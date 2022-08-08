@@ -60,6 +60,10 @@ Before discovering folders lets first perform some actions to make the project r
     ```
     flutter pub run flutter_launcher_icons:main
     ```
+- Change app splash screen (replace assets/images/app_icon.png with your app splash logo) then run this command
+   ```
+   flutter pub run flutter_native_splash:create
+   ```
 - FCM: firebase has recently added (add flutter app) to your firebase which will make adding our flutter(android/ios) app to firebase take only 2 steps 🔥 but first you need to download [Firebase CLI](https://firebase.google.com/docs/cli?authuser=0&hl=en#install_the_firebase_cli) and in the terminal execute:
     ```
     dart pub global activate flutterfire_cli
