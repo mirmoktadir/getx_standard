@@ -122,62 +122,7 @@ Before discovering folders lets first perform some actions to make the project r
       ```
 
 - Safe api call
-  - logic code (in controller)
-      ```dart
-          // api call status
-        ApiCallStatus apiCallStatus = ApiCallStatus.holding;
-
-        // getting data from api simulating
-        getData() async {
-          // *) indicate loading state
-          apiCallStatus = ApiCallStatus.loading;
-          update();
-          // *) perform api call
-          await BaseClient.get(
-            Constants.todosApiUrl, // url
-            onSuccess: (response){ // api done successfully
-              data = List.from(response.data);
-              // -) indicate success state
-              apiCallStatus = ApiCallStatus.success;
-              update(); // update ui
-            },
-            // if you don't pass this method base client
-            // will automatically handle error and show message
-            onError: (error){
-              // show error message to user
-              BaseClient.handleApiError(error);
-              // -) indicate error status
-              apiCallStatus = ApiCallStatus.error;
-              update(); // update ui
-            }, // error while performing request
-          );
-        }
-      ```
-  - UI: MyWidgetsAnimator will animate between widgets depending on current api call status
-
-      ```dart
-      GetBuilder<HomeController>(
-      builder: (controller){
-        LocalizationService.updateLanguage('en');
-        LocalizationService.getCurrentLocal();
-        return MyWidgetsAnimator(
-            apiCallStatus: controller.apiCallStatus,
-            loadingWidget: () => const Center(child: CircularProgressIndicator(),),
-            errorWidget: ()=> const Center(child: Text('Something went wrong!'),),
-            successWidget: () =>
-               ListView.separated(
-                itemCount: controller.data!.length,
-                separatorBuilder: (_,__) => SizedBox(height: 10.h,),
-                itemBuilder: (ctx,index) => ListTile(
-                    title: Text(controller.data![index]['userId'].toString()),
-                    subtitle: Text(controller.data![index]['title']),
-                  ),
-              ),
-
-        );
-      },
-    )
-      ```
+  
 
 - Snackbars (in app notify):
 
@@ -311,44 +256,7 @@ After setting up all the needed thing now lets talk about folder structure which
     MySharedPref.getCurrentLocal();
     ```
 
-- Safe api call: under if you opened lib/app/services package you will find 3 files
-  - api_call_status.dart: which contain all possible stages of our api call (loading,success,error..etc)
-  - api_exception.dart: custom exception class to make error handling more informative
-  - base_client.dart: contain our safe api call functions
-    to perform api request the right way you would do this
-
-```dart
-class HomeController extends GetxController {
-  // hold data
-  List<dynamic>? data;
-  // api call status
-  ApiCallStatus apiCallStatus = ApiCallStatus.holding;
-
-  // getting data from api simulating
-  getData() async {
-    // *) indicate loading state
-    apiCallStatus = ApiCallStatus.loading;
-    update();
-    // *) perform api call
-    await BaseClient.get(
-      Constants.todosApiUrl, // url
-      onSuccess: (response){ // api done successfully
-        data = List.from(response.data);
-        // -) indicate success state
-        apiCallStatus = ApiCallStatus.success;
-        update(); // update ui
-      },
-      // if you don't pass this method base client
-      // will automatically handle error and show message
-      onError: (error){
-        // show error message to user
-        BaseClient.handleApiError(error);
-        // -) indicate error status
-        apiCallStatus = ApiCallStatus.error;
-        update(); // update ui
-      }, // error while performing request
-    );
-  }
+- Safe api call
 
   @override
   void onInit() {
@@ -358,28 +266,7 @@ class HomeController extends GetxController {
 }
 ```
 
-base client will catch all the possible errors and if you didn't pass onError function it will automatically catch the error in UI side code will be
 
-```dart
-GetBuilder<HomeController>(
-        builder: (_){
-          return MyWidgetsAnimator(
-              apiCallStatus: controller.apiCallStatus,
-              loadingWidget: () => const Center(child: CircularProgressIndicator(),),
-              errorWidget: ()=> const Center(child: Text('Something went wrong!'),),
-              successWidget: () =>
-                 ListView.separated(
-                  itemCount: controller.data!.length,
-                  separatorBuilder: (_,__) => SizedBox(height: 10.h,),
-                  itemBuilder: (ctx,index) => ListTile(
-                      title: Text(controller.data![index]['userId'].toString()),
-                      subtitle: Text(controller.data![index]['title']),
-                    ),
-                ),
-
-          );
-        },
-      )
 ```
 **NOTE:** MyWidgetsAnimator will take care of ui changing with animation you will pass the ApiCallStatus and success,failed,loading..etc widgets and it will take care of transition
 

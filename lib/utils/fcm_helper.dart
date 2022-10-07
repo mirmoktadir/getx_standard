@@ -18,9 +18,9 @@ class FcmHelper {
     try {
       // initialize fcm and firebase core
       await Firebase.initializeApp(
-        //  only un comment this line if you set up firebase vie firebase cli
-        //options: DefaultFirebaseOptions.currentPlatform,
-      );
+          //  only un comment this line if you set up firebase vie firebase cli
+          //options: DefaultFirebaseOptions.currentPlatform,
+          );
       messaging = FirebaseMessaging.instance;
 
       // initialize notifications channel and libraries
@@ -76,10 +76,10 @@ class FcmHelper {
   static Future<void> _generateFcmToken() async {
     try {
       var token = await messaging.getToken();
-      if(token != null){
+      if (token != null) {
         MySharedPref.setFcmToken(token);
         _sendFcmTokenToServer();
-      }else {
+      } else {
         // retry generating token
         await Future.delayed(const Duration(seconds: 5));
         _generateFcmToken();
@@ -91,7 +91,7 @@ class FcmHelper {
 
   /// this method will be triggered when the app generate fcm
   /// token successfully
-  static _sendFcmTokenToServer(){
+  static _sendFcmTokenToServer() {
     var token = MySharedPref.getFcmToken();
     // TODO SEND FCM TOKEN TO SERVER
   }
@@ -137,12 +137,18 @@ class FcmHelper {
             body: body,
             groupKey: groupKey ?? NotificationChannels.generalGroupKey,
             channelKey: channelKey ?? NotificationChannels.generalChannelKey,
-            showWhen: true, // Hide/show the time elapsed since notification was displayed
-            payload: payload, // data of the notification (it will be used when user clicks on notification)
-            notificationLayout: notificationLayout, // notification shape (message,media player..etc) For ex => NotificationLayout.Messaging
-            autoDismissible: true, // dismiss notification when user clicks on it
-            summary: summary, // for ex: New message (it will be shown on status bar before notificaiton shows up)
-            largeIcon: largeIcon, // image of sender for ex (when someone send you message his image will be shown)
+            showWhen:
+                true, // Hide/show the time elapsed since notification was displayed
+            payload:
+                payload, // data of the notification (it will be used when user clicks on notification)
+            notificationLayout:
+                notificationLayout!, // notification shape (message,media player..etc) For ex => NotificationLayout.Messaging
+            autoDismissible:
+                true, // dismiss notification when user clicks on it
+            summary:
+                summary, // for ex: New message (it will be shown on status bar before notificaiton shows up)
+            largeIcon:
+                largeIcon, // image of sender for ex (when someone send you message his image will be shown)
           ),
         );
       }
@@ -159,7 +165,8 @@ class FcmHelper {
             channelKey: NotificationChannels.generalChannelKey,
             channelName: NotificationChannels.generalChannelName,
             groupKey: NotificationChannels.generalGroupKey,
-            channelDescription: 'Notification channel for general notifications',
+            channelDescription:
+                'Notification channel for general notifications',
             defaultColor: Colors.green,
             ledColor: Colors.white,
             channelShowBadge: true,
@@ -178,15 +185,14 @@ class FcmHelper {
               playSound: true,
               importance: NotificationImportance.Max)
         ],
-
         channelGroups: [
           NotificationChannelGroup(
-            channelGroupkey: NotificationChannels.generalChannelGroupKey,
             channelGroupName: NotificationChannels.generalChannelGroupName,
+            channelGroupkey: NotificationChannels.generalChannelGroupKey,
           ),
           NotificationChannelGroup(
-            channelGroupkey: NotificationChannels.chatChannelGroupKey,
             channelGroupName: NotificationChannels.chatChannelGroupName,
+            channelGroupkey: NotificationChannels.chatChannelGroupKey,
           )
         ]);
   }
@@ -205,7 +211,9 @@ class NotificationChannels {
   static String get generalChannelKey => "fitness_channel";
   static String get generalGroupKey => "basic group key";
   static String get generalChannelGroupKey => "basic_channel_group";
-  static String get generalChannelGroupName => "Fitness public notifications channels";
+  static String get generalChannelGroupName =>
+      "Fitness public notifications channels";
   static String get generalChannelName => "Fitness notifications channels";
-  static String get generalChannelDescription => "Notification channel for messages";
+  static String get generalChannelDescription =>
+      "Notification channel for messages";
 }
