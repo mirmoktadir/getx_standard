@@ -28,6 +28,7 @@ dependencies:
   expandable_text: ^2.3.0
   iconsax: ^0.0.8
   http: ^0.13.5
+  file_picker: ^5.2.2
 
 dev_dependencies:
   flutter_test:
