@@ -30,6 +30,8 @@ Future<void> main() async {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
+      useInheritedMediaQuery: true,
+      rebuildFactor: RebuildFactors.all,
       builder: (context, widget) {
         return GetMaterialApp(
           title: "GetXStandard",
