@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:getx_standard/app/modules/model/Posts.dart';
+import 'package:getx_standard/app/service/api_urls.dart';
 import 'package:getx_standard/app/service/base_controller.dart';
 
 import '../../../service/dio_client.dart';
@@ -11,8 +12,7 @@ class HomeController extends GetxController with BaseController {
   getPostList() async {
     showLoading('Loading post');
 
-    var response =
-        await DioClient().get("https://jsonplaceholder.typicode.com/posts", {
+    var response = await DioClient().get(ApiUrl.allPosts, {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }).catchError(handleError);
