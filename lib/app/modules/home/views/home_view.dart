@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import '../../../../config/theme/my_fonts.dart';
 import '../../../components/empty_widget.dart';
 import '../controllers/home_controller.dart';
 
@@ -13,7 +14,7 @@ class HomeView extends GetView<HomeController> {
     var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text('All Posts'),
         centerTitle: true,
       ),
       body: Obx(() => controller.postList.isEmpty
@@ -27,7 +28,7 @@ class HomeView extends GetView<HomeController> {
                   itemCount: controller.postList.length,
                   shrinkWrap: true,
                   separatorBuilder: (_, __) => SizedBox(
-                    height: 10.h,
+                    height: 15.h,
                   ),
                   itemBuilder: (ctx, index) => Container(
                     height: 100.h,
@@ -37,6 +38,11 @@ class HomeView extends GetView<HomeController> {
                       child: Text(
                         controller.postList[index].title ?? "",
                         textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: MyFonts.headline6TextSize,
+                          fontWeight: FontWeight.w500,
+                          color: theme.primaryColor,
+                        ),
                       ),
                     ),
                   ),

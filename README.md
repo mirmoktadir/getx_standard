@@ -259,6 +259,7 @@ After setting up all the needed thing now lets talk about folder structure which
 **API CALLING**
 **GET**
 
+```dart
   final awardList = RxList<AwardData>();
 
   getAwardList() async {
@@ -275,9 +276,11 @@ After setting up all the needed thing now lets talk about folder structure which
 
   hideLoading();
   }
+```
 
 **POST**
 
+```dart
   createAward(int? employeeID, int? awardTypeID, String? date, String? gift,
       String? description) async {
     var request = {
@@ -320,9 +323,10 @@ After setting up all the needed thing now lets talk about folder structure which
   Get.back();
     await getAwardList();
   }
-
+```
 **MULTIPART**
 
+```dart
   updateProfile([String? filePath]) async {
   var request = {
   "name": editNameController.text,
@@ -372,6 +376,7 @@ After setting up all the needed thing now lets talk about folder structure which
 
   Get.back();
   }
+```
   }
 ```
 
