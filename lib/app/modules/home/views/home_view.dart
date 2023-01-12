@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import '../../../components/empty_widget.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -15,29 +16,33 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: 2,
-        separatorBuilder: (_, __) => SizedBox(
-          height: 10.h,
-        ),
-        itemBuilder: (ctx, index) => Row(
-          children: [
-            SizedBox(
-              width: 300.w,
-              child: const ListTile(
-                title: Text("Hello"),
-                subtitle: Text('category'),
+      body: Obx(() => controller.postList.isEmpty
+          ? const EmptyWidget()
+          : Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                physics: const BouncingScrollPhysics(),
+                child: ListView.separated(
+                  itemCount: controller.postList.length,
+                  shrinkWrap: true,
+                  separatorBuilder: (_, __) => SizedBox(
+                    height: 10.h,
+                  ),
+                  itemBuilder: (ctx, index) => Container(
+                    height: 100.h,
+                    width: double.infinity,
+                    color: theme.canvasColor,
+                    child: Center(
+                      child: Text(
+                        controller.postList[index].title ?? "",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              width: 60.w,
-              child: const Image(
-                image: NetworkImage('image'),
-              ),
-            ),
-          ],
-        ),
-      ),
+            )),
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -11,12 +13,15 @@ class BaseClient {
   Future<dynamic> get(String baseUrl, String api) async {
     var uri = Uri.parse(baseUrl + api);
     try {
-      var response = await http.get(uri).timeout(Duration(seconds: TIME_OUT_DURATION));
+      var response = await http
+          .get(uri)
+          .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return _processResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection', uri.toString());
     } on TimeoutException {
-      throw ApiNotRespondingException('API not responded in time', uri.toString());
+      throw ApiNotRespondingException(
+          'API not responded in time', uri.toString());
     }
   }
 
@@ -25,12 +30,15 @@ class BaseClient {
     var uri = Uri.parse(baseUrl + api);
     var payload = json.encode(payloadObj);
     try {
-      var response = await http.post(uri, body: payload).timeout(Duration(seconds: TIME_OUT_DURATION));
+      var response = await http
+          .post(uri, body: payload)
+          .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return _processResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection', uri.toString());
     } on TimeoutException {
-      throw ApiNotRespondingException('API not responded in time', uri.toString());
+      throw ApiNotRespondingException(
+          'API not responded in time', uri.toString());
     }
   }
 
@@ -42,21 +50,24 @@ class BaseClient {
       case 200:
         var responseJson = utf8.decode(response.bodyBytes);
         return responseJson;
-        break;
       case 201:
         var responseJson = utf8.decode(response.bodyBytes);
         return responseJson;
-        break;
       case 400:
-        throw BadRequestException(utf8.decode(response.bodyBytes), response.request!.url.toString());
+        throw BadRequestException(
+            utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 401:
       case 403:
-        throw UnAuthorizedException(utf8.decode(response.bodyBytes), response.request!.url.toString());
+        throw UnAuthorizedException(
+            utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 422:
-        throw BadRequestException(utf8.decode(response.bodyBytes), response.request!.url.toString());
+        throw BadRequestException(
+            utf8.decode(response.bodyBytes), response.request!.url.toString());
       case 500:
       default:
-        throw FetchDataException('Error occured with code : ${response.statusCode}', response.request!.url.toString());
+        throw FetchDataException(
+            'Error occured with code : ${response.statusCode}',
+            response.request!.url.toString());
     }
   }
 }

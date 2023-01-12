@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
-class LightThemeColors
-{
+class LightThemeColors {
   //dark swatch
   static const Color primaryColor = Color(0xFF40A76A);
   static const Color accentColor = Color(0xFFD9EDE1);
@@ -30,7 +28,7 @@ class LightThemeColors
   static const Color bodyTextColor = Colors.black;
   static const Color headlinesTextColor = Colors.black;
   static const Color captionTextColor = Colors.grey;
-  static const Color hintTextColor =  Color(0xff686868);
+  static const Color hintTextColor = Color(0xff686868);
 
   //chip
   static const Color chipBackground = primaryColor;

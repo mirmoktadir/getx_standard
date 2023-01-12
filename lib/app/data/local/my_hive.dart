@@ -1,4 +1,5 @@
-import 'package:hive/hive.dart';
+// ignore_for_file: empty_catches
+
 import 'package:logger/logger.dart';
 
 import '../models/user_model.dart';
@@ -31,7 +32,7 @@ class MyHive {
     try {
       await _userBox.put(_currentUserKey, user);
     } catch (error) {
-      Logger().e('Hive Error => ${error}');
+      Logger().e('Hive Error => $error');
     }
   }
 

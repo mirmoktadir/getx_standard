@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
-class DarkThemeColors
-{
+class DarkThemeColors {
   //dark swatch
   static const Color primaryColor = Colors.orange;
   static Color accentColor = Colors.blueAccent;

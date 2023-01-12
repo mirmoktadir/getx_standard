@@ -121,7 +121,7 @@ Before discovering folders lets first perform some actions to make the project r
       Text(Strings.hello.tr)
       ```
 
-- Safe api call
+
   
 
 - Snackbars (in app notify):
@@ -256,14 +256,123 @@ After setting up all the needed thing now lets talk about folder structure which
     MySharedPref.getCurrentLocal();
     ```
 
-- Safe api call
+**API CALLING**
+**GET**
 
-  @override
-  void onInit() {
-    getData();
-    super.onInit();
+  final awardList = RxList<AwardData>();
+
+  getAwardList() async {
+  showLoading('Loading award');
+
+  var response = await DioClient().get(ApiUrl.allAward, {
+  "Authorization": "Bearer ${await MySharedPref.getToken()}"
+  }).catchError(handleError);
+
+  if (response == null) return;
+
+  awardList.assignAll(
+  (response["data"] as List).map((e) => AwardData.fromJson(e)).toList());
+
+  hideLoading();
   }
-}
+
+**POST**
+
+  createAward(int? employeeID, int? awardTypeID, String? date, String? gift,
+      String? description) async {
+    var request = {
+      "employee_id": employeeID,
+      "award_type": awardTypeID,
+      "date": date,
+      "gift": gift,
+      "description": description,
+    };
+    showLoading('Creating award...');
+    var response = await DioClient()
+        .post(
+            ApiUrl.createHrAward,
+            {"Authorization": "Bearer ${await MySharedPref.getToken()}"},
+            request)
+        .catchError((error) {
+      if (error is BadRequestException) {
+        var apiError = json.decode(error.message!);
+        DialogHelper.showErrorDialog(description: apiError["reason"]);
+      }
+      if (error is FetchDataException) {
+        var apiError = json.decode(error.message!);
+        DialogHelper.showErrorDialog(description: apiError["reason"]);
+      } else {
+        handleError(error);
+
+  CustomSnackBar.showCustomErrorSnackBar(
+          title: "Failed!",
+          message: 'Operation Failed',
+        );
+      }
+    });
+    if (response == null) return;
+
+  createAwardKey.currentState!.save();
+
+  //reload();
+  hideLoading();
+
+  Get.back();
+    await getAwardList();
+  }
+
+**MULTIPART**
+
+  updateProfile([String? filePath]) async {
+  var request = {
+  "name": editNameController.text,
+  "email": editMailController.text,
+  };
+  showLoading('Updating Profile...');
+  var response = await DioClient()
+  .multipartSingleFile(
+  ApiUrl.updateProfile,
+  {
+  "Authorization": "Bearer ${await MySharedPref.getToken()}",
+  'Content-Type': 'multipart/form-data'
+  },
+  request,
+  filePath,
+  "profile")
+  .catchError((error) {
+  if (error is BadRequestException) {
+  var apiError = json.decode(error.message!);
+  DialogHelper.showErrorDialog(description: apiError["reason"]);
+  } else {
+  handleError(error);
+
+  CustomSnackBar.showCustomErrorSnackBar(
+          title: "Failed!",
+          message: 'Operation Failed',
+        );
+      }
+    });
+    if (response == null) return;
+
+  profileEditKey.currentState!.save();
+    //reload();
+    await MySharedPref.removeUserAvatar();
+    await MySharedPref.removeName();
+    await MySharedPref.removeEmail();
+    //
+    await MySharedPref.setUserAvatar(response["data"]["profile"]);
+    await MySharedPref.setName(editNameController.text);
+    await MySharedPref.setEmail(editMailController.text);
+    await MySharedPref.getUserAvatar();
+    await MySharedPref.getName();
+    await MySharedPref.getEmail();
+
+  update();
+  hideLoading();
+
+  Get.back();
+  }
+  }
 ```
 
 

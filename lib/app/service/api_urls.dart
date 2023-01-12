@@ -1,5 +1,5 @@
 class ApiUrl {
   /// Base URL
-  static const baseUrl = "http://127.0.0.1:8000/api";
-
+  static const baseUrl = "https://jsonplaceholder.typicode.com/";
+  static const allPosts = "$baseUrl/posts";
 }

@@ -35,8 +35,8 @@ class MyStyles {
 
   ///text theme
   static TextTheme getTextTheme({required bool isLightTheme}) => TextTheme(
-        button: MyFonts.buttonTextStyle
-            .copyWith(fontSize: MyFonts.buttonTextSize),
+        button:
+            MyFonts.buttonTextStyle.copyWith(fontSize: MyFonts.buttonTextSize),
         bodyText1: (MyFonts.bodyTextStyle).copyWith(
             fontWeight: FontWeight.bold,
             fontSize: MyFonts.body1TextSize,
@@ -101,7 +101,7 @@ class MyStyles {
       secondaryLabelStyle: getChipTextStyle(isLightTheme: isLightTheme),
       selectedColor: Colors.black,
       disabledColor: Colors.green,
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       secondarySelectedColor: Colors.purple,
     );
   }
@@ -161,8 +161,8 @@ class MyStyles {
             ),
           ),
           elevation: MaterialStateProperty.all(0),
-          padding:
-              MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              EdgeInsets.symmetric(vertical: 8.h)),
           textStyle: getElevatedButtonTextStyle(isLightTheme),
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
