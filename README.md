@@ -384,7 +384,7 @@ After setting up all the needed thing now lets talk about folder structure which
 
 
 ```
-**NOTE:** MyWidgetsAnimator will take care of ui changing with animation you will pass the ApiCallStatus and success,failed,loading..etc widgets and it will take care of transition
+
 
 ## Support
 
