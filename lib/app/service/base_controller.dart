@@ -1,18 +1,17 @@
-import 'app_exceptions.dart';
+import 'package:flutter/foundation.dart';
+
+import '../components/custom_snackbar.dart';
+import 'api_exceptions.dart';
 import 'helper/dialog_helper.dart';
 
 class BaseController {
   void handleError(error) {
     hideLoading();
-    if (error is BadRequestException) {
-      var message = error.message;
-      DialogHelper.showErroDialog(description: message);
-    } else if (error is FetchDataException) {
-      var message = error.message;
-      DialogHelper.showErroDialog(description: message);
-    } else if (error is ApiNotRespondingException) {
-      DialogHelper.showErroDialog(
-          description: 'Oops! It took longer to respond.');
+
+    var errorText = DioExceptions.fromDioError(error).toString();
+    CustomSnackBar.showCustomErrorSnackBar(title: "Error", message: errorText);
+    if (kDebugMode) {
+      print(errorText);
     }
   }
 

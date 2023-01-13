@@ -76,18 +76,18 @@ Before discovering folders lets first perform some actions to make the project r
 ## Quick Start
 - Responsive app: to make your app responsive you need to get advantage of using flutter_ScreenUtil so instead of using normal double values for height,width,radius..etc you need to use it like this
 -
-  ```dart
-  200.w // adapted to screen width
-  100.h // /Adapted to screen height
-  25.sp // adapter font size
-  10.r // adapter radius
-  // Example
-  Container(
-      height: 100.h,
-      width: 200.w,
-      child: Text("Hello",style: TextStyle(fontSize: 20.sp,))
-  )
-  ```
+```dart
+200.w // adapted to screen width
+100.h // /Adapted to screen height
+25.sp // adapter font size
+10.r // adapter radius
+// Example
+Container(
+    height: 100.h,
+    width: 200.w,
+    child: Text("Hello",style: TextStyle(fontSize: 20.sp,))
+)
+```
 
 - Theme
   - Change theme
@@ -122,7 +122,7 @@ Before discovering folders lets first perform some actions to make the project r
       ```
 
 
-  
+
 
 - Snackbars (in app notify):
 
@@ -298,23 +298,7 @@ After setting up all the needed thing now lets talk about folder structure which
             ApiUrl.createHrAward,
             {"Authorization": "Bearer ${await MySharedPref.getToken()}"},
             request)
-        .catchError((error) {
-      if (error is BadRequestException) {
-        var apiError = json.decode(error.message!);
-        DialogHelper.showErrorDialog(description: apiError["reason"]);
-      }
-      if (error is FetchDataException) {
-        var apiError = json.decode(error.message!);
-        DialogHelper.showErrorDialog(description: apiError["reason"]);
-      } else {
-        handleError(error);
-
-  CustomSnackBar.showCustomErrorSnackBar(
-          title: "Failed!",
-          message: 'Operation Failed',
-        );
-      }
-    });
+        .catchError(handleError);
     if (response == null) return;
 
   createAwardKey.currentState!.save();
@@ -345,19 +329,7 @@ After setting up all the needed thing now lets talk about folder structure which
   request,
   filePath,
   "profile")
-  .catchError((error) {
-  if (error is BadRequestException) {
-  var apiError = json.decode(error.message!);
-  DialogHelper.showErrorDialog(description: apiError["reason"]);
-  } else {
-  handleError(error);
-
-  CustomSnackBar.showCustomErrorSnackBar(
-          title: "Failed!",
-          message: 'Operation Failed',
-        );
-      }
-    });
+  .catchError(handleError);
     if (response == null) return;
 
   profileEditKey.currentState!.save();
@@ -379,12 +351,12 @@ After setting up all the needed thing now lets talk about folder structure which
   Get.back();
   }
 ```
-  }
+}
 ```
 
 
 ```
-
+**NOTE:** MyWidgetsAnimator will take care of ui changing with animation you will pass the ApiCallStatus and success,failed,loading..etc widgets and it will take care of transition
 
 ## Support
 
