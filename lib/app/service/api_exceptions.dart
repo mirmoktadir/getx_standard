@@ -34,7 +34,7 @@ class DioExceptions implements Exception {
       case 400:
         return error['error'] ?? error["message"] ?? 'Bad request';
       case 404:
-        return error['error'] ?? error["message"];
+        return error['error'] ?? error["message"] ?? "Api Url Incorrect";
       case 500:
         return error['error'] ?? error["message"] ?? "Internal Server Error";
       default:
