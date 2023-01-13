@@ -21,17 +21,20 @@ class HomeView extends GetView<HomeController> {
           ? const EmptyWidget()
           : Padding(
               padding: const EdgeInsets.all(18.0),
-              child: SingleChildScrollView(
-                padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
+              child: RawScrollbar(
+                thumbColor: theme.primaryColor,
+                radius: const Radius.circular(100),
+                thickness: 5,
+                interactive: true,
                 child: ListView.separated(
                   itemCount: controller.postList.length,
-                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  padding: EdgeInsets.zero,
                   separatorBuilder: (_, __) => SizedBox(
-                    height: 15.h,
+                    height: 20.h,
                   ),
                   itemBuilder: (ctx, index) => Container(
-                    height: 100.h,
+                    padding: const EdgeInsets.all(5),
                     width: double.infinity,
                     color: theme.canvasColor,
                     child: Center(

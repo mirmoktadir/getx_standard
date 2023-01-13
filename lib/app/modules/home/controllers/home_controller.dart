@@ -6,7 +6,7 @@ import '../../../service/dio_client.dart';
 import '../model/posts.dart';
 
 class HomeController extends GetxController with BaseController {
-  ///POST LIST
+  ///GET POST LIST
   final postList = RxList<Posts>();
 
   getPostList() async {

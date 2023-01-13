@@ -68,7 +68,7 @@ class DioClient {
     }
   }
 
-  //MULTIPART
+  //MULTIPART FOR MULTIPLE FILE UPLOAD
 
   List<File>? docFileList = [];
   Future<dynamic> multipartRequest(
@@ -94,7 +94,7 @@ class DioClient {
     }
   }
 
-  ///
+  //MULTIPART FOR SINGLE FILE UPLOAD
 
   Future<dynamic> multipartSingleFile(String url, Map<String, dynamic> header,
       Map<String, dynamic> payload, String? filepath, String key) async {
