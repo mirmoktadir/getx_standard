@@ -12,7 +12,7 @@ class HomeController extends GetxController with BaseController {
   getPostList() async {
     showLoading('Loading post');
 
-    var response = await DioClient().get(ApiUrl.allPosts, {
+    var response = await DioClient().get(url: ApiUrl.allPosts, header: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }).catchError(handleError);

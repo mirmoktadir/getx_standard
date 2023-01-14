@@ -11,10 +11,14 @@ class DioClient {
 
   //GET
 
-  Future<dynamic> get(String url, Map<String, dynamic> header) async {
+  Future<dynamic> get({
+    required String url,
+    Map<String, dynamic>? header,
+    Map<String, dynamic>? params,
+  }) async {
     try {
       var response = await Dio()
-          .get(url, options: Options(headers: header))
+          .get(url, options: Options(headers: header), queryParameters: params)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return response.data;
     } catch (e) {
@@ -25,11 +29,17 @@ class DioClient {
   //POST
 
   Future<dynamic> post(
-      String url, Map<String, dynamic> header, dynamic payloadObj) async {
-    var payload = json.encode(payloadObj);
+      {required String url,
+      Map<String, dynamic>? header,
+      Map<String, dynamic>? params,
+      dynamic body}) async {
+    var payload = json.encode(body);
     try {
       var response = await Dio()
-          .post(url, options: Options(headers: header), data: payload)
+          .post(url,
+              options: Options(headers: header),
+              queryParameters: params,
+              data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
 
       return response.data;
@@ -41,11 +51,17 @@ class DioClient {
   //PATCH
 
   Future<dynamic> patch(
-      String url, Map<String, dynamic> header, dynamic payloadObj) async {
-    var payload = json.encode(payloadObj);
+      {required String url,
+      Map<String, dynamic>? header,
+      Map<String, dynamic>? params,
+      dynamic body}) async {
+    var payload = json.encode(body);
     try {
       var response = await Dio()
-          .patch(url, options: Options(headers: header), data: payload)
+          .patch(url,
+              options: Options(headers: header),
+              queryParameters: params,
+              data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return response.data;
     } catch (e) {
@@ -56,11 +72,17 @@ class DioClient {
   //DELETE
 
   Future<dynamic> delete(
-      String url, Map<String, dynamic> header, dynamic payloadObj) async {
-    var payload = json.encode(payloadObj);
+      {required String url,
+      Map<String, dynamic>? header,
+      Map<String, dynamic>? params,
+      dynamic body}) async {
+    var payload = json.encode(body);
     try {
       var response = await Dio()
-          .delete(url, options: Options(headers: header), data: payload)
+          .delete(url,
+              options: Options(headers: header),
+              queryParameters: params,
+              data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return response.data;
     } catch (e) {
@@ -71,13 +93,14 @@ class DioClient {
   //MULTIPART FOR MULTIPLE FILE UPLOAD
 
   List<File>? docFileList = [];
-  Future<dynamic> multipartRequest(
-    String url,
-    Map<String, dynamic> header,
-    Map<String, dynamic> payload,
+  Future<dynamic> multipartRequest({
+    required String url,
+    required Map<String, dynamic> header,
+    Map<String, dynamic>? params,
+    required Map<String, dynamic> body,
     String? filepath,
-  ) async {
-    var formData = FormData.fromMap(payload);
+  }) async {
+    var formData = FormData.fromMap(body);
     for (var files in docFileList!) {
       filepath = files.path;
       formData.files.addAll(
@@ -86,7 +109,10 @@ class DioClient {
 
     try {
       var response = await Dio()
-          .post(url, options: Options(headers: header), data: formData)
+          .post(url,
+              options: Options(headers: header),
+              queryParameters: params,
+              data: formData)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return response.data;
     } catch (e) {
@@ -96,16 +122,24 @@ class DioClient {
 
   //MULTIPART FOR SINGLE FILE UPLOAD
 
-  Future<dynamic> multipartSingleFile(String url, Map<String, dynamic> header,
-      Map<String, dynamic> payload, String? filepath, String key) async {
-    var formData = FormData.fromMap(payload);
+  Future<dynamic> multipartSingleFile(
+      {required String url,
+      required Map<String, dynamic> header,
+      Map<String, dynamic>? params,
+      required Map<String, dynamic> body,
+      String? filepath,
+      required String key}) async {
+    var formData = FormData.fromMap(body);
     if (filepath != null) {
       formData.files.add(MapEntry(key, await MultipartFile.fromFile(filepath)));
     }
 
     try {
       var response = await Dio()
-          .post(url, options: Options(headers: header), data: formData)
+          .post(url,
+              options: Options(headers: header),
+              queryParameters: params,
+              data: formData)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return response.data;
     } catch (e) {

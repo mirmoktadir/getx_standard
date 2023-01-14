@@ -267,7 +267,9 @@ After setting up all the needed thing now lets talk about folder structure which
   getAwardList() async {
   showLoading('Loading award');
 
-  var response = await DioClient().get(ApiUrl.allAward, {
+  var response = await DioClient().get(
+          url: ApiUrl.allAward,
+          header:  {
   "Authorization": "Bearer ${await MySharedPref.getToken()}"
   }).catchError(handleError);
 
@@ -295,9 +297,9 @@ After setting up all the needed thing now lets talk about folder structure which
     showLoading('Creating award...');
     var response = await DioClient()
         .post(
-            ApiUrl.createHrAward,
-            {"Authorization": "Bearer ${await MySharedPref.getToken()}"},
-            request)
+          url:  ApiUrl.createHrAward,
+            header: {"Authorization": "Bearer ${await MySharedPref.getToken()}"},
+           body: request)
         .catchError(handleError);
     if (response == null) return;
 
@@ -321,14 +323,14 @@ After setting up all the needed thing now lets talk about folder structure which
   showLoading('Updating Profile...');
   var response = await DioClient()
   .multipartSingleFile(
-  ApiUrl.updateProfile,
-  {
+  url: ApiUrl.updateProfile,
+  header:  {
   "Authorization": "Bearer ${await MySharedPref.getToken()}",
   'Content-Type': 'multipart/form-data'
   },
-  request,
-  filePath,
-  "profile")
+ body: request,
+ filepath: filePath,
+ key: "profile")
   .catchError(handleError);
     if (response == null) return;
 
@@ -356,7 +358,6 @@ After setting up all the needed thing now lets talk about folder structure which
 
 
 ```
-**NOTE:** MyWidgetsAnimator will take care of ui changing with animation you will pass the ApiCallStatus and success,failed,loading..etc widgets and it will take care of transition
 
 ## Support
 
