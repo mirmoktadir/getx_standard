@@ -12,21 +12,16 @@ import 'config/translations/localization_service.dart';
 import 'utils/fcm_helper.dart';
 
 Future<void> main() async {
-  // wait for bindings
   WidgetsFlutterBinding.ensureInitialized();
 
-  // initialize local db (hive) and register our custom adapters
   await MyHive.init(adapters: [UserModelAdapter()]);
 
-  // init shared preference
   await MySharedPref.init();
 
-  // inti fcm & notifications services (awesome notifications)
   await FcmHelper.initFcm();
 
   runApp(
     ScreenUtilInit(
-      // xd art board size
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -42,8 +37,6 @@ Future<void> main() async {
             return Theme(
               data: MyTheme.getThemeData(isLight: themeIsLight),
               child: MediaQuery(
-                // prevent font from scalling (some people use big/small device fonts)
-                // but we want our app font to still the same and dont get affected
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: widget!,
               ),
