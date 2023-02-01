@@ -1,4 +1,4 @@
-package com.example.getx_standard
+package com.example.getxStandard
 
 import io.flutter.embedding.android.FlutterActivity
 

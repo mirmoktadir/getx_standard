@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/service/api_urls.dart';
-import 'package:getx_standard/app/service/base_controller.dart';
 
+import '../../../service/api_urls.dart';
+import '../../../service/base_controller.dart';
 import '../../../service/dio_client.dart';
 import '../model/posts.dart';
 

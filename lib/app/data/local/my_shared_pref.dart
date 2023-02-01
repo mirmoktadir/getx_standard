@@ -1,13 +1,16 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/translations/localization_service.dart';
 
 class MySharedPref {
+  // prevent making instance
+  MySharedPref._();
+
   // get storage
-  static late final _storage;
+  static late SharedPreferences _sharedPreferences;
 
   // STORING KEYS
   static const String _fcmTokenKey = 'fcm_token';
@@ -15,25 +18,25 @@ class MySharedPref {
   static const String _lightThemeKey = 'is_theme_light';
 
   /// init get storage services
-  static init() async {
-    await GetStorage.init();
-    _storage = GetStorage();
+  static Future<void> init() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
   }
 
   /// set theme current type as light theme
   static void setThemeIsLight(bool lightTheme) =>
-      _storage.write(_lightThemeKey, lightTheme);
+      _sharedPreferences.setBool(_lightThemeKey, lightTheme);
 
   /// get if the current theme type is light
-  static bool getThemeIsLight() => _storage.read(_lightThemeKey) ?? true;
+  static bool getThemeIsLight() =>
+      _sharedPreferences.getBool(_lightThemeKey) ?? true;
 
   /// save current locale
   static void setCurrentLanguage(String languageCode) =>
-      _storage.write(_currentLocalKey, languageCode);
+      _sharedPreferences.setString(_currentLocalKey, languageCode);
 
   /// get current locale
   static Locale getCurrentLocal() {
-    String? langCode = _storage.read(_currentLocalKey);
+    String? langCode = _sharedPreferences.getString(_currentLocalKey);
     // default language is english
     if (langCode == null) {
       return LocalizationService.defaultLanguage;
@@ -42,8 +45,9 @@ class MySharedPref {
   }
 
   /// save generated fcm token
-  static void setFcmToken(String token) => _storage.write(_fcmTokenKey, token);
+  static void setFcmToken(String token) =>
+      _sharedPreferences.setString(_fcmTokenKey, token);
 
   /// get generated fcm token
-  static String? getFcmToken() => _storage.read(_fcmTokenKey);
+  static String? getFcmToken() => _sharedPreferences.getString(_fcmTokenKey);
 }

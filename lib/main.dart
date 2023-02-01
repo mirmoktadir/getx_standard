@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 
-import 'app/data/local/my_hive.dart';
 import 'app/data/local/my_shared_pref.dart';
-import 'app/data/models/user_model.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
-import 'utils/fcm_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await MyHive.init(adapters: [UserModelAdapter()]);
+  // await MyHive.init(adapters: [UserModelAdapter()]);
 
   await MySharedPref.init();
 
-  await FcmHelper.initFcm();
+  // await FcmHelper.initFcm();
 
   runApp(
     ScreenUtilInit(
