@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class DialogHelper {
   //show error dialog
@@ -44,9 +46,13 @@ class DialogHelper {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 8),
-              Text(message ?? 'Loading...'),
+              Lottie.asset(
+                'animations/loader.json',
+                height: 170.h,
+                repeat: true,
+                reverse: true,
+                fit: BoxFit.cover,
+              ),
             ],
           ),
         ),

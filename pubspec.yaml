@@ -30,6 +30,8 @@ dependencies:
 
   flutter: 
     sdk: flutter
+  ionicons: ^0.2.2
+
 
 dev_dependencies:
   mockito:
