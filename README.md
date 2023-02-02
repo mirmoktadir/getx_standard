@@ -60,7 +60,7 @@ Before discovering folders lets first perform some actions to make the project r
     ```
     flutter pub run flutter_launcher_icons:main
     ```
-- Change app splash screen (replace assets/images/app_icon.png with your app splash logo) then run this command
+- Change app splash screen (replace assets/images/splash.png with your app splash logo) then run this command
    ```
    flutter pub run flutter_native_splash:create
    ```
