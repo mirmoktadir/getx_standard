@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class DialogHelper {
+  static get context => null;
+
   //show error dialog
-  static void showErroDialog(
+  static void showErrorDialog(
       {String title = 'Error', String? description = 'Something went wrong'}) {
     Get.dialog(
       Dialog(
@@ -16,11 +20,11 @@ class DialogHelper {
             children: [
               Text(
                 title,
-                style: Get.textTheme.headline4,
+                style: Get.textTheme.headlineMedium,
               ),
               Text(
                 description ?? '',
-                style: Get.textTheme.headline6,
+                style: Get.textTheme.titleLarge,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -38,22 +42,25 @@ class DialogHelper {
   //show toast
   //show snack bar
   //show loading
-  static void showLoading([String? message]) {
+  static void showLoading() {
     Get.dialog(
-      Dialog(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Lottie.asset(
-                'animations/loader.json',
-                height: 170.h,
-                repeat: true,
-                reverse: true,
-                fit: BoxFit.cover,
-              ),
-            ],
+      Center(
+        child: Container(
+          height: 80.h,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: OverflowBox(
+            minHeight: 130.h,
+            maxHeight: 130.h,
+            child: Lottie.asset(
+              'animations/loader.json',
+              height: 130.h,
+              repeat: true,
+              reverse: true,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
@@ -62,6 +69,10 @@ class DialogHelper {
 
   //hide loading
   static void hideLoading() {
-    if (Get.isDialogOpen!) Get.back();
+    Timer(const Duration(seconds: 1), () {
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    });
   }
 }

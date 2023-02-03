@@ -22,6 +22,7 @@ class HomeView extends GetView<HomeController> {
               onPressed: () async => await controller.getPostList(),
             )
           : RefreshIndicator(
+              color: theme.primaryColor,
               onRefresh: () async => await controller.getPostList(),
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -37,22 +38,27 @@ class HomeView extends GetView<HomeController> {
                     separatorBuilder: (_, __) => SizedBox(
                       height: 20.h,
                     ),
-                    itemBuilder: (ctx, index) => Container(
-                      padding: const EdgeInsets.all(5),
-                      width: double.infinity,
-                      color: theme.canvasColor,
-                      child: Center(
-                        child: Text(
-                          controller.postList[index].title ?? "",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: MyFonts.headline6TextSize,
-                            fontWeight: FontWeight.w500,
-                            color: theme.primaryColor,
+                    itemBuilder: (ctx, index) => controller.postList.isEmpty
+                        ? EmptyWidget(
+                            onPressed: () async =>
+                                await controller.getPostList(),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(5),
+                            width: double.infinity,
+                            color: theme.canvasColor,
+                            child: Center(
+                              child: Text(
+                                controller.postList[index].title ?? "",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: MyFonts.headline6TextSize,
+                                  fontWeight: FontWeight.w500,
+                                  color: theme.primaryColor,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ),

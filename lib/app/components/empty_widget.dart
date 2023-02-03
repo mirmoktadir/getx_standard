@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconly/iconly.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,6 +9,7 @@ class EmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
     return Padding(
       padding: EdgeInsets.only(bottom: 100.h),
       child: Column(
@@ -18,7 +17,7 @@ class EmptyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Lottie.asset(
-            'animations/error.json',
+            'animations/nodata.json',
             height: 170.h,
             repeat: true,
             reverse: true,
@@ -29,8 +28,8 @@ class EmptyWidget extends StatelessWidget {
               "Empty or No data !",
               style: TextStyle(
                 fontSize: 18.sp,
-                fontWeight: FontWeight.w400,
-                color: theme.hintColor,
+                fontWeight: FontWeight.w500,
+                color: theme.hintColor.withOpacity(.5),
               ),
             ),
           ),
@@ -41,8 +40,8 @@ class EmptyWidget extends StatelessWidget {
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade50,
-                  elevation: 4,
-                  shadowColor: theme.primaryColor,
+                  elevation: 1,
+                  shadowColor: theme.hintColor,
                 ),
                 child: Icon(
                   Ionicons.refresh,

@@ -10,7 +10,7 @@ class HomeController extends GetxController with BaseController {
   final postList = RxList<Posts>();
 
   getPostList() async {
-    showLoading('Loading post');
+    showLoading();
 
     var response = await DioClient().get(url: ApiUrl.allPosts, header: {
       'Accept': 'application/json',
@@ -26,9 +26,9 @@ class HomeController extends GetxController with BaseController {
   }
 
   @override
-  void onReady() async {
+  void onReady() {
     // TODO: implement onReady
-    await getPostList();
+    getPostList();
     super.onReady();
   }
 }
