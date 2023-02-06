@@ -9,8 +9,7 @@ class DialogHelper {
   static get context => null;
 
   //show error dialog
-  static void showErrorDialog(
-      {String title = 'Error', String? description = 'Something went wrong'}) {
+  static void showErrorDialog(String title, String description) {
     Get.dialog(
       Dialog(
         child: Padding(
@@ -19,13 +18,23 @@ class DialogHelper {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                title,
+                title ?? "",
                 style: Get.textTheme.headlineMedium,
               ),
+              SizedBox(height: 10.h),
+              Lottie.asset(
+                'animations/apiError.json',
+                height: 140.h,
+                repeat: true,
+                reverse: true,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 10.h),
               Text(
-                description ?? '',
+                description ?? "",
                 style: Get.textTheme.titleLarge,
               ),
+              SizedBox(height: 30.h),
               ElevatedButton(
                 onPressed: () {
                   if (Get.isDialogOpen!) Get.back();
@@ -69,10 +78,13 @@ class DialogHelper {
 
   //hide loading
   static void hideLoading() {
-    Timer(const Duration(milliseconds: 700), () {
-      if (Get.isDialogOpen!) {
-        Get.back();
-      }
-    });
+    // Timer(const Duration(milliseconds: 700), () {
+    //   if (Get.isDialogOpen!) {
+    //     Get.back();
+    //   }
+    // });
+    if (Get.isDialogOpen!) {
+      Get.back();
+    }
   }
 }

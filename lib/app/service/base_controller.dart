@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '../components/custom_snackbar.dart';
 import 'api_exceptions.dart';
 import 'helper/dialog_helper.dart';
 
@@ -12,9 +11,8 @@ class BaseController {
     hideLoading();
     isError.value = true;
     var errorText = DioExceptions.fromDioError(error).toString();
-    Timer(const Duration(milliseconds: 700), () {
-      CustomSnackBar.showCustomErrorToast(title: "Error", message: errorText);
-    });
+
+    showErrorDialog("Oops!", errorText);
 
     if (kDebugMode) {
       print(errorText);
@@ -28,5 +26,9 @@ class BaseController {
 
   hideLoading() {
     DialogHelper.hideLoading();
+  }
+
+  showErrorDialog(String title, String message) {
+    DialogHelper.showErrorDialog(title, message);
   }
 }

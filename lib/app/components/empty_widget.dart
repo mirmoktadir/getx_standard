@@ -48,7 +48,14 @@ class EmptyWidget extends StatelessWidget {
                   size: 24,
                   color: theme.primaryColor.withOpacity(.7),
                 )),
-          )
+          ),
+          const SizedBox(height: 5),
+          Text(
+            "refresh!",
+            style: TextStyle(
+              color: theme.hintColor.withOpacity(.5),
+            ),
+          ),
         ],
       ),
     );
