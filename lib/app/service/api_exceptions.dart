@@ -5,23 +5,23 @@ class DioExceptions implements Exception {
   DioExceptions.fromDioError(DioError dioError) {
     switch (dioError.type) {
       case DioErrorType.cancel:
-        message = "Request to API server was cancelled";
+        message = "Request cancelled!";
         break;
       case DioErrorType.connectTimeout:
-        message = "Connection timeout with API server";
+        message = "Connection timeout!";
         break;
       case DioErrorType.other:
-        message = "Connection to API server failed due to internet connection";
+        message = "Connection problem!";
         break;
       case DioErrorType.receiveTimeout:
-        message = "Receive timeout in connection with API server";
+        message = "Receive timeout!";
         break;
       case DioErrorType.response:
         message = _handleError(
             dioError.response!.statusCode!.toInt(), dioError.response!.data);
         break;
       case DioErrorType.sendTimeout:
-        message = "Send timeout in connection with API server";
+        message = "Send timeout!";
         break;
       default:
         message = "Something went wrong";
@@ -38,9 +38,7 @@ class DioExceptions implements Exception {
       case 500:
         return error['error'] ?? error["message"] ?? "Internal Server Error";
       default:
-        return error['error'] ??
-            error["message"] ??
-            'Oops something went wrong';
+        return error['error'] ?? error["message"] ?? 'Something went wrong';
     }
   }
 

@@ -13,8 +13,7 @@ class BaseController {
     isError.value = true;
     var errorText = DioExceptions.fromDioError(error).toString();
     Timer(const Duration(milliseconds: 700), () {
-      CustomSnackBar.showCustomErrorSnackBar(
-          title: "Error", message: errorText);
+      CustomSnackBar.showCustomErrorToast(title: "Error", message: errorText);
     });
 
     if (kDebugMode) {

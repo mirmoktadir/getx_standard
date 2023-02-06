@@ -47,8 +47,8 @@ class DialogHelper {
       Center(
         child: Container(
           height: 80.h,
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade300,
             shape: BoxShape.circle,
           ),
           child: OverflowBox(

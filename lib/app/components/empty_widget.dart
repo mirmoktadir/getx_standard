@@ -17,8 +17,8 @@ class EmptyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Lottie.asset(
-            'animations/nodata.json',
-            height: 100.h,
+            'animations/error.json',
+            height: 120.h,
             repeat: true,
             reverse: true,
             fit: BoxFit.cover,
@@ -35,18 +35,18 @@ class EmptyWidget extends StatelessWidget {
           ),
           SizedBox(height: 40.h),
           SizedBox(
-            height: 52.h,
+            height: 46.h,
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade50,
-                  elevation: 1,
+                  elevation: .5,
                   shadowColor: theme.hintColor,
                 ),
                 child: Icon(
                   Ionicons.refresh,
-                  size: 32,
-                  color: theme.primaryColor,
+                  size: 24,
+                  color: theme.primaryColor.withOpacity(.7),
                 )),
           )
         ],
