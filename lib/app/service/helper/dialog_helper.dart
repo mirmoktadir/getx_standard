@@ -69,7 +69,7 @@ class DialogHelper {
 
   //hide loading
   static void hideLoading() {
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(milliseconds: 700), () {
       if (Get.isDialogOpen!) {
         Get.back();
       }

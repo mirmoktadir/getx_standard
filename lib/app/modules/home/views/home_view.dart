@@ -17,10 +17,8 @@ class HomeView extends GetView<HomeController> {
         title: const Text('All Posts'),
         centerTitle: true,
       ),
-      body: Obx(() => controller.postList.isEmpty
-          ? EmptyWidget(
-              onPressed: () async => await controller.getPostList(),
-            )
+      body: Obx(() => controller.isError.value == true
+          ? EmptyWidget(onPressed: () async => await controller.getPostList())
           : RefreshIndicator(
               color: theme.primaryColor,
               onRefresh: () async => await controller.getPostList(),
@@ -38,27 +36,22 @@ class HomeView extends GetView<HomeController> {
                     separatorBuilder: (_, __) => SizedBox(
                       height: 20.h,
                     ),
-                    itemBuilder: (ctx, index) => controller.postList.isEmpty
-                        ? EmptyWidget(
-                            onPressed: () async =>
-                                await controller.getPostList(),
-                          )
-                        : Container(
-                            padding: const EdgeInsets.all(5),
-                            width: double.infinity,
-                            color: theme.canvasColor,
-                            child: Center(
-                              child: Text(
-                                controller.postList[index].title ?? "",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: MyFonts.headline6TextSize,
-                                  fontWeight: FontWeight.w500,
-                                  color: theme.primaryColor,
-                                ),
-                              ),
-                            ),
+                    itemBuilder: (ctx, index) => Container(
+                      padding: const EdgeInsets.all(5),
+                      width: double.infinity,
+                      color: theme.canvasColor,
+                      child: Center(
+                        child: Text(
+                          controller.postList[index].title ?? "",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: MyFonts.headline6TextSize,
+                            fontWeight: FontWeight.w500,
+                            color: theme.primaryColor,
                           ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

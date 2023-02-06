@@ -26,9 +26,10 @@ class HomeController extends GetxController with BaseController {
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     // TODO: implement onReady
-    getPostList();
+    await getPostList();
+
     super.onReady();
   }
 }
