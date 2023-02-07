@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,7 +16,7 @@ class DialogHelper {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                title ?? "",
+                title,
                 style: Get.textTheme.headlineMedium,
               ),
               SizedBox(height: 10.h),
@@ -31,7 +29,7 @@ class DialogHelper {
               ),
               SizedBox(height: 10.h),
               Text(
-                description ?? "",
+                description,
                 style: Get.textTheme.titleLarge,
               ),
               SizedBox(height: 30.h),
@@ -78,11 +76,6 @@ class DialogHelper {
 
   //hide loading
   static void hideLoading() {
-    // Timer(const Duration(milliseconds: 700), () {
-    //   if (Get.isDialogOpen!) {
-    //     Get.back();
-    //   }
-    // });
     if (Get.isDialogOpen!) {
       Get.back();
     }

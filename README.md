@@ -121,20 +121,7 @@ Container(
       Text(Strings.hello.tr)
       ```
 
-
-
-
-- Snackbars (in app notify):
-
-    ```dart
-    CustomSnackBar.showCustomSnackBar(title: 'Done successfully!', message: 'item added to wishlist');
-    CustomSnackBar.showCustomErrorSnackBar(title: 'Failed!', message: 'failed to load data');
-    CustomSnackBar.showCustomToast(message: 'added to card');
-    CustomSnackBar.showCustomErrorToast(message: 'added to card');
-    ```
-
-  <img src="preview_images/success_snackbar.jpg" width="170px">&nbsp;&nbsp;<img src="preview_images/fail_snackbar.jpg" width="170px">&nbsp;&nbsp;<img src="preview_images/success_toast.jpg" width="170px">&nbsp;&nbsp;<img src="preview_images/fail_toast.jpg" width="170px">
-
+  
 ## Discovering Project
 After setting up all the needed thing now lets talk about folder structure which is mainly based on Getx Pattern and there are some personal opinions, if you open your lib folder you will find those folders
 

@@ -8,8 +8,9 @@ import 'helper/dialog_helper.dart';
 class BaseController {
   RxBool isError = false.obs;
   void handleError(error) {
-    hideLoading();
     isError.value = true;
+    hideLoading();
+
     var errorText = DioExceptions.fromDioError(error).toString();
 
     showErrorDialog("Oops!", errorText);

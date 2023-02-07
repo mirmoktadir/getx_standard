@@ -35,13 +35,14 @@ class EmptyWidget extends StatelessWidget {
           ),
           SizedBox(height: 40.h),
           SizedBox(
-            height: 46.h,
+            height: 44.h,
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade50,
                   elevation: .5,
                   shadowColor: theme.hintColor,
+                  padding: EdgeInsets.zero,
                 ),
                 child: Icon(
                   Ionicons.refresh,
