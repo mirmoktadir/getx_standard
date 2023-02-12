@@ -252,7 +252,7 @@ After setting up all the needed thing now lets talk about folder structure which
   final awardList = RxList<AwardData>();
 
   getAwardList() async {
-  showLoading('Loading award');
+  showLoading();
 
   var response = await DioClient().get(
           url: ApiUrl.allAward,
@@ -281,7 +281,7 @@ After setting up all the needed thing now lets talk about folder structure which
       "gift": gift,
       "description": description,
     };
-    showLoading('Creating award...');
+    showLoading();
     var response = await DioClient()
         .post(
           url:  ApiUrl.createHrAward,
@@ -307,7 +307,7 @@ After setting up all the needed thing now lets talk about folder structure which
   "name": editNameController.text,
   "email": editMailController.text,
   };
-  showLoading('Updating Profile...');
+  showLoading();
   var response = await DioClient()
   .multipartSingleFile(
   url: ApiUrl.updateProfile,
