@@ -249,24 +249,22 @@ After setting up all the needed thing now lets talk about folder structure which
 **GET**
 
 ```dart
-  final awardList = RxList<AwardData>();
-
-  getAwardList() async {
+  final postList = RxList<Posts>();
+  getPostList() async {
   showLoading();
 
-  var response = await DioClient().get(
-          url: ApiUrl.allAward,
-          header:  {
-  "Authorization": "Bearer ${await MySharedPref.getToken()}"
+  var response = await DioClient().get(url: ApiUrl.allPosts, header: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
   }).catchError(handleError);
 
   if (response == null) return;
 
-  awardList.assignAll(
-  (response["data"] as List).map((e) => AwardData.fromJson(e)).toList());
+  postList
+          .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
 
   hideLoading();
-  }
+}
 ```
 
 **POST**
