@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/config/translations/strings_enum.dart';
 import 'package:lottie/lottie.dart';
 
 class DialogHelper {
@@ -37,7 +38,7 @@ class DialogHelper {
                 onPressed: () {
                   if (Get.isDialogOpen!) Get.back();
                 },
-                child: const Text('Okay'),
+                child: Text(Strings.okay.tr),
               ),
             ],
           ),

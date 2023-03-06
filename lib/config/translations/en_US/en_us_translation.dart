@@ -1,16 +1,22 @@
 import '../strings_enum.dart';
 
 const Map<String, String> enUs = {
-  Strings.hello : 'Hello!',
-  Strings.loading : 'Loading',
+  ///API EXCEPTIONS
+  Strings.requestCanceled: "Request cancelled!",
+  Strings.connectionTimeout: "Connection timeout!",
+  Strings.receiveTimeout: "Receive timeout!",
+  Strings.sendTimeout: "Send timeout!",
+  Strings.connectionProblem: "Connection problem!",
+  Strings.somethingWrong: "Something went wrong!",
+  Strings.badRequest: "Bad request",
+  Strings.urlIncorrect: "Api Url Incorrect",
+  Strings.internalServerError: "Internal Server Error",
 
-  Strings.changeTheme : 'Change theme',
-  Strings.changeLanguage : 'Change language',
-
-  Strings.noInternetConnection : 'No internet connection!',
-  Strings.serverNotResponding : 'Server is not responding!',
-  Strings.someThingWentWorng : 'Something went wrong',
-  Strings.apiNotFound : 'Route not found!',
-  Strings.serverError : 'Server error',
-
+  ///
+  Strings.changeTheme: 'Change theme',
+  Strings.changeLanguage: 'Change language',
+  Strings.oops: "Oops!",
+  Strings.okay: "Okay",
+  Strings.refresh: "refresh!",
+  Strings.empty: "Empty or No data!",
 };

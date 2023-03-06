@@ -1,30 +1,32 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:getx_standard/config/translations/strings_enum.dart';
 
 class DioExceptions implements Exception {
   String message = "";
   DioExceptions.fromDioError(DioError dioError) {
     switch (dioError.type) {
       case DioErrorType.cancel:
-        message = "Request cancelled!";
+        message = Strings.requestCanceled.tr;
         break;
       case DioErrorType.connectTimeout:
-        message = "Connection timeout!";
+        message = Strings.connectionTimeout.tr;
         break;
       case DioErrorType.other:
-        message = "Connection problem!";
+        message = Strings.connectionProblem.tr;
         break;
       case DioErrorType.receiveTimeout:
-        message = "Receive timeout!";
+        message = Strings.receiveTimeout.tr;
         break;
       case DioErrorType.response:
         message = _handleError(
             dioError.response!.statusCode!.toInt(), dioError.response!.data);
         break;
       case DioErrorType.sendTimeout:
-        message = "Send timeout!";
+        message = Strings.sendTimeout.tr;
         break;
       default:
-        message = "Something went wrong";
+        message = Strings.somethingWrong.tr;
         break;
     }
   }
@@ -32,13 +34,15 @@ class DioExceptions implements Exception {
   String _handleError(int statusCode, dynamic error) {
     switch (statusCode) {
       case 400:
-        return error['error'] ?? error["message"] ?? 'Bad request';
+        return error['error'] ?? error["message"] ?? Strings.badRequest.tr;
       case 404:
-        return error['error'] ?? error["message"] ?? "Api Url Incorrect";
+        return error['error'] ?? error["message"] ?? Strings.urlIncorrect.tr;
       case 500:
-        return error['error'] ?? error["message"] ?? "Internal Server Error";
+        return error['error'] ??
+            error["message"] ??
+            Strings.internalServerError.tr;
       default:
-        return error['error'] ?? error["message"] ?? 'Something went wrong';
+        return error['error'] ?? error["message"] ?? Strings.somethingWrong.tr;
     }
   }
 
