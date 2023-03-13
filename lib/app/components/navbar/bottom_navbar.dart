@@ -72,7 +72,7 @@ class BottomNavbar extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: _selectedIndex == 0
-                              ? theme.colorScheme.secondary
+                              ? theme.primaryColor
                               : Colors.white,
                         ),
                         child: Center(
@@ -120,7 +120,7 @@ class BottomNavbar extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: _selectedIndex == 1
-                              ? theme.colorScheme.secondary
+                              ? theme.primaryColor
                               : Colors.white,
                         ),
                         child: Center(
@@ -166,7 +166,7 @@ class BottomNavbar extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: _selectedIndex == 2
-                              ? theme.colorScheme.secondary
+                              ? theme.primaryColor
                               : Colors.white,
                         ),
                         child: Center(
@@ -213,7 +213,7 @@ class BottomNavbar extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: _selectedIndex == 3
-                              ? theme.colorScheme.secondary
+                              ? theme.primaryColor
                               : Colors.white,
                         ),
                         child: Center(
@@ -260,14 +260,14 @@ class BottomNavbar extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: _selectedIndex == 4
-                              ? theme.colorScheme.secondary
+                              ? theme.primaryColor
                               : Colors.white,
                         ),
                         child: Center(
                           child: Icon(
                             IconlyLight.buy,
                             size: 20,
-                            color: _selectedIndex == 3
+                            color: _selectedIndex == 4
                                 ? Colors.white
                                 : theme.primaryColor.withOpacity(.5),
                           ),

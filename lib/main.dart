@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/app/modules/home/bindings/home_binding.dart';
 
 import 'app/data/local/my_shared_pref.dart';
 import 'app/routes/app_pages.dart';

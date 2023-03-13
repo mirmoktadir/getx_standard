@@ -9,21 +9,24 @@ class DioExceptions implements Exception {
       case DioErrorType.cancel:
         message = Strings.requestCanceled.tr;
         break;
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         message = Strings.connectionTimeout.tr;
         break;
-      case DioErrorType.other:
+      case DioErrorType.connectionError:
         message = Strings.connectionProblem.tr;
         break;
       case DioErrorType.receiveTimeout:
         message = Strings.receiveTimeout.tr;
         break;
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         message = _handleError(
             dioError.response!.statusCode!.toInt(), dioError.response!.data);
         break;
       case DioErrorType.sendTimeout:
         message = Strings.sendTimeout.tr;
+        break;
+      case DioErrorType.unknown:
+        message = Strings.somethingWrong.tr;
         break;
       default:
         message = Strings.somethingWrong.tr;
