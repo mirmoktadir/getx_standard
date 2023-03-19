@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
+
 import '../../../../config/theme/my_fonts.dart';
 import '../../../components/empty_widget.dart';
 import '../controllers/home_controller.dart';
@@ -36,18 +36,24 @@ class HomeView extends GetView<HomeController> {
                     separatorBuilder: (_, __) => SizedBox(
                       height: 20.h,
                     ),
-                    itemBuilder: (ctx, index) => Container(
-                      padding: const EdgeInsets.all(5),
-                      width: double.infinity,
-                      color: theme.canvasColor,
-                      child: Center(
-                        child: Text(
-                          controller.postList[index].title ?? "",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: MyFonts.headline6TextSize,
-                            fontWeight: FontWeight.w500,
-                            color: theme.primaryColor,
+                    itemBuilder: (ctx, index) => GestureDetector(
+                      onTap: () async {
+                        await controller
+                            .getPostDetail(controller.postList[index].id);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        width: double.infinity,
+                        color: theme.canvasColor,
+                        child: Center(
+                          child: Text(
+                            controller.postList[index].title ?? "",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: MyFonts.headline6TextSize,
+                              fontWeight: FontWeight.w500,
+                              color: theme.primaryColor,
+                            ),
                           ),
                         ),
                       ),

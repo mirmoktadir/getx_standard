@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:getx_standard/app/modules/home/bindings/home_binding.dart';
+import 'package:getx_standard/app/modules/home/views/post_detail_view.dart';
 
 import '../../../service/api_urls.dart';
 import '../../../service/base_controller.dart';
@@ -12,10 +14,8 @@ class HomeController extends GetxController with BaseController {
   getPostList() async {
     showLoading();
 
-    var response = await DioClient().get(url: ApiUrl.allPosts, header: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }).catchError(handleError);
+    var response = await DioClient()
+        .get(url: ApiUrl.allPosts, header: {}).catchError(handleError);
 
     if (response == null) return;
 
@@ -23,6 +23,23 @@ class HomeController extends GetxController with BaseController {
         .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
 
     hideLoading();
+  }
+
+  /// GET POST DETAIL
+  String title = "";
+  String body = "";
+
+  getPostDetail(int? id) async {
+    showLoading();
+    var response = await DioClient().get(
+        url: "${ApiUrl.postDetail}$id", header: {}).catchError(handleError);
+
+    if (response == null) return;
+
+    title = response["title"].toString();
+    body = response["body"].toString();
+    hideLoading();
+    Get.to(() => const PostDetailView(), binding: HomeBinding());
   }
 
   @override
