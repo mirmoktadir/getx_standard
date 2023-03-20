@@ -14,8 +14,8 @@ class HomeController extends GetxController with BaseController {
   getPostList() async {
     showLoading();
 
-    var response = await DioClient()
-        .get(url: ApiUrl.allPosts, header: {}).catchError(handleError);
+    var response =
+        await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
 
     if (response == null) return;
 
@@ -31,8 +31,9 @@ class HomeController extends GetxController with BaseController {
 
   getPostDetail(int? id) async {
     showLoading();
-    var response = await DioClient().get(
-        url: "${ApiUrl.postDetail}$id", header: {}).catchError(handleError);
+    var response = await DioClient()
+        .get(url: "${ApiUrl.postDetail}$id")
+        .catchError(handleError);
 
     if (response == null) return;
 

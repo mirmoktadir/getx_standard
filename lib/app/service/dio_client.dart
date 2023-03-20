@@ -6,6 +6,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import 'helper/api_header.dart';
+
 class DioClient {
   static const int TIME_OUT_DURATION = 20;
 
@@ -13,13 +15,15 @@ class DioClient {
 
   Future<dynamic> get({
     required String url,
-    Map<String, dynamic>? header,
     Map<String, dynamic>? params,
   }) async {
     try {
       var response = await Dio()
-          .get(url, options: Options(headers: header), queryParameters: params)
+          .get(url,
+              options: Options(headers: Header.defaultHeader),
+              queryParameters: params)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
+
       return response.data;
     } catch (e) {
       rethrow;
@@ -29,15 +33,12 @@ class DioClient {
   //POST
 
   Future<dynamic> post(
-      {required String url,
-      Map<String, dynamic>? header,
-      Map<String, dynamic>? params,
-      dynamic body}) async {
+      {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
       var response = await Dio()
           .post(url,
-              options: Options(headers: header),
+              options: Options(headers: Header.defaultHeader),
               queryParameters: params,
               data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
@@ -51,15 +52,12 @@ class DioClient {
   //PATCH
 
   Future<dynamic> patch(
-      {required String url,
-      Map<String, dynamic>? header,
-      Map<String, dynamic>? params,
-      dynamic body}) async {
+      {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
       var response = await Dio()
           .patch(url,
-              options: Options(headers: header),
+              options: Options(headers: Header.defaultHeader),
               queryParameters: params,
               data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
@@ -72,15 +70,12 @@ class DioClient {
   //DELETE
 
   Future<dynamic> delete(
-      {required String url,
-      Map<String, dynamic>? header,
-      Map<String, dynamic>? params,
-      dynamic body}) async {
+      {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
       var response = await Dio()
           .delete(url,
-              options: Options(headers: header),
+              options: Options(headers: Header.defaultHeader),
               queryParameters: params,
               data: payload)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
@@ -95,7 +90,6 @@ class DioClient {
   List<File>? docFileList = [];
   Future<dynamic> multipartRequest({
     required String url,
-    required Map<String, dynamic> header,
     Map<String, dynamic>? params,
     required Map<String, dynamic> body,
     String? filepath,
@@ -110,7 +104,7 @@ class DioClient {
     try {
       var response = await Dio()
           .post(url,
-              options: Options(headers: header),
+              options: Options(headers: Header.defaultMultipartHeader),
               queryParameters: params,
               data: formData)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
@@ -124,7 +118,6 @@ class DioClient {
 
   Future<dynamic> multipartSingleFile(
       {required String url,
-      required Map<String, dynamic> header,
       Map<String, dynamic>? params,
       required Map<String, dynamic> body,
       String? filepath,
@@ -137,7 +130,7 @@ class DioClient {
     try {
       var response = await Dio()
           .post(url,
-              options: Options(headers: header),
+              options: Options(headers: Header.defaultMultipartHeader),
               queryParameters: params,
               data: formData)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
