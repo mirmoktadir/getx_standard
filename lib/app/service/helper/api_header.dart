@@ -17,7 +17,7 @@ class Header {
     'Content-Type': 'multipart/form-data',
   };
 
-  // SECURE HEADER
+  // SECURE MULTIPART HEADER
   static Map<String, dynamic> secureMultipartHeader = {
     "Authorization": "Bearer 'token'",
     'Accept': 'application/json',

@@ -7,10 +7,11 @@ import 'helper/dialog_helper.dart';
 
 class BaseController {
   RxBool isError = false.obs;
+
   void handleError(error) {
     isError.value = true;
     hideLoading();
-
+/**/
     var errorText = DioExceptions.fromDioError(error).toString();
 
     showErrorDialog(Strings.oops.tr, errorText);

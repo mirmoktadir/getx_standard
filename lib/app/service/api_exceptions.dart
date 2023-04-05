@@ -12,9 +12,6 @@ class DioExceptions implements Exception {
       case DioErrorType.connectionTimeout:
         message = Strings.connectionTimeout.tr;
         break;
-      case DioErrorType.connectionError:
-        message = Strings.connectionProblem.tr;
-        break;
       case DioErrorType.receiveTimeout:
         message = Strings.receiveTimeout.tr;
         break;
@@ -26,7 +23,7 @@ class DioExceptions implements Exception {
         message = Strings.sendTimeout.tr;
         break;
       case DioErrorType.unknown:
-        message = Strings.somethingWrong.tr;
+        message = Strings.connectionProblem.tr;
         break;
       default:
         message = Strings.somethingWrong.tr;
