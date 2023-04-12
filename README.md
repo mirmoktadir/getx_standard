@@ -248,22 +248,21 @@ After setting up all the needed thing now lets talk about folder structure which
 
 **GET**
 
-```dart
-  final postList = RxList<Posts>();
-  getPostList() async {
-  showLoading();
+**CHANG THE HEADER in the DIO_CLIENT.DART file according to you >> "defaultHeader" to "secureHeader" . in MULTIPART "defaultMultipartHeader" to "secureMultipartHeader"**
 
-  var response = await DioClient().get(url: ApiUrl.allPosts, header: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  }).catchError(handleError);
+```dart
+   getPostDetail(int? id) async {
+  showLoading();
+  var response = await DioClient()
+          .get(url: "${ApiUrl.postDetail}$id")
+          .catchError(handleError);
 
   if (response == null) return;
 
-  postList
-          .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
-
+  title = response["title"].toString();
+  body = response["body"].toString();
   hideLoading();
+  Get.to(() => const PostDetailView(), binding: HomeBinding());
 }
 ```
 
@@ -283,7 +282,7 @@ After setting up all the needed thing now lets talk about folder structure which
     var response = await DioClient()
         .post(
           url:  ApiUrl.createHrAward,
-            header: {"Authorization": "Bearer ${await MySharedPref.getToken()}"},
+            
            body: request)
         .catchError(handleError);
     if (response == null) return;
@@ -309,10 +308,7 @@ After setting up all the needed thing now lets talk about folder structure which
   var response = await DioClient()
   .multipartSingleFile(
   url: ApiUrl.updateProfile,
-  header:  {
-  "Authorization": "Bearer ${await MySharedPref.getToken()}",
-  'Content-Type': 'multipart/form-data'
-  },
+ 
  body: request,
  filepath: filePath,
  key: "profile")
