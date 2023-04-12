@@ -245,10 +245,11 @@ After setting up all the needed thing now lets talk about folder structure which
 
 **API CALLING**
 
+**CHANG THE HEADER in the DIO_CLIENT.DART file according to you >> "defaultHeader" to "secureHeader" . in MULTIPART "defaultMultipartHeader" to "secureMultipartHeader"**
+
 
 **GET**
 
-**CHANG THE HEADER in the DIO_CLIENT.DART file according to you >> "defaultHeader" to "secureHeader" . in MULTIPART "defaultMultipartHeader" to "secureMultipartHeader"**
 
 ```dart
    getPostDetail(int? id) async {
