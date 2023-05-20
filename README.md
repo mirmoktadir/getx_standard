@@ -9,8 +9,6 @@ Flutter Getx template to make starting project fast and easy
 We all face the same problem when we want to start a new project we have to take care of some repeatable things such as
 - Theme (light/dark) & store current theme in shared pref 🌒
 - Localization & store the current locale in shared pref 🅰️
-- Firebase Messaging 📨
-- Notifications setup 🔔
 - Safe api requests & error handling 🔏
 - Changing between widgets during api call (loading,success,failed..etc) 😴
 - Snackbar,Toasts & in app notifications 🪖
@@ -21,9 +19,7 @@ We all face the same problem when we want to start a new project we have to take
 Project was created using [get_cli](https://pub.dev/packages/get_cli) which is a great tool helping you to (start project,create screens/controllers, handling DI)..etc and we will list other packages that helped to create this skeleton
 - [GetX](https://pub.dev/packages/get) for state management,navigation,managing dependencies..etc
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) to make app more responsive
-- [hive](https://pub.dev/packages/hive) as local database
 - [get_storage](https://pub.dev/packages/get_storage) as shared pref (its more easy and it read data sync)
-- [awesome_notifications](https://pub.dev/packages/awesome_notifications) for local notification
 ## Clone and start project
 Before discovering folders lets first perform some actions to make the project ready to launch
 - first run this command it will generate hive type adapters (for our custom classes that we want to store locally)
@@ -31,23 +27,13 @@ Before discovering folders lets first perform some actions to make the project r
     ```
     flutter packages pub run build_runner build --delete-conflicting-outputs
     ```
-  if you don't want to use hive comment this line in main.dart
 
-    ```dart
-    await MyHive.init(adapters: [UserModelAdapter()]);
-    ```
 - To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
     ```dart
     ScreenUtilInit(
       designSize: const Size(375, 812), // change this to your xd artboard size
     ```
-- FCM & Awesome Notifications are combined at the same class so when ever you connect your app to firebase your app will be ready to receive notifications you don't need to do anything except sending fcm notification to your api via implementing the method (sendFcmTokenToServer) which is inside FcmHelper class 😎
-    ```dart
-    static _sendFcmTokenToServer(){
-        var token = MySharedPref.getFcmToken();
-        // TODO SEND FCM TOKEN TO SERVER
-    }
-    ```
+
 - Change app package name
     ```
     flutter pub run change_app_package_name:main com.new.package.name
@@ -64,13 +50,7 @@ Before discovering folders lets first perform some actions to make the project r
    ```
    flutter pub run flutter_native_splash:create
    ```
-- FCM: firebase has recently added (add flutter app) to your firebase which will make adding our flutter(android/ios) app to firebase take only 2 steps 🔥 but first you need to download [Firebase CLI](https://firebase.google.com/docs/cli?authuser=0&hl=en#install_the_firebase_cli) and in the terminal execute:
-    ```
-    dart pub global activate flutterfire_cli
-    ```
-  then follow the firebase guid you will get command similar to this one
-    ```
-    flutterfire configure --project=flutter-firebase-YOUR_PROJECT_ID
+
     ```
   and that's it! your project is now connected to firebase and fcm is up and ready to get notifications
 ## Quick Start

@@ -5,7 +5,7 @@ import 'package:getx_standard/config/translations/strings_enum.dart';
 import 'api_exceptions.dart';
 import 'helper/dialog_helper.dart';
 
-class BaseController {
+mixin class BaseController {
   RxBool isError = false.obs;
 
   void handleError(error) {
