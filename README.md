@@ -22,16 +22,11 @@ Project was created using [get_cli](https://pub.dev/packages/get_cli) which is a
 - [get_storage](https://pub.dev/packages/get_storage) as shared pref (its more easy and it read data sync)
 ## Clone and start project
 Before discovering folders lets first perform some actions to make the project ready to launch
-- first run this command it will generate hive type adapters (for our custom classes that we want to store locally)
-
-    ```
-    flutter packages pub run build_runner build --delete-conflicting-outputs
-    ```
 
 - To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
     ```dart
     ScreenUtilInit(
-      designSize: const Size(375, 812), // change this to your xd artboard size
+      designSize: const Size(375, 812), // change this to your xd/figma artboard size
     ```
 
 - Change app package name
