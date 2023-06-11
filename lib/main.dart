@@ -10,11 +10,7 @@ import 'config/translations/localization_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await MyHive.init(adapters: [UserModelAdapter()]);
-
   await MySharedPref.init();
-
-  // await FcmHelper.initFcm();
 
   runApp(
     ScreenUtilInit(

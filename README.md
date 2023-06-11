@@ -9,7 +9,8 @@ Flutter Getx template to make starting project fast and easy
 We all face the same problem when we want to start a new project we have to take care of some repeatable things such as
 - Theme (light/dark) & store current theme in shared pref 🌒
 - Localization & store the current locale in shared pref 🅰️
-- Safe api requests & error handling 🔏
+- Safe rest api requests & error handling 🔏
+- Safe graphql api requests & error handling 🔏
 - Changing between widgets during api call (loading,success,failed..etc) 😴
 - Snackbar,Toasts & in app notifications 🪖
 - Making app more responsive and stop font scaling ⚖️
@@ -22,16 +23,11 @@ Project was created using [get_cli](https://pub.dev/packages/get_cli) which is a
 - [get_storage](https://pub.dev/packages/get_storage) as shared pref (its more easy and it read data sync)
 ## Clone and start project
 Before discovering folders lets first perform some actions to make the project ready to launch
-- first run this command it will generate hive type adapters (for our custom classes that we want to store locally)
-
-    ```
-    flutter packages pub run build_runner build --delete-conflicting-outputs
-    ```
 
 - To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
     ```dart
     ScreenUtilInit(
-      designSize: const Size(375, 812), // change this to your xd artboard size
+      designSize: const Size(375, 812), // change this to your xd/Figma artboard size
     ```
 
 - Change app package name

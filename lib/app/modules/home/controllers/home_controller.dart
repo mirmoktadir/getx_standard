@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/modules/home/bindings/home_binding.dart';
 import 'package:getx_standard/app/modules/home/views/post_detail_view.dart';
 
-import '../../../service/api_urls.dart';
-import '../../../service/base_controller.dart';
-import '../../../service/dio_client.dart';
+import '../../../service/REST/api_urls.dart';
+import '../../../service/REST/base_controller.dart';
+import '../../../service/REST/dio_client.dart';
 import '../model/posts.dart';
 
 class HomeController extends GetxController with BaseController {

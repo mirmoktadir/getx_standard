@@ -26,10 +26,6 @@ class MyTheme {
       dividerColor: isLight
           ? LightThemeColors.dividerColor
           : DarkThemeColors.dividerColor,
-      // app background color
-      backgroundColor: isLight
-          ? LightThemeColors.backgroundColor
-          : DarkThemeColors.backgroundColor,
       scaffoldBackgroundColor: isLight
           ? LightThemeColors.scaffoldBackgroundColor
           : DarkThemeColors.scaffoldBackgroundColor,
@@ -56,10 +52,15 @@ class MyTheme {
 
       // icon theme
       iconTheme: MyStyles.getIconTheme(isLightTheme: isLight),
-      colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: isLight
-              ? LightThemeColors.accentColor
-              : DarkThemeColors.accentColor),
+      colorScheme: ColorScheme.fromSwatch()
+          .copyWith(
+              secondary: isLight
+                  ? LightThemeColors.accentColor
+                  : DarkThemeColors.accentColor)
+          .copyWith(
+              background: isLight
+                  ? LightThemeColors.backgroundColor
+                  : DarkThemeColors.backgroundColor),
     );
   }
 
