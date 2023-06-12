@@ -1,43 +1,36 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/service/graphQL/graphql_config.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+
+import 'graphql_config.dart';
 
 class GraphQLService extends GetxService {
   GraphQLConfig graphQLConfig = GraphQLConfig();
 
-  Future<GraphQLResult> performQuery(String query) async {
-    final options = QueryOptions(document: gql(query));
-    final result = await graphQLConfig.graphqlClient().query(options);
-    return _handleResult(result);
-  }
+  Future<dynamic> performMutation(String mutation) async {
+    final mutationOptions = MutationOptions(
+      document: gql(mutation),
+    );
 
-  Future<GraphQLResult> performMutation(String mutation) async {
-    final options = MutationOptions(document: gql(mutation));
-    final result = await graphQLConfig.graphqlClient().mutate(options);
-    return _handleResult(result);
-  }
+    final result = await graphQLConfig.graphqlClient().mutate(mutationOptions);
 
-  GraphQLResult _handleResult(QueryResult result) {
     if (result.hasException) {
-      final graphqlError = result.exception?.graphqlErrors.first;
-      throw GraphQLError(graphqlError!.message);
-    } else {
-      return GraphQLResult(result.data);
+      throw result.exception!;
     }
+
+    return result.data;
   }
-}
 
-class GraphQLError implements Exception {
-  final String message;
+  Future<dynamic> performQuery(String query) async {
+    final queryOptions = QueryOptions(
+      document: gql(query),
+    );
 
-  GraphQLError(this.message);
+    final result = await graphQLConfig.graphqlClient().query(queryOptions);
 
-  @override
-  String toString() => 'GraphQLError: $message';
-}
+    if (result.hasException) {
+      throw result.exception!;
+    }
 
-class GraphQLResult {
-  final dynamic data;
-
-  GraphQLResult(this.data);
+    return result.data;
+  }
 }
