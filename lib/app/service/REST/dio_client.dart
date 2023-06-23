@@ -6,7 +6,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import 'helper/api_header.dart';
+import 'api_header.dart';
 
 class DioClient {
   static const int TIME_OUT_DURATION = 20;

@@ -3,11 +3,11 @@ import 'package:getx_standard/app/modules/home/bindings/home_binding.dart';
 import 'package:getx_standard/app/modules/home/views/post_detail_view.dart';
 
 import '../../../service/REST/api_urls.dart';
-import '../../../service/REST/base_controller.dart';
 import '../../../service/REST/dio_client.dart';
+import '../../../service/handler/exception_handler.dart';
 import '../model/posts.dart';
 
-class HomeController extends GetxController with BaseController {
+class HomeController extends GetxController with ExceptionHandler {
   ///GET POST LIST
   final postList = RxList<Posts>();
 
