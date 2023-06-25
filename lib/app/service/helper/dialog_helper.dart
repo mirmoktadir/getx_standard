@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/config/theme/light_theme_colors.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../config/translations/strings_enum.dart';
@@ -12,6 +13,8 @@ class DialogHelper {
   static void showErrorDialog(String title, String description) {
     Get.dialog(
       Dialog(
+        elevation: 6,
+        shadowColor: LightThemeColors.primaryColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -21,7 +24,7 @@ class DialogHelper {
                 title,
                 style: Get.textTheme.headlineMedium,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               Lottie.asset(
                 'animations/apiError.json',
                 height: 140.h,
@@ -29,17 +32,21 @@ class DialogHelper {
                 reverse: true,
                 fit: BoxFit.cover,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               Text(
-                description,
+                'message:  $description',
                 style: Get.textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 30.h),
-              ElevatedButton(
-                onPressed: () {
-                  if (Get.isDialogOpen!) Get.back();
-                },
-                child: Text(Strings.okay.tr),
+              SizedBox(
+                width: 100.w,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (Get.isDialogOpen!) Get.back();
+                  },
+                  child: Text(Strings.okay.tr),
+                ),
               ),
             ],
           ),

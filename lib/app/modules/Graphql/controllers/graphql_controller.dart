@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/service/handler/exception_handler.dart';
 
 class GraphQLController extends GetxController with ExceptionHandler {
-  // final GraphQLService graphQLService = GraphQLService();
   final userList = RxList<dynamic>();
   RxString mutationResult = "".obs;
 
@@ -39,7 +38,7 @@ class GraphQLController extends GetxController with ExceptionHandler {
 
     const mutation = '''
         mutation {
-          updaeTodo(input:{id:"Hello World",description:"Hello World"}){
+          updateTodo(input:{id:"Hello World",description:"Hello World"}){
             id
             description
             done
@@ -57,7 +56,6 @@ class GraphQLController extends GetxController with ExceptionHandler {
 
   @override
   void onReady() async {
-    // TODO: implement onReady
     await getAlbums();
 
     super.onReady();

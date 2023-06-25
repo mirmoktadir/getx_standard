@@ -19,6 +19,7 @@ class GraphQLService extends GetxService {
       if (errors.isNotEmpty) {
         for (final GraphQLError error in errors) {
           errorMessage = error.message.toString();
+
           throw error.message;
         }
       } else if (linkException != null) {
@@ -42,6 +43,7 @@ class GraphQLService extends GetxService {
       if (errors.isNotEmpty) {
         for (final GraphQLError error in errors) {
           errorMessage = error.message.toString();
+
           throw error.message;
         }
       } else if (linkException != null) {

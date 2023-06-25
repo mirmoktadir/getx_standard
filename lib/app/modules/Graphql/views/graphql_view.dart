@@ -38,6 +38,7 @@ class GraphQLView extends GetView<GraphQLController> {
                             },
                             child: const Text("Run mutation")),
                       ),
+                      SizedBox(height: 10.h),
                       controller.mutationResult.isEmpty
                           ? const SizedBox()
                           : Padding(

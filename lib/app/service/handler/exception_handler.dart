@@ -13,7 +13,7 @@ mixin class ExceptionHandler {
   void handleError(error) {
     isError.value = true;
     hideLoading();
-/**/
+
     var errorText = DioExceptions.fromDioError(error).toString();
 
     showErrorDialog(Strings.oops.tr, errorText);
@@ -27,6 +27,7 @@ mixin class ExceptionHandler {
     isError.value = true;
     hideLoading();
     var errorText = graphQLService.errorMessage.toString();
+
     showErrorDialog(Strings.oops.tr, errorText);
 
     if (kDebugMode) {
