@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,22 +23,32 @@ class DialogHelper {
             children: [
               Text(
                 title,
-                style: Get.textTheme.headlineMedium,
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.sp,
+                ),
               ),
               SizedBox(height: 5.h),
               Lottie.asset(
                 'animations/apiError.json',
-                height: 140.h,
+                height: 120.h,
                 repeat: true,
                 reverse: true,
                 fit: BoxFit.cover,
               ),
-              SizedBox(height: 5.h),
-              Text(
-                'message:  $description',
-                style: Get.textTheme.titleLarge,
-                textAlign: TextAlign.center,
-              ),
+              SizedBox(height: 20.h),
+              AnimatedTextKit(repeatForever: true, animatedTexts: [
+                ColorizeAnimatedText(description,
+                    textStyle: Get.textTheme.headlineMedium as TextStyle,
+                    textAlign: TextAlign.center,
+                    colors: [
+                      Colors.purple,
+                      Colors.blue,
+                      Colors.yellow,
+                      Colors.red,
+                    ]),
+              ]),
               SizedBox(height: 30.h),
               SizedBox(
                 width: 100.w,

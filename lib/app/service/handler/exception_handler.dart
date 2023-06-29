@@ -10,6 +10,7 @@ mixin class ExceptionHandler {
   final GraphQLService graphQLService = GraphQLService();
   RxBool isError = false.obs;
 
+  /// FOR REST API
   void handleError(error) {
     isError.value = true;
     hideLoading();
@@ -23,6 +24,7 @@ mixin class ExceptionHandler {
     }
   }
 
+  /// FOR GRAPHQL API
   void handleGraphqlError(error) {
     isError.value = true;
     hideLoading();

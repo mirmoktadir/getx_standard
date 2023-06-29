@@ -37,6 +37,8 @@ Future<void> main() async {
 
           initialRoute:
               AppPages.NAV, // first screen to show when app is running
+          defaultTransition: Transition.noTransition,
+
           getPages: AppPages.routes, // app screens
           locale: MySharedPref.getCurrentLocal(), // app language
           translations:

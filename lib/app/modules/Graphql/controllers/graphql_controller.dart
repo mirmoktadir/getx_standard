@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:getx_standard/app/service/handler/exception_handler.dart';
 
@@ -51,6 +54,28 @@ class GraphQLController extends GetxController with ExceptionHandler {
         .catchError(handleGraphqlError);
     if (result == null) return;
     mutationResult.value = result.toString();
+    hideLoading();
+  }
+
+  ///
+  Future<void> uploadFileMutation(File file) async {
+    showLoading();
+    const mutation = '''
+    
+    ''';
+
+    final result = await graphQLService.performMutationWithFile(
+      mutation: mutation,
+      file: file,
+      fileFieldName: 'fileFieldName',
+      variables: {
+        // Additional variables if needed
+      },
+    ).catchError(handleGraphqlError);
+    if (result == null) return;
+    if (kDebugMode) {
+      print(result.toString());
+    }
     hideLoading();
   }
 
