@@ -4,25 +4,25 @@ import 'package:getx_standard/config/translations/strings_enum.dart';
 
 class DioExceptions implements Exception {
   String message = "";
-  DioExceptions.fromDioError(DioError dioError) {
-    switch (dioError.type) {
-      case DioErrorType.cancel:
+  DioExceptions.fromDioError(DioException dioException) {
+    switch (dioException.type) {
+      case DioExceptionType.cancel:
         message = Strings.requestCanceled.tr;
         break;
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         message = Strings.connectionTimeout.tr;
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         message = Strings.receiveTimeout.tr;
         break;
-      case DioErrorType.badResponse:
-        message = _handleError(
-            dioError.response!.statusCode!.toInt(), dioError.response!.data);
+      case DioExceptionType.badResponse:
+        message = _handleError(dioException.response!.statusCode!.toInt(),
+            dioException.response!.data);
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         message = Strings.sendTimeout.tr;
         break;
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         message = Strings.connectionProblem.tr;
         break;
       default:
