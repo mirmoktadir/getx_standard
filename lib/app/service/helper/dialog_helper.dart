@@ -6,6 +6,7 @@ import 'package:getx_standard/config/theme/light_theme_colors.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../config/translations/strings_enum.dart';
+import '../../../utils/constants.dart';
 
 class DialogHelper {
   static get context => null;
@@ -78,16 +79,25 @@ class DialogHelper {
             color: Colors.grey.shade300,
             shape: BoxShape.circle,
           ),
-          child: OverflowBox(
-            minHeight: 130.h,
-            maxHeight: 130.h,
-            child: Lottie.asset(
-              'animations/loader.json',
-              height: 130.h,
-              repeat: true,
-              reverse: true,
-              fit: BoxFit.cover,
-            ),
+
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // App Icon
+              Container(
+                height: 50.sp, width: 50.sp,
+                decoration:  BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image:AssetImage(
+                      AppImages.kAppIcon, // Replace with your app icon file path
+
+                    ) )
+                ),
+
+              ),
+              // Loader
+              SizedBox(height: 60.h,width: 60.w, child: const CircularProgressIndicator()),
+            ],
           ),
         ),
       ),

@@ -12,16 +12,18 @@ class MySharedPref {
   // get storage
   static late SharedPreferences _sharedPreferences;
 
+  static Future<void> init() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+  }
+
   // STORING KEYS
   static const String _fcmTokenKey = 'fcm_token';
 
   static const String _currentLocalKey = 'current_local';
   static const String _lightThemeKey = 'is_theme_light';
 
-  /// init get storage services
-  static Future<void> init() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-  }
+
+
 
   /// set theme current type as light theme
   static void setThemeIsLight(bool lightTheme) =>

@@ -34,6 +34,19 @@ class GraphQLService extends GetxService {
   }
 
   /// MUTATION WITH FILE
+  Future<dynamic> performMutationWithFile(
+    String mutation,
+  ) async {
+    final mutationOptions = MutationOptions(
+      document: gql(mutation),
+      fetchPolicy: FetchPolicy.noCache,
+    );
+
+    final result = await graphQLConfig.graphqlClient().mutate(mutationOptions);
+
+    _checkException(result);
+    return result.data;
+  }
 
   /// ERROR CHECKER
   _checkException(result) {
