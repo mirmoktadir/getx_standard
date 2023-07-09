@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -60,10 +62,14 @@ class GraphQLService extends GetxService {
           throw error.message;
         }
       } else if (linkException != null) {
-        errorMessage = linkException.originalException.toString() != "null"
-            ? linkException.originalException.toString()
-            : "Something went wrong!";
-        throw linkException;
+        if (linkException.originalException is TimeoutException) {
+          errorMessage = "Request timed out!";
+        } else {
+          errorMessage = linkException.originalException.toString() != "null"
+              ? linkException.originalException.toString()
+              : "Something went wrong!";
+          throw linkException.originalException!;
+        }
       }
     }
   }

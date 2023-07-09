@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/modules/home/bindings/home_binding.dart';
-import 'package:getx_standard/app/modules/home/views/post_detail_view.dart';
 
 import '../../../service/REST/api_urls.dart';
 import '../../../service/REST/dio_client.dart';
 import '../../../service/handler/exception_handler.dart';
+import '../bindings/home_binding.dart';
 import '../model/posts.dart';
+import '../views/post_detail_view.dart';
 
 class HomeController extends GetxController with ExceptionHandler {
+
+
   ///GET POST LIST
   final postList = RxList<Posts>();
 
@@ -15,7 +17,7 @@ class HomeController extends GetxController with ExceptionHandler {
     showLoading();
 
     var response =
-        await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
+    await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
 
     if (response == null) return;
 
