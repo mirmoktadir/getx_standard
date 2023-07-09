@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../components/navbar/navbar_controller.dart';
 import '../../../service/REST/api_urls.dart';
 import '../../../service/REST/dio_client.dart';
 import '../../../service/handler/exception_handler.dart';
@@ -8,7 +9,7 @@ import '../model/posts.dart';
 import '../views/post_detail_view.dart';
 
 class HomeController extends GetxController with ExceptionHandler {
-
+  final navController = Get.put(NavbarController());
 
   ///GET POST LIST
   final postList = RxList<Posts>();
@@ -17,7 +18,7 @@ class HomeController extends GetxController with ExceptionHandler {
     showLoading();
 
     var response =
-    await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
+        await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
 
     if (response == null) return;
 
