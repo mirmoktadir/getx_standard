@@ -67,9 +67,8 @@ class DialogHelper {
     );
   }
 
-  //show toast
-  //show snack bar
-  //show loading
+
+  ///show loading
   static void showLoading() {
     Get.dialog(
       Center(
@@ -86,17 +85,19 @@ class DialogHelper {
               // App Icon
               Container(
                 height: 50.sp, width: 50.sp,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: DecorationImage(image:AssetImage(
-                      AppImages.kAppIcon, // Replace with your app icon file path
+                    image: DecorationImage(image: AssetImage(
+                      AppImages.kAppIcon,
 
-                    ) )
+                    ))
                 ),
 
               ),
               // Loader
-              SizedBox(height: 60.h,width: 60.w, child: const CircularProgressIndicator()),
+              SizedBox(height: 60.h,
+                  width: 60.w,
+                  child: const CircularProgressIndicator()),
             ],
           ),
         ),

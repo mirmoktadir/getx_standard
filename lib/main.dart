@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,7 @@ import 'config/translations/localization_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await MySharedPref.init();
 
   runApp(
@@ -35,12 +36,14 @@ Future<void> main() async {
             );
           },
 
-          initialRoute:
-              AppPages.NAV, // first screen to show when app is running
+          initialRoute: AppPages.NAV,
+          // first screen to show when app is running
           defaultTransition: Transition.noTransition,
 
-          getPages: AppPages.routes, // app screens
-          locale: MySharedPref.getCurrentLocal(), // app language
+          getPages: AppPages.routes,
+          // app screens
+          locale: MySharedPref.getCurrentLocal(),
+          // app language
           translations:
               LocalizationService(), // localization services in app (controller app language)
         );

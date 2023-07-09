@@ -9,7 +9,7 @@ class MySharedPref {
   // prevent making instance
   MySharedPref._();
 
-  // get storage
+  // shared pref init
   static late SharedPreferences _sharedPreferences;
 
   static Future<void> init() async {
@@ -21,9 +21,6 @@ class MySharedPref {
 
   static const String _currentLocalKey = 'current_local';
   static const String _lightThemeKey = 'is_theme_light';
-
-
-
 
   /// set theme current type as light theme
   static void setThemeIsLight(bool lightTheme) =>

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/navbar/navbar_controller.dart';
+import 'package:iconly/iconly.dart';
 
 import '../../../../config/theme/my_fonts.dart';
 import '../../../components/empty_widget.dart';
@@ -8,12 +10,22 @@ import '../controllers/graphql_controller.dart';
 
 class GraphQLView extends GetView<GraphQLController> {
   const GraphQLView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    final navController = Get.put(NavbarController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('GraphQL'),
+        actions: [
+          IconButton(
+              onPressed: () => navController.selectedIndex.value = 0,
+              icon: const Icon(
+                IconlyBold.home,
+                color: Colors.white,
+              )),
+        ],
         centerTitle: true,
       ),
       body: Obx(() => controller.isError.value == true

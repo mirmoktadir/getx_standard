@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/modules/Graphql/bindings/graphql_binding.dart';
 
 import '../components/navbar/bottom_navbar.dart';
 import '../components/navbar/navbar_binding.dart';
-import '../modules/Graphql/views/graphql_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
+import '../modules/home-with-graphql/bindings/graphql_binding.dart';
+import '../modules/home-with-graphql/views/graphql_view.dart';
+import '../modules/home-with-restAPI/bindings/home_binding.dart';
+import '../modules/home-with-restAPI/views/home_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -21,14 +21,14 @@ class AppPages {
     /// NAV BAR
     GetPage(
       name: _Paths.NAV,
-      page: () => BottomNavbar(),
+      page: () => const BottomNavbar(),
       binding: NavbarBinding(),
     ),
 
     ///
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
