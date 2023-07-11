@@ -52,10 +52,10 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/app_icon.png"
+  image_path: "assets/images/icon-splash/app_icon.png"
 
 flutter_native_splash:
-  background_image: assets/images/splash.png
+  background_image: assets/images/icon-splash/splash.png
   android: true
   ios: true
 
@@ -67,6 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/icon-splash/
     - assets/vectors/
     - assets/fonts/
     - animations/

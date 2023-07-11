@@ -28,7 +28,9 @@ class DialogHelper {
                   color: Colors.redAccent,
                   fontWeight: FontWeight.w400,
                   fontSize: 16.sp,
+
                 ),
+                maxLines: 4, overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 5.h),
               Lottie.asset(
@@ -67,7 +69,6 @@ class DialogHelper {
     );
   }
 
-
   ///show loading
   static void showLoading() {
     Get.dialog(
@@ -78,24 +79,25 @@ class DialogHelper {
             color: Colors.grey.shade300,
             shape: BoxShape.circle,
           ),
-
           child: Stack(
             alignment: Alignment.center,
             children: [
               // App Icon
               Container(
-                height: 50.sp, width: 50.sp,
+                height: 50.sp,
+                width: 50.sp,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(image: AssetImage(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(
                       AppImages.kAppIcon,
-
-                    ))
+                    ),
+                  ),
                 ),
-
               ),
               // Loader
-              SizedBox(height: 60.h,
+              SizedBox(
+                  height: 60.h,
                   width: 60.w,
                   child: const CircularProgressIndicator()),
             ],
