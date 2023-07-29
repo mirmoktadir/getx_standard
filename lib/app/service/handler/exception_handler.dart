@@ -1,9 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import 'package:getx_standard/app/service/graphQL/graphql_service.dart';
-import 'package:getx_standard/config/translations/strings_enum.dart';
+import 'dart:convert';
 
+import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+
+import '../../../config/translations/strings_enum.dart';
 import '../REST/api_exceptions.dart';
+import '../graphQL/graphql_service.dart';
 import '../helper/dialog_helper.dart';
 
 mixin class ExceptionHandler {
@@ -18,10 +20,7 @@ mixin class ExceptionHandler {
     var errorText = DioExceptions.fromDioError(error).toString();
 
     showErrorDialog(Strings.oops.tr, errorText);
-
-    if (kDebugMode) {
-      print(errorText);
-    }
+    Logger().e(errorText);
   }
 
   /// FOR GRAPHQL API
@@ -30,10 +29,13 @@ mixin class ExceptionHandler {
     hideLoading();
     var errorText = graphQLService.errorMessage.toString();
 
-    showErrorDialog(Strings.oops.tr, errorText);
-
-    if (kDebugMode) {
-      print(errorText);
+    try {
+      Map onlyMessage = jsonDecode(errorText);
+      showErrorDialog(Strings.oops.tr, onlyMessage["message"]);
+      Logger().e(onlyMessage);
+    } catch (e) {
+      showErrorDialog(Strings.oops.tr, errorText);
+      Logger().e(errorText);
     }
   }
 

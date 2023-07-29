@@ -10,8 +10,24 @@ import 'config/translations/localization_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // Device orientation
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+  // Device info
+//  DeviceInfoHelper.initializeDeviceInfo();
+
+  // Shared pref
   await MySharedPref.init();
+
+  // inti fcm services
+  // await FcmHelper.initFcm();
+
+  // FCM foreground message
+  // FirebaseMessaging.onMessage.listen(FcmHelper.fcmForegroundHandler);
+
+  // initialize local notifications service
+  // await AwesomeNotificationsHelper.init();
 
   runApp(
     ScreenUtilInit(
@@ -38,6 +54,7 @@ Future<void> main() async {
 
           initialRoute: AppPages.NAV,
           // first screen to show when app is running
+
           defaultTransition: Transition.noTransition,
 
           getPages: AppPages.routes,

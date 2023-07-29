@@ -10,7 +10,7 @@ class MySharedPref {
   MySharedPref._();
 
   // shared pref init
-  static late SharedPreferences _sharedPreferences;
+  static SharedPreferences? _sharedPreferences;
 
   static Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -24,19 +24,19 @@ class MySharedPref {
 
   /// set theme current type as light theme
   static void setThemeIsLight(bool lightTheme) =>
-      _sharedPreferences.setBool(_lightThemeKey, lightTheme);
+      _sharedPreferences!.setBool(_lightThemeKey, lightTheme);
 
   /// get if the current theme type is light
   static bool getThemeIsLight() =>
-      _sharedPreferences.getBool(_lightThemeKey) ?? true;
+      _sharedPreferences!.getBool(_lightThemeKey) ?? true;
 
   /// save current locale
   static void setCurrentLanguage(String languageCode) =>
-      _sharedPreferences.setString(_currentLocalKey, languageCode);
+      _sharedPreferences!.setString(_currentLocalKey, languageCode);
 
   /// get current locale
   static Locale getCurrentLocal() {
-    String? langCode = _sharedPreferences.getString(_currentLocalKey);
+    String? langCode = _sharedPreferences!.getString(_currentLocalKey);
     // default language is english
     if (langCode == null) {
       return LocalizationService.defaultLanguage;
@@ -45,9 +45,26 @@ class MySharedPref {
   }
 
   /// save generated fcm token
-  static void setFcmToken(String token) =>
-      _sharedPreferences.setString(_fcmTokenKey, token);
+  static Future<void> setFcmToken(String token) =>
+      _sharedPreferences!.setString(_fcmTokenKey, token);
 
   /// get generated fcm token
-  static String? getFcmToken() => _sharedPreferences.getString(_fcmTokenKey);
+  static String? getFcmToken() => _sharedPreferences!.getString(_fcmTokenKey);
+
+  /// clear all data from shared pref except the current language
+  static Future<void> clearExceptLanguage() async {
+    // Step 1: Retrieve the current language from shared preferences
+    final currentLanguage = _sharedPreferences!.getString(_currentLocalKey);
+
+    // Step 2: Clear all the shared preferences
+    await _sharedPreferences!.clear();
+
+    // Step 3: Set the current language back to the shared preferences
+    if (currentLanguage != null) {
+      setCurrentLanguage(currentLanguage);
+    }
+  }
+
+  /// clear all data from shared pref
+  /// static Future<void> clear() async => await _sharedPreferences!.clear();
 }

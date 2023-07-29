@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:http/http.dart' as http;
 
 import 'graphql_config.dart';
 
@@ -35,17 +37,62 @@ class GraphQLService extends GetxService {
     return result.data;
   }
 
-  /// MUTATION WITH FILE
-  Future<dynamic> performMutationWithFile(
-    String mutation,
-  ) async {
-    final mutationOptions = MutationOptions(
-      document: gql(mutation),
-      fetchPolicy: FetchPolicy.noCache,
+  /// MUTATION WITH SINGLE FILE
+
+  Future<dynamic> performFileUpload(
+      {required String mutation, required String key, File? file}) async {
+    if (file == null) {
+      throw Exception('No file provided');
+    }
+
+    final fileBytes = await file.readAsBytes();
+    final multipartFile = http.MultipartFile.fromBytes(
+      key,
+      fileBytes,
+      filename: file.path.split('/').last,
     );
 
-    final result = await graphQLConfig.graphqlClient().mutate(mutationOptions);
+    final options = MutationOptions(
+      document: gql(mutation),
+      variables: {
+        key: multipartFile,
+      },
+    );
 
+    final result = await graphQLConfig.graphqlClient().mutate(options);
+    _checkException(result);
+    return result.data;
+  }
+
+  ///MUTATION WITH MULTIPLE FILE
+
+  Future<dynamic> performMultipleFileUpload({
+    required String mutation,
+    required Map<String, File> files,
+  }) async {
+    final Map<String, http.MultipartFile> multipartFiles = {};
+
+    files.forEach((key, file) async {
+      final fileBytes = await file.readAsBytes();
+      final multipartFile = http.MultipartFile.fromBytes(
+        key,
+        fileBytes,
+        filename: file.path.split('/').last,
+      );
+      multipartFiles[key] = multipartFile;
+    });
+
+    final variables = <String, dynamic>{};
+    multipartFiles.forEach((key, multipartFile) {
+      variables[key] = multipartFile;
+    });
+
+    final options = MutationOptions(
+      document: gql(mutation),
+      variables: variables,
+    );
+
+    final result = await graphQLConfig.graphqlClient().mutate(options);
     _checkException(result);
     return result.data;
   }
