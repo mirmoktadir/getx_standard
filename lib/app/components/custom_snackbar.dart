@@ -7,7 +7,7 @@ class CustomSnackBar {
     Get.snackbar(
       title,
       message,
-      duration: duration ?? const Duration(milliseconds: 1500),
+      duration: duration ?? const Duration(milliseconds: 3000),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       colorText: Colors.white,
       backgroundColor: Colors.green,
@@ -26,7 +26,7 @@ class CustomSnackBar {
     Get.snackbar(
       title,
       message,
-      duration: duration ?? const Duration(milliseconds: 1500),
+      duration: duration ?? const Duration(milliseconds: 3000),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       colorText: Colors.white,
       backgroundColor: color ?? Colors.redAccent,
@@ -44,7 +44,7 @@ class CustomSnackBar {
       Duration? duration}) {
     Get.rawSnackbar(
       title: title,
-      duration: duration ?? const Duration(milliseconds: 1500),
+      duration: duration ?? const Duration(milliseconds: 3000),
       snackStyle: SnackStyle.GROUNDED,
       backgroundColor: color ?? Colors.green,
       onTap: (snack) {
@@ -62,7 +62,7 @@ class CustomSnackBar {
       Duration? duration}) {
     Get.rawSnackbar(
       title: title,
-      duration: duration ?? const Duration(milliseconds: 1500),
+      duration: duration ?? const Duration(milliseconds: 3000),
       snackStyle: SnackStyle.GROUNDED,
       backgroundColor: color ?? Colors.redAccent,
       onTap: (snack) {

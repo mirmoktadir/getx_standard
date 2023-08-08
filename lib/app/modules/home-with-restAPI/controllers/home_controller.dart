@@ -20,9 +20,9 @@ class HomeController extends GetxController with ExceptionHandler {
 
   getPostList() async {
     showLoading();
-
     if (await NetworkConnectivity.isNetworkAvailable()) {
       // Fetch posts from the API
+
       var response =
           await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
 
@@ -37,7 +37,7 @@ class HomeController extends GetxController with ExceptionHandler {
       hideLoading();
     } else {
       // If offline, try to load from Hive
-      CustomSnackBar.showCustomToast(message: "No network!");
+
       var posts = MyHive.getAllPosts();
 
       if (posts.isNotEmpty) {
@@ -45,10 +45,16 @@ class HomeController extends GetxController with ExceptionHandler {
         postList.assignAll(posts);
 
         hideLoading();
+        CustomSnackBar.showCustomErrorToast(message: "No network!");
+        return;
+      } else {
+        isError.value = true;
+
+        hideLoading();
+        showErrorDialog("Oops!", "Connection problem");
         return;
       }
     }
-    hideLoading();
   }
 
   @override
