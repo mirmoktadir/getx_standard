@@ -1,11 +1,13 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logger/logger.dart';
 
 import '../../app/data/local/my_shared_pref.dart';
-import 'awesome_notifications_helper.dart';
+import 'local_notification_helper.dart';
 
 class FcmHelper {
   // prevent making instance
@@ -85,23 +87,18 @@ class FcmHelper {
 
   @pragma('vm:entry-point')
   static Future<void> fcmBackgroundHandler(RemoteMessage message) async {
-    AwesomeNotificationsHelper.showNotification(
-      id: 1,
-      title: message.notification?.title ?? 'Tittle',
+    LocalNotificationHelper.showNotification(
+      title: message.notification?.title ?? 'Title',
       body: message.notification?.body ?? 'Body',
-      payload: message.data
-          .cast(), // pass payload to the notification card so you can use it (when user click on notification)
+      payload: jsonEncode(message.data.cast()),
     );
   }
 
   //handle fcm notification when app is open
   static Future<void> fcmForegroundHandler(RemoteMessage message) async {
-    // Show the Awesome Notification
-    AwesomeNotificationsHelper.showNotification(
+    LocalNotificationHelper.showNotification(
       title: message.notification?.title ?? 'Title',
       body: message.notification?.body ?? 'Body',
-      id: 1, // Provide a unique ID for each notification
-      // Add other parameters for customization if needed
     );
   }
 }

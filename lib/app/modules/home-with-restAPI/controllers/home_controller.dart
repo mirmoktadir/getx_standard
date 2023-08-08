@@ -1,49 +1,53 @@
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/custom_snackbar.dart';
+import 'package:getx_standard/app/service/network_connectivity.dart';
 
 import '../../../components/navbar/navbar_controller.dart';
+import '../../../data/local/my_hive.dart';
 import '../../../service/REST/api_urls.dart';
 import '../../../service/REST/dio_client.dart';
 import '../../../service/handler/exception_handler.dart';
-import '../bindings/home_binding.dart';
 import '../model/posts.dart';
-import '../views/post_detail_view.dart';
 
 class HomeController extends GetxController with ExceptionHandler {
   final navController = Get.put(NavbarController());
 
-  ///GET POST LIST
+  RxString title = "".obs;
+  RxString body = "".obs;
+
+  /// GET POST LIST
   final postList = RxList<Posts>();
 
   getPostList() async {
     showLoading();
 
-    var response =
-        await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
+    if (await NetworkConnectivity.isNetworkAvailable()) {
+      // Fetch posts from the API
+      var response =
+          await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
 
-    if (response == null) return;
+      if (response == null) return;
 
-    postList
-        .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
+      postList
+          .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
 
-    hideLoading();
-  }
+      // Save fetched posts to Hive for future use
+      await MyHive.saveAllPosts(postList);
 
-  /// GET POST DETAIL
-  String title = "";
-  String body = "";
+      hideLoading();
+    } else {
+      // If offline, try to load from Hive
+      CustomSnackBar.showCustomToast(message: "No network!");
+      var posts = MyHive.getAllPosts();
 
-  getPostDetail(int? id) async {
-    showLoading();
-    var response = await DioClient()
-        .get(url: "${ApiUrl.postDetail}$id")
-        .catchError(handleError);
+      if (posts.isNotEmpty) {
+        // Use posts from Hive if available
+        postList.assignAll(posts);
 
-    if (response == null) return;
-
-    title = response["title"].toString();
-    body = response["body"].toString();
-    hideLoading();
-    Get.to(() => const PostDetailView(), binding: HomeBinding());
+        hideLoading();
+        return;
+      }
+    }
   }
 
   @override

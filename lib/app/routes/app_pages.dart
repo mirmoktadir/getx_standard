@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:getx_standard/app/modules/home-with-restAPI/views/post_detail_view.dart';
 
 import '../components/navbar/bottom_navbar.dart';
 import '../components/navbar/navbar_binding.dart';
@@ -16,6 +17,7 @@ class AppPages {
 
   static const NAV = Routes.NAV;
   static const HOME = Routes.HOME;
+  static const POST_DETAIL = Routes.POST_DETAIL;
 
   static final routes = [
     /// NAV BAR
@@ -28,7 +30,12 @@ class AppPages {
     ///
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.POST_DETAIL,
+      page: () => const PostDetailView(),
       binding: HomeBinding(),
     ),
     GetPage(

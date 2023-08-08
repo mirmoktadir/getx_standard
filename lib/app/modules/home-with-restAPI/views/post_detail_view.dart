@@ -6,6 +6,7 @@ import '../controllers/home_controller.dart';
 
 class PostDetailView extends GetView<HomeController> {
   const PostDetailView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -21,12 +22,12 @@ class PostDetailView extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              controller.title,
+              controller.title.value,
               style: theme.textTheme.headlineSmall,
             ),
             SizedBox(height: 40.h),
             Text(
-              controller.body,
+              controller.body.value,
               style: theme.textTheme.bodyLarge,
             ),
           ],

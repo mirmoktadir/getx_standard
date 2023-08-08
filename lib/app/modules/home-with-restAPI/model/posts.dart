@@ -1,4 +1,21 @@
-class Posts {
+import 'package:hive/hive.dart';
+
+part 'posts.g.dart'; // This is the generated Hive type adapter file
+
+@HiveType(typeId: 0) // Replace 0 with a unique integer identifier for this type
+class Posts extends HiveObject {
+  @HiveField(0)
+  int? userId;
+
+  @HiveField(1)
+  int? id;
+
+  @HiveField(2)
+  String? title;
+
+  @HiveField(3)
+  String? body;
+
   Posts({
     this.userId,
     this.id,
@@ -6,23 +23,12 @@ class Posts {
     this.body,
   });
 
-  Posts.fromJson(dynamic json) {
-    userId = json['userId'];
-    id = json['id'];
-    title = json['title'];
-    body = json['body'];
-  }
-  int? userId;
-  int? id;
-  String? title;
-  String? body;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['userId'] = userId;
-    map['id'] = id;
-    map['title'] = title;
-    map['body'] = body;
-    return map;
+  factory Posts.fromJson(Map<String, dynamic> json) {
+    return Posts(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+      body: json['body'],
+    );
   }
 }

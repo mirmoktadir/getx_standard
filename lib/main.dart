@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/data/local/my_hive.dart';
+import 'package:getx_standard/app/modules/home-with-restAPI/model/posts.dart';
 
 import 'app/data/local/my_shared_pref.dart';
 import 'app/routes/app_pages.dart';
@@ -14,6 +16,13 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
   );
+
+  // init hive and adapters
+  await MyHive.init(registerAdapters: (hive) {
+    hive.registerAdapter(PostsAdapter());
+    //myHive.registerAdapter(OtherAdapter());
+  });
+
   // Device info
 //  DeviceInfoHelper.initializeDeviceInfo();
 
@@ -27,7 +36,7 @@ Future<void> main() async {
   // FirebaseMessaging.onMessage.listen(FcmHelper.fcmForegroundHandler);
 
   // initialize local notifications service
-  // await AwesomeNotificationsHelper.init();
+  // LocalNotificationHelper.initializeNotifications();
 
   runApp(
     ScreenUtilInit(
@@ -55,7 +64,7 @@ Future<void> main() async {
           initialRoute: AppPages.NAV,
           // first screen to show when app is running
 
-          defaultTransition: Transition.noTransition,
+          defaultTransition: Transition.circularReveal,
 
           getPages: AppPages.routes,
           // app screens

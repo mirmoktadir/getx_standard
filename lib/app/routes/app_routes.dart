@@ -5,14 +5,18 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+
   static const NAV = _Paths.NAV;
   static const HOME = _Paths.HOME;
+  static const POST_DETAIL = _Paths.POST_DETAIL;
   static const GRAPHQL = _Paths.GRAPHQL;
 }
 
 abstract class _Paths {
   _Paths._();
+
   static const NAV = '/nav';
   static const HOME = '/home';
+  static const POST_DETAIL = '/post_detail';
   static const GRAPHQL = '/graphql';
 }
