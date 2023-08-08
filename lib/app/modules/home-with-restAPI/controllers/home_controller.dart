@@ -48,6 +48,7 @@ class HomeController extends GetxController with ExceptionHandler {
         return;
       }
     }
+    hideLoading();
   }
 
   @override
