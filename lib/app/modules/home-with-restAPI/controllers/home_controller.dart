@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/components/custom_snackbar.dart';
 import 'package:getx_standard/app/service/network_connectivity.dart';
 
+import '../../../components/global-widgets/custom_snackbar.dart';
 import '../../../components/navbar/navbar_controller.dart';
 import '../../../data/local/my_hive.dart';
 import '../../../service/REST/api_urls.dart';

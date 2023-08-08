@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/global-widgets/splash_container.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../../config/theme/my_fonts.dart';
-import '../../../components/empty_widget.dart';
+import '../../../components/global-widgets/empty_widget.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -34,10 +35,10 @@ class HomeView extends GetView<HomeController> {
               color: theme.primaryColor,
               onRefresh: () async => await controller.getPostList(),
               child: Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: EdgeInsets.all(18.r),
                 child: RawScrollbar(
                   thumbColor: theme.primaryColor,
-                  radius: const Radius.circular(100),
+                  radius: Radius.circular(100.r),
                   thickness: 5,
                   interactive: true,
                   child: ListView.separated(
@@ -47,18 +48,17 @@ class HomeView extends GetView<HomeController> {
                     separatorBuilder: (_, __) => SizedBox(
                       height: 20.h,
                     ),
-                    itemBuilder: (ctx, index) => GestureDetector(
-                      onTap: () {
+                    itemBuilder: (ctx, index) => SplashContainer(
+                      radius: 15,
+                      onPressed: () {
                         controller.title.value =
                             controller.postList[index].title ?? "";
                         controller.body.value =
                             controller.postList[index].body ?? "";
                         Get.toNamed(Routes.POST_DETAIL);
                       },
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        width: double.infinity,
-                        color: theme.canvasColor,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.r),
                         child: Center(
                           child: Text(
                             controller.postList[index].title ?? "",
