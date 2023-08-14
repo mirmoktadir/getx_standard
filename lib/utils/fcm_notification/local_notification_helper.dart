@@ -1,14 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:logger/logger.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationHelper {
   static int id = 0;
@@ -24,55 +19,9 @@ class LocalNotificationHelper {
 
   static void initializeNotifications() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await _configureLocalTimeZone();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    final List<DarwinNotificationCategory> darwinNotificationCategories =
-        <DarwinNotificationCategory>[
-      DarwinNotificationCategory(
-        'textCategory',
-        actions: <DarwinNotificationAction>[
-          DarwinNotificationAction.text(
-            'text_1',
-            'Action 1',
-            buttonTitle: 'Send',
-            placeholder: 'Placeholder',
-          ),
-        ],
-      ),
-      DarwinNotificationCategory(
-        'plainCategory',
-        actions: <DarwinNotificationAction>[
-          DarwinNotificationAction.plain('id_1', 'Action 1'),
-          DarwinNotificationAction.plain(
-            'id_2',
-            'Action 2 (destructive)',
-            options: <DarwinNotificationActionOption>{
-              DarwinNotificationActionOption.destructive,
-            },
-          ),
-          DarwinNotificationAction.plain(
-            'id_3',
-            'Action 3 (foreground)',
-            options: <DarwinNotificationActionOption>{
-              DarwinNotificationActionOption.foreground,
-            },
-          ),
-          DarwinNotificationAction.plain(
-            'id_4',
-            'Action 4 (auth required)',
-            options: <DarwinNotificationActionOption>{
-              DarwinNotificationActionOption.authenticationRequired,
-            },
-          ),
-        ],
-        options: <DarwinNotificationCategoryOption>{
-          DarwinNotificationCategoryOption.hiddenPreviewShowTitle,
-        },
-      )
-    ];
 
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
@@ -90,7 +39,6 @@ class LocalNotificationHelper {
           ),
         );
       },
-      notificationCategories: darwinNotificationCategories,
     );
 
     final LinuxInitializationSettings initializationSettingsLinux =
@@ -131,21 +79,10 @@ class LocalNotificationHelper {
   static Future<void> _onNotificationTap(String? payload) async {
     if (payload != null) {
       // Use the payload data to navigate to the specific page
-      // await Get.find<HomeController>()
-      //     .getNotifications(MySharedPref.getLangID() ?? "2");
-      //
-      // Get.key.currentState
-      //     ?.pushNamed(Routes.NOTIFICATION_HOME, arguments: payload);
-    }
-  }
 
-  static Future<void> _configureLocalTimeZone() async {
-    if (kIsWeb || Platform.isLinux) {
-      return;
+      // Get.key.currentState
+      //     ?.pushNamed(Routes.YOUR_PAGE, arguments: payload);
     }
-    tz.initializeTimeZones();
-    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
   static Future<void> _notificationTapBackground(
@@ -173,8 +110,9 @@ class LocalNotificationHelper {
       priority: Priority.high,
       ticker: 'ticker',
     );
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: DarwinNotificationDetails());
 
     await flutterLocalNotificationsPlugin.show(
       id,

@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logger/logger.dart';
 
 import '../../app/data/local/my_shared_pref.dart';
+
 import 'local_notification_helper.dart';
 
 class FcmHelper {
@@ -22,7 +23,7 @@ class FcmHelper {
       // initialize fcm and firebase core
       await Firebase.initializeApp(
           // TODO: uncomment this line if you connected to firebase via cli
-          //  options: DefaultFirebaseOptions.currentPlatform,
+          // options: DefaultFirebaseOptions.currentPlatform,
           );
 
       // initialize firebase

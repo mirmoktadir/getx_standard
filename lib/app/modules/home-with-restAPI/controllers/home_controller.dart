@@ -15,7 +15,7 @@ class HomeController extends GetxController with ExceptionHandler {
   RxString title = "".obs;
   RxString body = "".obs;
 
-  /// GET POST LIST
+  /// GET POST LIST 'HIVE IMPLEMENTED'
   final postList = RxList<Posts>();
 
   getPostList() async {
@@ -59,7 +59,6 @@ class HomeController extends GetxController with ExceptionHandler {
 
   @override
   void onReady() async {
-    // TODO: implement onReady
     await getPostList();
 
     super.onReady();

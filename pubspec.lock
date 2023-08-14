@@ -522,10 +522,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_native_splash
-      sha256: ba45d8cfbd778478a74696b012f33ffb6b1760c9bc531b21e2964444a4870dae
+      sha256: ecff62b3b893f2f665de7e4ad3de89f738941fcfcaaba8ee601e749efafa4698
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   flutter_otp_text_field:
     dependency: "direct main"
     description:
@@ -555,14 +555,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_timezone:
-    dependency: "direct main"
-    description:
-      name: flutter_timezone
-      sha256: "4508018aba499c837f723e2e718259eb677410490638b7ea669b11113d083e68"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -596,18 +588,18 @@ packages:
     dependency: transitive
     description:
       name: gql
-      sha256: c2d4248adf2cc568976d9bb42803531232a981eff205b9931b73389e0665ac63
+      sha256: "56c5707f84128dfad2db16f513bbfe011f0dae96073bbdc4e6a9925915641a03"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1-alpha+1690479830964"
+    version: "1.0.1-alpha+1691943394579"
   gql_dedupe_link:
     dependency: transitive
     description:
       name: gql_dedupe_link
-      sha256: "307a33a0723edd5d9de652e38f6ccb01fbf04b90464e32efca7a3fa9027367d3"
+      sha256: "80419ab0618dea72a0961617cf24fba690ff4e63fffdd57a701b0c7de08b8360"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.4-alpha+1690479831065"
+    version: "2.0.4-alpha+1691943394662"
   gql_error_link:
     dependency: transitive
     description:
@@ -620,10 +612,10 @@ packages:
     dependency: transitive
     description:
       name: gql_exec
-      sha256: "257b6eeb206343349b188a4bfe874ba5826ec7992461a97890ebf4802eaa9a86"
+      sha256: "7b8c816f1d4830a21ae37e107bb035073b2f5613acde8f76a7768a7eb23322d3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1-alpha+1690479830973"
+    version: "1.0.1-alpha+1691943394588"
   gql_http_link:
     dependency: transitive
     description:
@@ -636,10 +628,10 @@ packages:
     dependency: transitive
     description:
       name: gql_link
-      sha256: "6e429187a7c199c9a7bb7fc26c8ed0673dae9be3a00c8be6ecf15ba9b713b3cb"
+      sha256: "255a0262425b6efd9df2312fd90546105baaad22a98a9873dfca56efbe9163eb"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1-alpha+1690479830981"
+    version: "1.0.1-alpha+1691943394596"
   gql_transform_link:
     dependency: transitive
     description:
@@ -692,10 +684,10 @@ packages:
     dependency: "direct dev"
     description:
       name: hive_generator
-      sha256: "65998cc4d2cd9680a3d9709d893d2f6bb15e6c1f92626c3f1fa650b4b3281521"
+      sha256: "06cb8f58ace74de61f63500564931f9505368f45f98958bd7a6c35ba24159db4"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   html:
     dependency: transitive
     description:
@@ -1036,10 +1028,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_foundation
-      sha256: f39696b83e844923b642ce9dd4bd31736c17e697f6731a5adf445b1274cf3cd4
+      sha256: d29753996d8eb8f7619a1f13df6ce65e34bc107bef6330739ed76f18b22310ef
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -1190,7 +1182,7 @@ packages:
     source: hosted
     version: "0.5.1"
   timezone:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: timezone
       sha256: "1cfd8ddc2d1cfd836bc93e67b9be88c3adaeca6f40a00ca999104c30693cdca0"

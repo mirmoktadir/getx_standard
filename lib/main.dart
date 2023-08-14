@@ -24,16 +24,13 @@ Future<void> main() async {
   });
 
   // Device info
-//  DeviceInfoHelper.initializeDeviceInfo();
+  //  DeviceInfoHelper.initializeDeviceInfo();
 
   // Shared pref
   await MySharedPref.init();
 
   // inti fcm services
   // await FcmHelper.initFcm();
-
-  // FCM foreground message
-  // FirebaseMessaging.onMessage.listen(FcmHelper.fcmForegroundHandler);
 
   // initialize local notifications service
   // LocalNotificationHelper.initializeNotifications();
