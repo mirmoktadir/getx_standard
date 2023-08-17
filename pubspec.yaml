@@ -33,10 +33,10 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.2
-  firebase_core: ^2.15.0
-  firebase_auth: ^4.7.2
-  cloud_firestore: ^4.8.4
-  firebase_messaging: ^14.6.5
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.7.3
+  cloud_firestore: ^4.8.5
+  firebase_messaging: ^14.6.6
   carousel_slider: ^4.2.1
   cached_network_image: ^3.2.3
   graphql_flutter: ^5.1.2

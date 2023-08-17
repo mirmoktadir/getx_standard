@@ -51,27 +51,21 @@ class BottomNavbar extends GetView<NavbarController> {
                             SizedBox(
                               height: 40.h,
                               width: 40.w,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  splashFactory: NoSplash.splashFactory,
-                                  backgroundColor: Colors.transparent,
-                                ),
+                              child: IconButton(
+                                hoverColor: Colors.transparent,
                                 onPressed: () {
                                   controller.onTap(0);
                                 },
-                                child: Center(
-                                  child: Icon(
-                                    controller.selectedIndex.value == 0
-                                        ? IconlyBold.home
-                                        : IconlyLight.home,
-                                    color: Colors.white,
-                                    size: 32,
-                                  ),
+                                icon: Icon(
+                                  controller.selectedIndex.value == 0
+                                      ? IconlyBold.home
+                                      : IconlyLight.home,
+                                  color: Colors.white,
+                                  size: 25.sp,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 3),
+                            SizedBox(height: 2.sp),
                             Container(
                               height: 8,
                               width: 8,
@@ -92,27 +86,21 @@ class BottomNavbar extends GetView<NavbarController> {
                             SizedBox(
                               height: 40.h,
                               width: 40.w,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  splashFactory: NoSplash.splashFactory,
-                                  backgroundColor: Colors.transparent,
-                                ),
+                              child: IconButton(
+                                hoverColor: Colors.transparent,
                                 onPressed: () {
                                   controller.onTap(1);
                                 },
-                                child: Center(
-                                  child: Icon(
-                                    controller.selectedIndex.value == 1
-                                        ? IconlyBold.graph
-                                        : IconlyLight.graph,
-                                    color: Colors.white,
-                                    size: 32,
-                                  ),
+                                icon: Icon(
+                                  controller.selectedIndex.value == 1
+                                      ? IconlyBold.graph
+                                      : IconlyLight.graph,
+                                  color: Colors.white,
+                                  size: 25.sp,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 3),
+                            SizedBox(height: 2.sp),
                             Container(
                               height: 8,
                               width: 8,

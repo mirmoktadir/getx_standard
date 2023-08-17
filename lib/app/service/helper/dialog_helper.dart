@@ -28,9 +28,9 @@ class DialogHelper {
                   color: Colors.redAccent,
                   fontWeight: FontWeight.w400,
                   fontSize: 16.sp,
-
                 ),
-                maxLines: 4, overflow: TextOverflow.ellipsis,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 5.h),
               Lottie.asset(
@@ -97,9 +97,10 @@ class DialogHelper {
               ),
               // Loader
               SizedBox(
-                  height: 60.h,
-                  width: 60.w,
-                  child: const CircularProgressIndicator()),
+                height: 60.sp,
+                width: 60.sp,
+                child: const CircularProgressIndicator(),
+              ),
             ],
           ),
         ),
@@ -107,7 +108,6 @@ class DialogHelper {
     );
   }
 
-  //hide loading
   static void hideLoading() {
     if (Get.isDialogOpen!) {
       Get.back();
