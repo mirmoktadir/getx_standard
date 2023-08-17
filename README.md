@@ -1,26 +1,24 @@
-![Alt bg1](https://github.com/mirmoktadir/getx_standard/blob/master/assets/images/readmeOnly/bg1.png) ![Alt bg2](https://github.com/mirmoktadir/getx_standard/blob/master/assets/images/readmeOnly/bg2.png)
-# Flutter GetX Template
-<img src="assets/images/readmeOnly/bg1.png" width="100%">
+# Flutter GetX Template with GetCLI
+
+## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive, 
+
 Flutter Getx template to make starting project fast and easy
 .
 
-## Introduction
+## Feature
 
-We all face the same problem when we want to start a new project we have to take care of some repeatable things such as
-- Theme (light/dark) & store current theme in shared pref 🌒
-- Localization & store the current locale in shared pref 🅰️
-- Safe rest api requests & error handling 🔏
-- Safe graphql api requests & error handling 🔏
-- Changing between widgets during api call (loading,success,failed..etc) 😴
-- Snackbar,Toasts & in app notifications 🪖
+- Rest api requests & error handling with app state
+- GraphQL api requests & error handling with app state
+- Hive for offline Caching
+- Shared preference custom class
+- Snackbar,Toasts & in app notifications 
+- FCM and Push notifications with Flutter Local Notification custom class
+- Theme (light/dark) & store current theme in shared pref
+- Localization & store the current locale in shared pref
 - Making app more responsive and stop font scaling ⚖️
   This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use 😎
 
-## Acknowledgment
-Project was created using [get_cli](https://pub.dev/packages/get_cli) which is a great tool helping you to (start project,create screens/controllers, handling DI)..etc and we will list other packages that helped to create this skeleton
-- [GetX](https://pub.dev/packages/get) for state management,navigation,managing dependencies..etc
-- [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) to make app more responsive
-- [get_storage](https://pub.dev/packages/get_storage) as shared pref (its more easy and it read data sync)
+
 ## Clone and start project
 Before discovering folders lets first perform some actions to make the project ready to launch
 
@@ -29,15 +27,20 @@ Before discovering folders lets first perform some actions to make the project r
     ScreenUtilInit(
       designSize: const Size(375, 812), // change this to your xd/Figma artboard size
     ```
+- To run in iOS you must have installed cocoapods in your mac , Let's delete Pods folder and Podfile.lock and run
+  ```
+  flutter clean
+  flutter pub get
+  cd ios
+  pod install
+  cd..
+  ```
 
 - Change app package name
     ```
     flutter pub run change_app_package_name:main com.new.package.name
     ```
-- Change app name
-    ```
-    flutter pub run rename_app:main all="My App Name"
-    ```
+  
 - Change app launch icon (replace assets/images/app_icon.png with your app icon) then run this command
     ```
     flutter pub run flutter_launcher_icons:main
@@ -219,103 +222,6 @@ After setting up all the needed thing now lets talk about folder structure which
     MySharedPref.getCurrentLocal();
     ```
 
-**API CALLING**
-
-**CHANG THE HEADER in the DIO_CLIENT.DART file according to you >> "defaultHeader" to "secureHeader" . in MULTIPART "defaultMultipartHeader" to "secureMultipartHeader"**
-
-
-**GET**
-
-
-```dart
-   getPostDetail(int? id) async {
-  showLoading();
-  var response = await DioClient()
-          .get(url: "${ApiUrl.postDetail}$id")
-          .catchError(handleError);
-
-  if (response == null) return;
-
-  title = response["title"].toString();
-  body = response["body"].toString();
-  hideLoading();
-  Get.to(() => const PostDetailView(), binding: HomeBinding());
-}
-```
-
-**POST**
-
-```dart
-  createAward(int? employeeID, int? awardTypeID, String? date, String? gift,
-      String? description) async {
-    var request = {
-      "employee_id": employeeID,
-      "award_type": awardTypeID,
-      "date": date,
-      "gift": gift,
-      "description": description,
-    };
-    showLoading();
-    var response = await DioClient()
-        .post(
-          url:  ApiUrl.createHrAward,
-            
-           body: request)
-        .catchError(handleError);
-    if (response == null) return;
-
-  createAwardKey.currentState!.save();
-
-  //reload();
-  hideLoading();
-
-  Get.back();
-    await getAwardList();
-  }
-```
-**MULTIPART**
-
-```dart
-  updateProfile([String? filePath]) async {
-  var request = {
-  "name": editNameController.text,
-  "email": editMailController.text,
-  };
-  showLoading();
-  var response = await DioClient()
-  .multipartSingleFile(
-  url: ApiUrl.updateProfile,
- 
- body: request,
- filepath: filePath,
- key: "profile")
-  .catchError(handleError);
-    if (response == null) return;
-
-  profileEditKey.currentState!.save();
-    //reload();
-    await MySharedPref.removeUserAvatar();
-    await MySharedPref.removeName();
-    await MySharedPref.removeEmail();
-    //
-    await MySharedPref.setUserAvatar(response["data"]["profile"]);
-    await MySharedPref.setName(editNameController.text);
-    await MySharedPref.setEmail(editMailController.text);
-    await MySharedPref.getUserAvatar();
-    await MySharedPref.getName();
-    await MySharedPref.getEmail();
-
-  update();
-  hideLoading();
-
-  Get.back();
-  }
-```
-}
-```
-
-
-```
 
 ## Support
 
