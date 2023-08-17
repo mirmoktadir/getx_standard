@@ -1,6 +1,6 @@
 ![Alt bg1](https://github.com/mirmoktadir/getx_standard/blob/master/assets/images/readmeOnly/bg1.png) ![Alt bg2](https://github.com/mirmoktadir/getx_standard/blob/master/assets/images/readmeOnly/bg2.png)
 # Flutter GetX Template
-
+<img src="assets/images/readmeOnly/bg1.png" width="100%">
 Flutter Getx template to make starting project fast and easy
 .
 
