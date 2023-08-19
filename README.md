@@ -13,10 +13,11 @@ Flutter Getx template to make starting project fast and easy
 - Shared preference custom class
 - Snackbar,Toasts & in app notifications 
 - FCM and Push notifications with Flutter Local Notification custom class
+- Custom Image Picker with Cropper class
 - Theme (light/dark) & store current theme in shared pref
 - Localization & store the current locale in shared pref
-- Making app more responsive and stop font scaling ⚖️
-  This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use 😎
+- Making app more responsive and stop font scaling 
+  This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use 
 
 
 ## Clone and start project
@@ -49,9 +50,17 @@ Before discovering folders lets first perform some actions to make the project r
    ```
    flutter pub run flutter_native_splash:create
    ```
-
+- FCM: firebase has recently added (add flutter app) to your firebase which will make adding our flutter(android/ios) app to firebase take only 2 steps 🔥 but first you need to download [Firebase CLI](https://firebase.google.com/docs/cli?authuser=0&hl=en#install_the_firebase_cli) and in the terminal execute:
+    ```
+    dart pub global activate flutterfire_cli
+    ```
+  then follow the firebase guid you will get command similar to this one
+    ```
+    flutterfire configure --project=flutter-firebase-YOUR_PROJECT_ID
     ```
   and that's it! your project is now connected to firebase and fcm is up and ready to get notifications
+  ##### Important Note
+  IOS require few more steps from your side to recive fcm notifications follow the [Dcos](https://firebase.flutter.dev/docs/messaging/apple-integration/) steps and after that everything should be working fine from flutter side
 ## Quick Start
 - Responsive app: to make your app responsive you need to get advantage of using flutter_ScreenUtil so instead of using normal double values for height,width,radius..etc you need to use it like this
 -
