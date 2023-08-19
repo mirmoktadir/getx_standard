@@ -23,11 +23,6 @@ Flutter Getx template to make starting project fast and easy
 ## Clone and start project
 Before discovering folders lets first perform some actions to make the project ready to launch
 
-- To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
-    ```dart
-    ScreenUtilInit(
-      designSize: const Size(375, 812), // change this to your xd/Figma artboard size
-    ```
 - To run in iOS you must have installed cocoapods in your mac , Let's delete Pods folder and Podfile.lock and run
   ```
   flutter clean
@@ -44,6 +39,13 @@ Before discovering folders lets first perform some actions to make the project r
   ```
   cd..
   ```
+  
+- To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
+    ```dart
+    ScreenUtilInit(
+      designSize: const Size(375, 812), // change this to your xd/Figma artboard size
+    ```
+
 
 - Change app package name
     ```
