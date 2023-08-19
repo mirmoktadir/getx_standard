@@ -31,9 +31,17 @@ Before discovering folders lets first perform some actions to make the project r
 - To run in iOS you must have installed cocoapods in your mac , Let's delete Pods folder and Podfile.lock and run
   ```
   flutter clean
+  ```
+  ```
   flutter pub get
+  ```
+  ```
   cd ios
+  ```
+  ```
   pod install
+  ```
+  ```
   cd..
   ```
 
