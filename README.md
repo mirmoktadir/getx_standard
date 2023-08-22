@@ -14,6 +14,7 @@ Flutter Getx template to make starting project fast and easy
 - Snackbar,Toasts & in app notifications 
 - FCM and Push notifications with Flutter Local Notification custom class
 - Custom Image Picker with Cropper class
+- Web Socket Manager class
 - Theme (light/dark) & store current theme in shared pref
 - Localization & store the current locale in shared pref
 - Making app more responsive and stop font scaling 
