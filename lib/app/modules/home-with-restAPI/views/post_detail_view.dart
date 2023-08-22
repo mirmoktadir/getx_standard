@@ -10,6 +10,7 @@ class PostDetailView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Post Detail'),

@@ -41,7 +41,7 @@ Future<void> main() async {
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
-      rebuildFactor: RebuildFactors.all,
+      rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
           title: "GetXStandard",
