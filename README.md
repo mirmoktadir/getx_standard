@@ -1,11 +1,11 @@
-# Flutter GetX Template with GetCLI
+**# Flutter GetX Template with GetCLI**
 
-## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive, 
+**## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive,** 
 
 Flutter Getx template to make starting project fast and easy
 .
 
-## Feature
+## **Feature**
 
 - Rest api requests & error handling with app state
 - GraphQL api requests & error handling with app state
@@ -21,7 +21,7 @@ Flutter Getx template to make starting project fast and easy
   This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use 
 
 
-## Clone and start project
+## Clone and start project****
 Before discovering folders lets first perform some actions to make the project ready to launch
 
 - To run in iOS you must have installed cocoapods in your mac , Let's delete Pods folder and Podfile.lock and run
