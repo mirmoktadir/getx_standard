@@ -10,6 +10,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const POST_DETAIL = _Paths.POST_DETAIL;
   static const GRAPHQL = _Paths.GRAPHQL;
+  static const ONBOARDING = _Paths.ONBOARDING;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const POST_DETAIL = '/post_detail';
   static const GRAPHQL = '/graphql';
+  static const ONBOARDING = '/onboarding';
 }

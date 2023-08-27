@@ -58,7 +58,7 @@ Future<void> main() async {
             );
           },
 
-          initialRoute: AppPages.NAV,
+          initialRoute: AppPages.ONBOARDING,
           // first screen to show when app is running
 
           defaultTransition: Transition.circularReveal,
