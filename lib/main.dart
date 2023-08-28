@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_standard/app/data/local/my_hive.dart';
-import 'package:getx_standard/app/modules/home-with-restAPI/model/posts.dart';
 
 import 'app/data/local/my_shared_pref.dart';
+import 'app/modules/example/home-with-restAPI/model/posts.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';

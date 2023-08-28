@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:getx_standard/app/service/handler/exception_handler.dart';
 
-import '../../../components/navbar/navbar_controller.dart';
+import '../../../../components/navbar/navbar_controller.dart';
 
 class GraphQLController extends GetxController with ExceptionHandler {
   final navController = Get.put(NavbarController());
@@ -28,7 +28,7 @@ class GraphQLController extends GetxController with ExceptionHandler {
     """;
 
     final result =
-    await graphQLService.performQuery(query).catchError(handleGraphqlError);
+        await graphQLService.performQuery(query).catchError(handleGraphqlError);
     if (result == null) return;
     userList.value = List.from(result["users"]);
     hideLoading();

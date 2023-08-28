@@ -2,11 +2,12 @@ import 'package:get/get.dart';
 
 import '../components/navbar/bottom_navbar.dart';
 import '../components/navbar/navbar_binding.dart';
-import '../modules/home-with-graphql/bindings/graphql_binding.dart';
-import '../modules/home-with-graphql/views/graphql_view.dart';
-import '../modules/home-with-restAPI/bindings/home_binding.dart';
-import '../modules/home-with-restAPI/views/home_view.dart';
-import '../modules/home-with-restAPI/views/post_detail_view.dart';
+
+import '../modules/example/home-with-graphql/bindings/graphql_binding.dart';
+import '../modules/example/home-with-graphql/views/graphql_view.dart';
+import '../modules/example/home-with-restAPI/bindings/home_binding.dart';
+import '../modules/example/home-with-restAPI/views/home_view.dart';
+import '../modules/example/home-with-restAPI/views/post_detail_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 

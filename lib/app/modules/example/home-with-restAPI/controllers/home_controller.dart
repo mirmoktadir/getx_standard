@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:getx_standard/app/service/network_connectivity.dart';
 
-import '../../../components/global-widgets/custom_snackbar.dart';
-import '../../../components/navbar/navbar_controller.dart';
-import '../../../data/local/my_hive.dart';
-import '../../../service/REST/api_urls.dart';
-import '../../../service/REST/dio_client.dart';
-import '../../../service/handler/exception_handler.dart';
+import '../../../../components/global-widgets/custom_snackbar.dart';
+import '../../../../components/navbar/navbar_controller.dart';
+import '../../../../data/local/my_hive.dart';
+import '../../../../service/REST/api_urls.dart';
+import '../../../../service/REST/dio_client.dart';
+import '../../../../service/handler/exception_handler.dart';
 import '../model/posts.dart';
 
 class HomeController extends GetxController with ExceptionHandler {

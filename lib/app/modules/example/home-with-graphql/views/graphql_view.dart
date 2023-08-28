@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../../config/theme/my_fonts.dart';
-import '../../../components/global-widgets/empty_widget.dart';
+import '../../../../../config/theme/my_fonts.dart';
+import '../../../../components/global-widgets/empty_widget.dart';
 import '../controllers/graphql_controller.dart';
 
 class GraphQLView extends GetView<GraphQLController> {

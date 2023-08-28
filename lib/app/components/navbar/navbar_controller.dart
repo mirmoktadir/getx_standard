@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../modules/home-with-graphql/views/graphql_view.dart';
-import '../../modules/home-with-restAPI/views/home_view.dart';
+import '../../modules/example/home-with-graphql/views/graphql_view.dart';
+import '../../modules/example/home-with-restAPI/views/home_view.dart';
 
 class NavbarController extends GetxController {
   List navigation = [

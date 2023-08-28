@@ -1,5 +1,6 @@
-import 'package:getx_standard/app/modules/home-with-restAPI/model/posts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../modules/example/home-with-restAPI/model/posts.dart';
 
 class MyHive {
   // Prevent making an instance of this class

@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/components/global-widgets/splash_container.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../../config/theme/my_fonts.dart';
-import '../../../components/global-widgets/empty_widget.dart';
-import '../../../routes/app_pages.dart';
+import '../../../../../config/theme/my_fonts.dart';
+import '../../../../components/global-widgets/empty_widget.dart';
+import '../../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
