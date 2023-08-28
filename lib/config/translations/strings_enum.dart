@@ -1,4 +1,6 @@
 class Strings {
+  static const String hello = 'hello';
+
   /// API EXCEPTIONS
   static const String requestCanceled = "Request cancelled!";
   static const String connectionTimeout = "Connection timeout!";

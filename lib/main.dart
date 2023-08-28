@@ -67,8 +67,8 @@ Future<void> main() async {
           // app screens
           locale: MySharedPref.getCurrentLocal(),
           // app language
-          translations:
-              LocalizationService(), // localization services in app (controller app language)
+          translations: LocalizationService
+              .getInstance(), // localization services in app (controller app language)
         );
       },
     ),

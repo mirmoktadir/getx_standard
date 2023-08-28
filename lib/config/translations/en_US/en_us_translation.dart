@@ -1,6 +1,8 @@
 import '../strings_enum.dart';
 
 const Map<String, String> enUs = {
+  Strings.hello: 'Hello!',
+
   ///API EXCEPTIONS
   Strings.requestCanceled: "Request cancelled!",
   Strings.connectionTimeout: "Connection timeout!",

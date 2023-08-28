@@ -1,6 +1,8 @@
 import '../strings_enum.dart';
 
 final Map<String, String> arAR = {
+  Strings.hello: 'مرحباً!',
+
   ///API EXCEPTIONS
   Strings.requestCanceled: "تم إلغاء الطلب!",
   Strings.connectionTimeout: "انتهى وقت محاولة الاتصال!",

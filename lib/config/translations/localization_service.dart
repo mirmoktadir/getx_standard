@@ -6,6 +6,16 @@ import 'ar_AR/ar_ar_translation.dart';
 import 'en_US/en_us_translation.dart';
 
 class LocalizationService extends Translations {
+  // prevent creating instance
+  LocalizationService._();
+
+  static LocalizationService? _instance;
+
+  static LocalizationService getInstance() {
+    _instance ??= LocalizationService._();
+    return _instance!;
+  }
+
   // default language
   static Locale defaultLanguage = supportedLanguages['en']!;
 

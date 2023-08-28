@@ -23,7 +23,7 @@ class MySharedPref {
   static const String _lightThemeKey = 'is_theme_light';
 
   /// set theme current type as light theme
-  static void setThemeIsLight(bool lightTheme) =>
+  static Future<void> setThemeIsLight(bool lightTheme) =>
       _sharedPreferences!.setBool(_lightThemeKey, lightTheme);
 
   /// get if the current theme type is light
@@ -66,5 +66,5 @@ class MySharedPref {
   }
 
   /// clear all data from shared pref
-  /// static Future<void> clear() async => await _sharedPreferences!.clear();
+  static Future<void> clear() async => await _sharedPreferences!.clear();
 }
