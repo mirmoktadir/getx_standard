@@ -4,7 +4,7 @@ description: A GetX Architecture by Mir Moktadir.
 publish_to: 'none'
 
 
-version: 1.0.0+1
+version: 1.4.9+34
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
