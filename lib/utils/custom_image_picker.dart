@@ -11,8 +11,10 @@ class CustomImagePicker {
 
   /// Pick Image From Gallery
   Future getImageFromGallery() async {
-    var galleryImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    var galleryImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
 
     if (galleryImage != null) {
       pickedImage.value = cropImage(File(galleryImage.path));
@@ -24,7 +26,10 @@ class CustomImagePicker {
 
   /// Pick Image From  Camera
   Future getImageFromCamera() async {
-    var cameraImage = await ImagePicker().pickImage(source: ImageSource.camera);
+    var cameraImage = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
 
     if (cameraImage != null) {
       //pickedImage.value = cropImage(File(galleryImage.path)); "If we want to use cropped image "
@@ -46,7 +51,7 @@ class CustomImagePicker {
         CropAspectRatioPreset.ratio16x9
       ],
       cropStyle: CropStyle.circle,
-      compressQuality: 100,
+      compressQuality: 50,
       compressFormat: ImageCompressFormat.png,
       uiSettings: [
         AndroidUiSettings(

@@ -9,29 +9,37 @@ class WebSocketManager {
   late WebSocketChannel _channel;
   late WebSocket _webSocket;
   RxString receivedMessage = "".obs; // This full response comes from websocket
-  RxInt totalClaps =
+  RxInt yourJsonKeyValue =
       0.obs; // collecting any particular value from socket response
 
   Future<void> connectWebSocket() async {
-    const String url = 'your-websocket-url';
-    try {
-      _webSocket = await WebSocket.connect(url);
-      _channel = IOWebSocketChannel(_webSocket);
+    List<String> urls = [
+      'your-websocket-url', //  socket url 1
+      'your-websocket-url', //  socket url 2
+    ];
+    for (var url in urls) {
+      try {
+        _webSocket = await WebSocket.connect(url);
+        _channel = IOWebSocketChannel(_webSocket);
 
-      _channel.stream.listen((message) {
-        _parseReceivedMessage(message); // your particular value
-        receivedMessage.value = message; // main response
-      });
-    } catch (e) {
-      Logger().e('WebSocket connection failed: $e');
+        _channel.stream.listen((message) {
+          _parseReceivedMessage(message); // your particular value
+          receivedMessage.value = message; // main response
+        });
+        Logger().i('WebSocket connection established in: $url');
+      } catch (e) {
+        Logger().e('WebSocket connection failed: $e');
+      }
     }
   }
 
   // Decoding main socket response to get particular value
   void _parseReceivedMessage(String message) {
+    Logger().d('Received message: $message');
     final Map<String, dynamic> data = jsonDecode(message);
-    if (data.containsKey('total_claps')) {
-      totalClaps.value = data['total_claps'];
+    if (data.containsKey('json_key')) {
+      yourJsonKeyValue.value = data['json_key'];
+      Logger().d(yourJsonKeyValue.value);
     }
   }
 
