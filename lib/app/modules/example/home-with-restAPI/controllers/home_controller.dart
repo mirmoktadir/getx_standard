@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:getx_standard/app/service/network_connectivity.dart';
+import 'package:getx_standard/app/service/helper/network_connectivity.dart';
 
 import '../../../../components/global-widgets/custom_snackbar.dart';
 import '../../../../components/navbar/navbar_controller.dart';

@@ -88,6 +88,10 @@ class FcmHelper {
 
   @pragma('vm:entry-point')
   static Future<void> fcmBackgroundHandler(RemoteMessage message) async {
+    // Put here your logic //
+    // ex: you can call any function that fetch all notification to display in UI
+    //end//
+    Logger().i("New notification has arrived");
     LocalNotificationHelper.showNotification(
       title: message.notification?.title ?? 'Title',
       body: message.notification?.body ?? 'Body',
@@ -97,6 +101,10 @@ class FcmHelper {
 
   //handle fcm notification when app is open
   static Future<void> fcmForegroundHandler(RemoteMessage message) async {
+    // Put here your logic //
+    // ex: you can call any function that fetch all notification to display in UI
+    //end//
+    Logger().i("New notification has arrived");
     LocalNotificationHelper.showNotification(
       title: message.notification?.title ?? 'Title',
       body: message.notification?.body ?? 'Body',
