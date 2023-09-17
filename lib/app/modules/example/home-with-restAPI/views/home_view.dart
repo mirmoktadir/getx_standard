@@ -30,10 +30,10 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Obx(() => controller.isError.value == true
-          ? EmptyWidget(onPressed: () async => await controller.getPostList())
+          ? EmptyWidget(onPressed: () async => await controller.getRecipes())
           : RefreshIndicator(
               color: theme.primaryColor,
-              onRefresh: () async => await controller.getPostList(),
+              onRefresh: () async => await controller.getRecipes(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -64,7 +64,7 @@ class HomeView extends GetView<HomeController> {
                       child: Padding(
                         padding: EdgeInsets.all(18.r),
                         child: ListView.separated(
-                          itemCount: controller.postList.length,
+                          itemCount: controller.recipes.length,
                           physics: const BouncingScrollPhysics(),
                           padding: EdgeInsets.zero,
                           separatorBuilder: (_, __) => SizedBox(
@@ -73,17 +73,17 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (ctx, index) => SplashContainer(
                             radius: 15,
                             onPressed: () {
-                              controller.title.value =
-                                  controller.postList[index].title ?? "";
-                              controller.body.value =
-                                  controller.postList[index].body ?? "";
-                              Get.toNamed(Routes.POST_DETAIL);
+                              // controller.title.value =
+                              //     controller.postList[index].title ?? "";
+                              // controller.body.value =
+                              //     controller.postList[index].body ?? "";
+                              // Get.toNamed(Routes.POST_DETAIL);
                             },
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Center(
                                 child: Text(
-                                  controller.postList[index].title ?? "",
+                                  controller.recipes[index].name ?? "",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: MyFonts.headline6TextSize,

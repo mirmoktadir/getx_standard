@@ -6,6 +6,7 @@ import 'package:getx_standard/app/data/local/my_hive.dart';
 
 import 'app/data/local/my_shared_pref.dart';
 import 'app/modules/example/home-with-restAPI/model/posts.dart';
+import 'app/modules/example/home-with-restAPI/model/recipes_model.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   // init hive and adapters
   await MyHive.init(registerAdapters: (hive) {
     hive.registerAdapter(PostsAdapter());
+    hive.registerAdapter(RecipesAdapter());
     //myHive.registerAdapter(OtherAdapter());
   });
 

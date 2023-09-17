@@ -1,4 +1,9 @@
 class Header {
+  // RAPID API HEADER
+  static Map<String, dynamic> rapidApiHeader = {
+    "X-RapidAPI-Key": "05741bc39bmsh35c797d07e59651p13baa5jsn936cd89ffe07",
+    "X-RapidAPI-Host": "tasty.p.rapidapi.com",
+  };
   // SECURE HEADER
   static Map<String, dynamic> secureHeader = {
     "Authorization": "Bearer 'token'",

@@ -20,7 +20,7 @@ class DioClient {
     try {
       var response = await Dio()
           .get(url,
-              options: Options(headers: Header.defaultHeader),
+              options: Options(headers: Header.rapidApiHeader),
               queryParameters: params)
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
 

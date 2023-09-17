@@ -1,3 +1,4 @@
+import 'package:getx_standard/app/modules/example/home-with-restAPI/model/recipes_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../modules/example/home-with-restAPI/model/posts.dart';
@@ -6,11 +7,15 @@ class MyHive {
   // Prevent making an instance of this class
   MyHive._();
 
-  // Hive box to store movie data
+  // Hive box to store post data
   static late Box<Posts> _postBox;
+
+  // Hive box to store recipe data
+  static late Box<Results> _recipeBox;
 
   // Box name, it's like the table name
   static const String _postBoxName = 'posts';
+  static const String _recipeBoxName = 'recipes';
 
   /// Initialize local db (HIVE)
   /// Pass testPath only if you are testing hive
@@ -23,6 +28,7 @@ class MyHive {
     }
     await registerAdapters?.call(Hive);
     await initPostsBox();
+    await initRecipesBox();
   }
 
   /// Initialize post box
@@ -45,5 +51,27 @@ class MyHive {
     final posts = _postBox.values.toList();
     return posts
         .cast<Posts>(); // Cast the list to the correct type (List<Posts>)
+  }
+
+  /// Initialize recipe box
+  static Future<void> initRecipesBox() async {
+    _recipeBox = await Hive.openBox<Results>(_recipeBoxName);
+  }
+
+  /// Save all recipes to the database
+  static Future<void> saveAllRecipes(List<Results> recipes) async {
+    try {
+      await _recipeBox.clear(); // Clear existing data
+      await _recipeBox.addAll(recipes); // Add all recipes to Hive
+    } catch (error) {
+      // Handle error
+    }
+  }
+
+  /// Get all recipes from Hive
+  static List<Results> getAllRecipes() {
+    final recipes = _recipeBox.values.toList();
+    return recipes
+        .cast<Results>(); // Cast the list to the correct type (List<Posts>)
   }
 }
