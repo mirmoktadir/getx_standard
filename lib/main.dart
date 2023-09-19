@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/data/local/my_hive.dart';
 
 import 'app/data/local/my_shared_pref.dart';
-import 'app/modules/example/home-with-restAPI/model/posts.dart';
 import 'app/modules/example/home-with-restAPI/model/recipes_model.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
@@ -20,9 +19,24 @@ Future<void> main() async {
 
   // init hive and adapters
   await MyHive.init(registerAdapters: (hive) {
-    hive.registerAdapter(PostsAdapter());
     hive.registerAdapter(RecipesAdapter());
-    //myHive.registerAdapter(OtherAdapter());
+    hive.registerAdapter(ResultsAdapter());
+    hive.registerAdapter(TotalTimeTierAdapter());
+    hive.registerAdapter(ShowAdapter());
+    hive.registerAdapter(SectionsAdapter());
+    hive.registerAdapter(ComponentsAdapter());
+    hive.registerAdapter(MeasurementsAdapter());
+    hive.registerAdapter(UnitAdapter());
+    hive.registerAdapter(IngredientAdapter());
+    hive.registerAdapter(CompilationsAdapter());
+    hive.registerAdapter(TagsAdapter());
+    hive.registerAdapter(RenditionsAdapter());
+    hive.registerAdapter(NutritionAdapter());
+    hive.registerAdapter(PriceAdapter());
+    hive.registerAdapter(TopicsAdapter());
+    hive.registerAdapter(UserRatingsAdapter());
+    hive.registerAdapter(InstructionsAdapter());
+    hive.registerAdapter(CreditsAdapter());
   });
 
   // Device info

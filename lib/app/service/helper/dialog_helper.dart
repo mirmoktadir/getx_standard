@@ -105,6 +105,7 @@ class DialogHelper {
           ),
         ),
       ),
+      barrierColor: Colors.transparent,
     );
   }
 

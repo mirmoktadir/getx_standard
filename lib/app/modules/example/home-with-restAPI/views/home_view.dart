@@ -6,7 +6,7 @@ import 'package:iconly/iconly.dart';
 
 import '../../../../../config/theme/my_fonts.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
-import '../../../../routes/app_pages.dart';
+import '../../../../components/global-widgets/network_image_box.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Posts'),
+        title: const Text('Tasty'),
         actions: [
           IconButton(
               onPressed: () => controller.navController.selectedIndex.value = 1,
@@ -72,24 +72,64 @@ class HomeView extends GetView<HomeController> {
                           ),
                           itemBuilder: (ctx, index) => SplashContainer(
                             radius: 15,
-                            onPressed: () {
-                              // controller.title.value =
-                              //     controller.postList[index].title ?? "";
-                              // controller.body.value =
-                              //     controller.postList[index].body ?? "";
-                              // Get.toNamed(Routes.POST_DETAIL);
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.all(8.r),
-                              child: Center(
-                                child: Text(
-                                  controller.recipes[index].name ?? "",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: MyFonts.headline6TextSize,
-                                    fontWeight: FontWeight.w500,
-                                    color: theme.primaryColor,
-                                  ),
+                            onPressed: () {},
+                            child: SizedBox(
+                              height: 110.sp,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.r),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SplashContainer(
+                                      radius: 15,
+                                      onPressed: () {},
+                                      child: NetworkImageBox(
+                                        url: controller
+                                                .recipes[index].thumbnailUrl ??
+                                            "",
+                                      ),
+                                    ),
+                                    SizedBox(width: 10.sp),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            controller.recipes[index].name ??
+                                                "",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  MyFonts.headline5TextSize,
+                                              fontWeight: FontWeight.w500,
+                                              color: theme.primaryColor,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              controller.recipes[index]
+                                                      .description ??
+                                                  "No description",
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                fontSize:
+                                                    MyFonts.headline6TextSize,
+                                                fontWeight: FontWeight.w400,
+                                                color: theme.hintColor,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
