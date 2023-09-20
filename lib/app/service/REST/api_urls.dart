@@ -1,5 +1,6 @@
 class ApiUrl {
   /// Base URL
-  static const baseUrl = "https://tasty.p.rapidapi.com/recipes";
-  static const allRecipes = "$baseUrl/list";
+  static const baseUrl = "https://tasty.p.rapidapi.com";
+  static const allRecipes = "$baseUrl/recipes/list";
+  static const allTags = "$baseUrl/tags/list";
 }

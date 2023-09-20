@@ -17,7 +17,7 @@ final Map<String, String> arAR = {
   ///
   Strings.changeTheme: 'تغيير الثيم',
   Strings.changeLanguage: 'تغيير اللغة',
-  Strings.oops: "أُووبس!",
+  Strings.ohNo: "أوه لا...",
   Strings.okay: "تمام",
   Strings.refresh: "ينعش!",
   Strings.empty: "فارغة أو لا توجد بيانات!",

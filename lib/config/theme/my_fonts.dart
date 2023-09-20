@@ -29,8 +29,9 @@ class MyFonts {
   static double get appBarTittleSize => 18.sp;
 
   // body font size
-  static double get body1TextSize => 13.sp;
+  static double get body1TextSize => 15.sp;
   static double get body2TextSize => 13.sp;
+  static double get body3TextSize => 10.sp;
 
   // headlines font size
   static double get headline1TextSize => 50.sp;

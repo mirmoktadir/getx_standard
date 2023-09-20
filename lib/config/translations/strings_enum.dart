@@ -15,7 +15,7 @@ class Strings {
   ///
   static const String changeTheme = 'change_theme';
   static const String changeLanguage = 'change_language';
-  static const String oops = "Oops!";
+  static const String ohNo = "Oh, no...";
   static const String okay = "Okay";
   static const String refresh = "refresh!";
   static const String empty = "Empty or No data!";

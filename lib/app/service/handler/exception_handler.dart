@@ -19,7 +19,7 @@ mixin class ExceptionHandler {
 
     var errorText = DioExceptions.fromDioError(error).toString();
 
-    showErrorDialog(Strings.oops.tr, errorText);
+    showErrorDialog(Strings.ohNo.tr, errorText);
     Logger().e(errorText);
   }
 
@@ -31,10 +31,10 @@ mixin class ExceptionHandler {
 
     try {
       Map onlyMessage = jsonDecode(errorText);
-      showErrorDialog(Strings.oops.tr, onlyMessage["message"]);
+      showErrorDialog(Strings.ohNo.tr, onlyMessage["message"]);
       Logger().e(onlyMessage);
     } catch (e) {
-      showErrorDialog(Strings.oops.tr, errorText);
+      showErrorDialog(Strings.ohNo.tr, errorText);
       Logger().e(errorText);
     }
   }

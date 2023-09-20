@@ -17,7 +17,7 @@ const Map<String, String> enUs = {
   ///
   Strings.changeTheme: 'Change theme',
   Strings.changeLanguage: 'Change language',
-  Strings.oops: "Oops!",
+  Strings.ohNo: "Oh, no...",
   Strings.okay: "Okay",
   Strings.refresh: "refresh!",
   Strings.empty: "Empty or No data!",

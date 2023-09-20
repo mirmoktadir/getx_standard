@@ -9,9 +9,11 @@ class NetworkImageBox extends StatelessWidget {
   const NetworkImageBox({
     super.key,
     required this.url,
+    required this.radius,
   });
 
   final String url;
+  final num radius;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class NetworkImageBox extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white, width: 1),
           shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(radius.r),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
