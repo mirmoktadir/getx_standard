@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,17 +25,25 @@ class HomeController extends GetxController with ExceptionHandler {
   final recipes = RxList<Results>();
 
   scrollPositionTracker() {
+    Timer? debounce;
+
     scrollController.addListener(() {
-      if (scrollController.position.pixels >
-          scrollController.position.minScrollExtent + 5) {
-        bottomPadding.value = 18.sp;
-        // position in Top
+      if (debounce != null && debounce!.isActive) {
+        debounce!.cancel();
       }
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
-        bottomPadding.value = 130.sp;
-        // position in Bottom
-      }
+
+      debounce = Timer(const Duration(milliseconds: 200), () {
+        if (scrollController.position.pixels >
+            scrollController.position.minScrollExtent + 5) {
+          bottomPadding.value = 18.sp;
+          // position in Top
+        }
+        if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent) {
+          bottomPadding.value = 130.sp;
+          // position in Bottom
+        }
+      });
     });
   }
 
@@ -80,25 +90,12 @@ class HomeController extends GetxController with ExceptionHandler {
   @override
   void onReady() async {
     await getRecipes();
-    // scrollController.addListener(() {
-    //   if (scrollController.position.atEdge) {
-    //     bool isTop = scrollController.position.pixels == 0;
-    //     if (isTop) {
-    //       bottomPadding.value = 18.sp;
-    //       print('At the top');
-    //     } else {
-    //       bottomPadding.value = 50.sp;
-    //       print('At the bottom');
-    //     }
-    //   }
-    // });
     super.onReady();
   }
 
   @override
   void onInit() {
     super.onInit();
-
     scrollPositionTracker();
   }
 
