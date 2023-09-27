@@ -16,46 +16,46 @@ class DialogHelper {
     Get.dialog(
       Dialog(
         elevation: 6,
-        shadowColor: LightThemeColors.primaryColor,
+        shadowColor: LightThemeColors.primaryColor.withOpacity(.5),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Lottie.asset(
+                'animations/apiError.json',
+                height: 120.sp,
+                repeat: true,
+                reverse: true,
+                fit: BoxFit.cover,
+              ),
               Text(
                 title,
                 style: TextStyle(
                   color: Colors.redAccent,
                   fontWeight: FontWeight.w400,
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                 ),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5.h),
-              Lottie.asset(
-                'animations/apiError.json',
-                height: 120.h,
-                repeat: true,
-                reverse: true,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 20.sp),
               AnimatedTextKit(repeatForever: true, animatedTexts: [
                 ColorizeAnimatedText(description,
-                    textStyle: Get.textTheme.headlineMedium as TextStyle,
+                    textStyle: Get.textTheme.headlineSmall as TextStyle,
                     textAlign: TextAlign.center,
                     colors: [
-                      Colors.purple,
+                      Colors.red,
                       Colors.blue,
                       Colors.yellow,
                       Colors.red,
                     ]),
               ]),
-              SizedBox(height: 30.h),
+              SizedBox(height: 30.sp),
               SizedBox(
-                width: 100.w,
+                width: 100.sp,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   onPressed: () {
                     if (Get.isDialogOpen!) Get.back();
                   },
@@ -105,6 +105,7 @@ class DialogHelper {
           ),
         ),
       ),
+      barrierColor: Colors.transparent,
     );
   }
 

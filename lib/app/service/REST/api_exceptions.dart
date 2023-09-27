@@ -4,6 +4,7 @@ import 'package:getx_standard/config/translations/strings_enum.dart';
 
 class DioExceptions implements Exception {
   String message = "";
+
   DioExceptions.fromDioError(DioException dioException) {
     switch (dioException.type) {
       case DioExceptionType.cancel:
@@ -15,12 +16,12 @@ class DioExceptions implements Exception {
       case DioExceptionType.receiveTimeout:
         message = Strings.receiveTimeout.tr;
         break;
+      case DioExceptionType.sendTimeout:
+        message = Strings.sendTimeout.tr;
+        break;
       case DioExceptionType.badResponse:
         message = _handleError(dioException.response!.statusCode!.toInt(),
             dioException.response!.data);
-        break;
-      case DioExceptionType.sendTimeout:
-        message = Strings.sendTimeout.tr;
         break;
       case DioExceptionType.unknown:
         message = Strings.connectionProblem.tr;

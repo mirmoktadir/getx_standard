@@ -1,49 +1,79 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/modules/example/home-with-restAPI/model/recipes_model.dart';
 import 'package:getx_standard/app/service/helper/network_connectivity.dart';
 
 import '../../../../components/global-widgets/custom_snackbar.dart';
 import '../../../../components/navbar/navbar_controller.dart';
-import '../../../../data/local/my_hive.dart';
+import '../../../../data/local/hive/my_hive.dart';
 import '../../../../service/REST/api_urls.dart';
 import '../../../../service/REST/dio_client.dart';
 import '../../../../service/handler/exception_handler.dart';
-import '../model/posts.dart';
 
 class HomeController extends GetxController with ExceptionHandler {
   final navController = Get.put(NavbarController());
+  final scrollController = ScrollController();
+
+  RxDouble bottomPadding = 18.sp.obs;
 
   RxString title = "".obs;
   RxString body = "".obs;
 
-  /// GET POST LIST 'HIVE IMPLEMENTED'
-  final postList = RxList<Posts>();
+  final recipes = RxList<Results>();
 
-  getPostList() async {
+  scrollPositionTracker() {
+    Timer? debounce;
+
+    scrollController.addListener(() {
+      if (debounce != null && debounce!.isActive) {
+        debounce!.cancel();
+      }
+
+      debounce = Timer(const Duration(milliseconds: 200), () {
+        if (scrollController.position.pixels >
+            scrollController.position.minScrollExtent + 5) {
+          bottomPadding.value = 18.sp;
+          // position in Top
+        }
+        if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent) {
+          bottomPadding.value = 130.sp;
+          // position in Bottom
+        }
+      });
+    });
+  }
+
+  /// GET ALL RECIPES LIST 'HIVE IMPLEMENTED'
+
+  getRecipes() async {
     showLoading();
     if (await NetworkConnectivity.isNetworkAvailable()) {
-      // Fetch posts from the API
-
-      var response =
-          await DioClient().get(url: ApiUrl.allPosts).catchError(handleError);
+      /// Fetch recipes from the API
+      var response = await DioClient()
+          .get(
+            url: ApiUrl.allRecipes,
+          )
+          .catchError(handleError);
 
       if (response == null) return;
 
-      postList
-          .assignAll((response as List).map((e) => Posts.fromJson(e)).toList());
+      recipes.assignAll((response["results"] as List)
+          .map((e) => Results.fromJson(e))
+          .toList());
 
-      // Save fetched posts to Hive for future use
-      await MyHive.saveAllPosts(postList);
-
+      /// Save fetched posts to Hive for future use
+      await MyHive.saveAllRecipes(recipes);
       hideLoading();
     } else {
-      // If offline, try to load from Hive
+      /// If offline, try to load from Hive
+      var savedRecipes = MyHive.getAllRecipes();
 
-      var posts = MyHive.getAllPosts();
-
-      if (posts.isNotEmpty) {
-        // Use posts from Hive if available
-        postList.assignAll(posts);
-
+      if (savedRecipes.isNotEmpty) {
+        recipes.assignAll(savedRecipes);
         hideLoading();
         CustomSnackBar.showCustomErrorToast(message: "No network!");
         return;
@@ -59,8 +89,19 @@ class HomeController extends GetxController with ExceptionHandler {
 
   @override
   void onReady() async {
-    await getPostList();
-
+    await getRecipes();
     super.onReady();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    scrollPositionTracker();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }

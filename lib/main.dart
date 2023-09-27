@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/app/data/local/my_hive.dart';
+import 'package:getx_standard/app/data/local/hive/hive_adapters.dart';
 
 import 'app/data/local/my_shared_pref.dart';
-import 'app/modules/example/home-with-restAPI/model/posts.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
@@ -18,10 +17,7 @@ Future<void> main() async {
   );
 
   // init hive and adapters
-  await MyHive.init(registerAdapters: (hive) {
-    hive.registerAdapter(PostsAdapter());
-    //myHive.registerAdapter(OtherAdapter());
-  });
+  await HiveAdapters.registerAll();
 
   // Device info
   //  DeviceInfoHelper.initializeDeviceInfo();
@@ -58,7 +54,7 @@ Future<void> main() async {
             );
           },
 
-          initialRoute: AppPages.ONBOARDING,
+          initialRoute: AppPages.NAV,
           // first screen to show when app is running
 
           defaultTransition: Transition.circularReveal,

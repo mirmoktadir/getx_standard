@@ -50,7 +50,7 @@ class CustomSnackBar {
       onTap: (snack) {
         Get.closeAllSnackbars();
       },
-      //overlayBlur: 0.8,
+      overlayBlur: 0.8,
       message: message,
     );
   }
@@ -68,7 +68,7 @@ class CustomSnackBar {
       onTap: (snack) {
         Get.closeAllSnackbars();
       },
-      // overlayBlur: 0.8,
+      overlayBlur: 0.8,
       message: message,
     );
   }

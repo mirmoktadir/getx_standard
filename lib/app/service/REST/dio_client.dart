@@ -9,7 +9,12 @@ import 'package:dio/dio.dart';
 import 'api_header.dart';
 
 class DioClient {
-  static const int TIME_OUT_DURATION = 20;
+  static const int TIME_OUT_DURATION = 2000;
+  BaseOptions baseOptions = BaseOptions(
+    connectTimeout: const Duration(seconds: TIME_OUT_DURATION),
+    receiveTimeout: const Duration(seconds: TIME_OUT_DURATION),
+    sendTimeout: const Duration(seconds: TIME_OUT_DURATION),
+  );
 
   //GET
 
@@ -18,11 +23,9 @@ class DioClient {
     Map<String, dynamic>? params,
   }) async {
     try {
-      var response = await Dio()
-          .get(url,
-              options: Options(headers: Header.defaultHeader),
-              queryParameters: params)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).get(url,
+          options: Options(headers: Header.rapidApiHeader),
+          queryParameters: params);
 
       return response.data;
     } catch (e) {
@@ -36,12 +39,10 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio()
-          .post(url,
-              options: Options(headers: Header.defaultHeader),
-              queryParameters: params,
-              data: payload)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).post(url,
+          options: Options(headers: Header.defaultHeader),
+          queryParameters: params,
+          data: payload);
 
       return response.data;
     } catch (e) {
@@ -55,12 +56,10 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio()
-          .patch(url,
-              options: Options(headers: Header.defaultHeader),
-              queryParameters: params,
-              data: payload)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).patch(url,
+          options: Options(headers: Header.defaultHeader),
+          queryParameters: params,
+          data: payload);
       return response.data;
     } catch (e) {
       rethrow;
@@ -73,12 +72,10 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio()
-          .delete(url,
-              options: Options(headers: Header.defaultHeader),
-              queryParameters: params,
-              data: payload)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).delete(url,
+          options: Options(headers: Header.defaultHeader),
+          queryParameters: params,
+          data: payload);
       return response.data;
     } catch (e) {
       rethrow;
@@ -88,6 +85,7 @@ class DioClient {
   //MULTIPART FOR MULTIPLE FILE UPLOAD
 
   List<File>? docFileList = [];
+
   Future<dynamic> multipartRequest({
     required String url,
     Map<String, dynamic>? params,
@@ -102,12 +100,10 @@ class DioClient {
     }
 
     try {
-      var response = await Dio()
-          .post(url,
-              options: Options(headers: Header.defaultMultipartHeader),
-              queryParameters: params,
-              data: formData)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).post(url,
+          options: Options(headers: Header.defaultMultipartHeader),
+          queryParameters: params,
+          data: formData);
       return response.data;
     } catch (e) {
       rethrow;
@@ -128,12 +124,10 @@ class DioClient {
     }
 
     try {
-      var response = await Dio()
-          .post(url,
-              options: Options(headers: Header.defaultMultipartHeader),
-              queryParameters: params,
-              data: formData)
-          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await Dio(baseOptions).post(url,
+          options: Options(headers: Header.defaultMultipartHeader),
+          queryParameters: params,
+          data: formData);
       return response.data;
     } catch (e) {
       rethrow;

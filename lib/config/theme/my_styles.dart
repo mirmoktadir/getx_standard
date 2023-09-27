@@ -47,6 +47,11 @@ class MyStyles {
             color: isLightTheme
                 ? LightThemeColors.bodyTextColor
                 : DarkThemeColors.bodyTextColor),
+        bodySmall: (MyFonts.bodyTextStyle).copyWith(
+            fontSize: MyFonts.body3TextSize,
+            color: isLightTheme
+                ? LightThemeColors.bodyTextColor
+                : DarkThemeColors.bodyTextColor),
         displayLarge: (MyFonts.headlineTextStyle).copyWith(
             fontSize: MyFonts.headline1TextSize,
             fontWeight: FontWeight.bold,
@@ -83,11 +88,6 @@ class MyStyles {
             color: isLightTheme
                 ? LightThemeColors.headlinesTextColor
                 : DarkThemeColors.headlinesTextColor),
-        bodySmall: TextStyle(
-            color: isLightTheme
-                ? LightThemeColors.captionTextColor
-                : DarkThemeColors.captionTextColor,
-            fontSize: MyFonts.captionTextSize),
       );
 
   static ChipThemeData getChipTheme({required bool isLightTheme}) {
