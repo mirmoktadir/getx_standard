@@ -26,10 +26,12 @@ Future<void> main() async {
   await MySharedPref.init();
 
   // inti fcm services
-  // await FcmHelper.initFcm();
+  // await Firebase.initializeApp(
+  //     options: DefaultFirebaseOptions.currentPlatform,
+  //   );
 
-  // initialize local notifications service
-  // LocalNotificationHelper.initializeNotifications();
+  // initialize local notifications
+  // await NotificationHelper().initNotification();
 
   runApp(
     ScreenUtilInit(

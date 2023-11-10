@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:web_socket_channel/io.dart';
@@ -22,12 +23,22 @@ class WebSocketManager {
         _webSocket = await WebSocket.connect(url);
         _channel = IOWebSocketChannel(_webSocket);
 
-        _channel.stream.listen((message) {
-          _parseReceivedMessage(message); // your particular value
-          receivedMessage.value = message; // main response
-        });
+        _channel.stream.listen(
+          (message) {
+            _parseReceivedMessage(message); // your particular value
+            receivedMessage.value = message; // main response
+          },
+          onError: (err) {
+            connectWebSocket();
+          },
+          onDone: () {
+            connectWebSocket();
+          },
+          cancelOnError: true,
+        );
         Logger().i('WebSocket connection established in: $url');
       } catch (e) {
+        connectWebSocket();
         Logger().e('WebSocket connection failed: $e');
       }
     }
