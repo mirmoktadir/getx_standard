@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/global-widgets/my_buttons.dart';
 import 'package:iconly/iconly.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/my_fonts.dart';
+import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
 import '../controllers/graphql_controller.dart';
 
 class GraphQLView extends GetView<GraphQLController> {
-  const GraphQLView({Key? key}) : super(key: key);
+  const GraphQLView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,14 @@ class GraphQLView extends GetView<GraphQLController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GraphQL'),
+        title: const Text('GetX Standard'),
+        leading: IconButton(
+          onPressed: () => MyTheme.changeTheme(),
+          icon: Icon(
+            Get.isDarkMode ? Iconsax.moon5 : Iconsax.sun5,
+            color: Colors.white,
+          ),
+        ),
         actions: [
           IconButton(
               onPressed: () => controller.navController.selectedIndex.value = 0,
@@ -42,13 +52,13 @@ class GraphQLView extends GetView<GraphQLController> {
                   child: Column(
                     children: [
                       SizedBox(
-                        width: 150.w,
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller.updateTodo();
-                            },
-                            child: const Text("Run mutation")),
-                      ),
+                          width: 150.sp,
+                          height: 48.sp,
+                          child: PrimaryButton(
+                              title: "Run mutation",
+                              onPressed: () async =>
+                                  await controller.updateTodo(),
+                              inactive: false)),
                       SizedBox(height: 10.h),
                       controller.mutationResult.isEmpty
                           ? const SizedBox()

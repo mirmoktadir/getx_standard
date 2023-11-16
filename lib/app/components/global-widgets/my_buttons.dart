@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.onPressed,
-      required this.inactive})
-      : super(key: key);
+      required this.inactive});
   final String title;
   final VoidCallback onPressed;
   final bool inactive;

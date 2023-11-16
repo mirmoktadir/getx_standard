@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_standard/app/components/global-widgets/splash_container.dart';
+import 'package:getx_standard/config/theme/dark_theme_colors.dart';
+import 'package:getx_standard/config/theme/light_theme_colors.dart';
 import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
 import '../../../../components/global-widgets/network_image_box.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,22 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tasty'),
+        title: const Text('GetX Standard'),
+        leading: IconButton(
+          onPressed: () => MyTheme.changeTheme(),
+          icon: Icon(
+            Get.isDarkMode ? Iconsax.moon5 : Iconsax.sun5,
+            color: Colors.white,
+          ),
+        ),
         actions: [
           IconButton(
-              onPressed: () => controller.navController.selectedIndex.value = 1,
-              icon: const Icon(
-                IconlyBold.graph,
-                color: Colors.white,
-              )),
+            onPressed: () => controller.navController.selectedIndex.value = 1,
+            icon: const Icon(
+              IconlyBold.graph,
+              color: Colors.white,
+            ),
+          ),
         ],
         centerTitle: true,
       ),
@@ -147,9 +158,16 @@ class HomeView extends GetView<HomeController> {
                                   color: const Color(0xffFFAD30),
                                   size: 18.sp,
                                 ),
-                                Text(controller
-                                    .recipes[index].userRatings!.score!
-                                    .toStringAsFixed(1)),
+                                Text(
+                                  controller.recipes[index].userRatings!.score!
+                                      .toStringAsFixed(1),
+                                  style: TextStyle(
+                                    color: Get.isDarkMode
+                                        ? DarkThemeColors
+                                            .scaffoldBackgroundColor
+                                        : LightThemeColors.primaryColor,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
