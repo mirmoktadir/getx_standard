@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/components/global-widgets/splash_container.dart';
 import 'package:getx_standard/config/theme/dark_theme_colors.dart';
 import 'package:getx_standard/config/theme/light_theme_colors.dart';
-import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
+import '../../../../components/global-widgets/main_appbar.dart';
 import '../../../../components/global-widgets/network_image_box.dart';
 import '../../../../data/local/my_shared_pref.dart';
 import '../controllers/home_controller.dart';
@@ -19,27 +19,11 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-
+    //
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('GetX Standard'),
-        leading: IconButton(
-          onPressed: () => MyTheme.changeTheme(),
-          icon: Icon(
-            Get.isDarkMode ? Iconsax.sun5 : Iconsax.moon5,
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => controller.navController.selectedIndex.value = 1,
-            icon: const Icon(
-              IconlyBold.graph,
-              color: Colors.white,
-            ),
-          ),
-        ],
-        centerTitle: true,
+      appBar: MainAppBar(
+        prefixAction: () => MyTheme.changeTheme(),
+        suffixAction: () => controller.navController.selectedIndex.value = 1,
       ),
       body: Obx(
         () => controller.isError.value == true
