@@ -34,7 +34,7 @@ class BottomNavbar extends GetView<NavbarController> {
                       BoxShadow(
                           color: theme.colorScheme.secondary.withOpacity(1),
                           spreadRadius: 0,
-                          blurRadius: 20.r),
+                          blurRadius: 10.r),
                     ],
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 65.w),

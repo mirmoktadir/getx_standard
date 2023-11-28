@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/global-widgets/main_appbar.dart';
 import 'package:getx_standard/app/components/global-widgets/my_buttons.dart';
-import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/my_theme.dart';
@@ -17,24 +17,9 @@ class GraphQLView extends GetView<GraphQLController> {
     var theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('GetX Standard'),
-        leading: IconButton(
-          onPressed: () => MyTheme.changeTheme(),
-          icon: Icon(
-            Get.isDarkMode ? Iconsax.moon5 : Iconsax.sun5,
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () => controller.navController.selectedIndex.value = 0,
-              icon: const Icon(
-                IconlyBold.home,
-                color: Colors.white,
-              )),
-        ],
-        centerTitle: true,
+      appBar: MainAppBar(
+        prefixAction: () => MyTheme.changeTheme(),
+        suffixAction: () => controller.navController.selectedIndex.value = 0,
       ),
       body: Obx(() => controller.isError.value == true
           ? EmptyWidget(onPressed: () async => await controller.getTodos())
@@ -58,14 +43,17 @@ class GraphQLView extends GetView<GraphQLController> {
                           child: Column(
                             children: [
                               controller.mutationResult.isEmpty
-                                  ? SizedBox(
-                                      width: 150.sp,
-                                      height: 48.sp,
-                                      child: PrimaryButton(
-                                          title: "Run mutation",
-                                          onPressed: () async =>
-                                              await controller.updateTodo(),
-                                          inactive: false),
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 30.sp),
+                                      child: SizedBox(
+                                        width: 150.sp,
+                                        height: 48.sp,
+                                        child: PrimaryButton(
+                                            title: "Run mutation",
+                                            onPressed: () async =>
+                                                await controller.updateTodo(),
+                                            inactive: false),
+                                      ),
                                     )
                                   : const SizedBox(),
                               SizedBox(height: 10.h),
@@ -116,7 +104,7 @@ class GraphQLView extends GetView<GraphQLController> {
                                     ),
                               SizedBox(
                                   height: controller.mutationResult.isEmpty
-                                      ? 100.h
+                                      ? 60.h
                                       : 50.h),
                               Text(
                                 "Query result",
