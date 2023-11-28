@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:getx_standard/app/modules/example/home-with-restAPI/model/recipes_model.dart';
 import 'package:getx_standard/app/service/helper/network_connectivity.dart';
 
-import '../../../../components/global-widgets/custom_snackbar.dart';
+import '../../../../components/global-widgets/my_snackbar.dart';
 import '../../../../components/navbar/navbar_controller.dart';
 import '../../../../data/local/hive/my_hive.dart';
 import '../../../../service/REST/api_urls.dart';
@@ -75,7 +75,7 @@ class HomeController extends GetxController with ExceptionHandler {
       if (savedRecipes.isNotEmpty) {
         recipes.assignAll(savedRecipes);
         hideLoading();
-        CustomSnackBar.showCustomErrorToast(message: "No network!");
+        MySnackBar.showErrorToast(message: "No network!");
         return;
       } else {
         isError.value = true;

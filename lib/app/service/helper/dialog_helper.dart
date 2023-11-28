@@ -11,7 +11,7 @@ import '../../../utils/constants.dart';
 class DialogHelper {
   static get context => null;
 
-  //show error dialog
+  ///show error dialog
   static void showErrorDialog(String title, String description) {
     Get.dialog(
       Dialog(
@@ -111,10 +111,11 @@ class DialogHelper {
     );
   }
 
+  ///hide loading
   static Future<void> hideLoading() async {
     if (Get.isDialogOpen!) {
       if (Get.isSnackbarOpen) {
-        await 3.delay();
+        await SnackBarDurations.kMySnackBarDuration.delay();
         Get.closeAllSnackbars();
         Get.back();
       } else {
