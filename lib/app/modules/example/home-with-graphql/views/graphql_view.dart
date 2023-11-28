@@ -5,7 +5,6 @@ import 'package:getx_standard/app/components/global-widgets/my_buttons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../config/theme/my_fonts.dart';
 import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
 import '../controllers/graphql_controller.dart';
@@ -38,10 +37,13 @@ class GraphQLView extends GetView<GraphQLController> {
         centerTitle: true,
       ),
       body: Obx(() => controller.isError.value == true
-          ? EmptyWidget(onPressed: () async => await controller.getAlbums())
+          ? EmptyWidget(onPressed: () async => await controller.getTodos())
           : RefreshIndicator(
               color: theme.primaryColor,
-              onRefresh: () async => await controller.getAlbums(),
+              onRefresh: () async {
+                controller.mutationResult.value = "";
+                await controller.getTodos();
+              },
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: RawScrollbar(
@@ -49,71 +51,86 @@ class GraphQLView extends GetView<GraphQLController> {
                   radius: const Radius.circular(100),
                   thickness: 5,
                   interactive: true,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          width: 150.sp,
-                          height: 48.sp,
-                          child: PrimaryButton(
-                              title: "Run mutation",
-                              onPressed: () async =>
-                                  await controller.updateTodo(),
-                              inactive: false)),
-                      SizedBox(height: 10.h),
-                      controller.mutationResult.isEmpty
-                          ? const SizedBox()
-                          : Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20.h),
-                              child: Text(
-                                  "RESULT :${controller.mutationResult.value}"),
-                            ),
-                      Expanded(
-                        child: ListView.separated(
-                          itemCount: controller.userList.length,
+                  child: controller.queryResult.isEmpty
+                      ? const SizedBox()
+                      : SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          separatorBuilder: (_, __) => SizedBox(
-                            height: 20.h,
-                          ),
-                          itemBuilder: (ctx, index) => Container(
-                            padding: const EdgeInsets.all(5),
-                            width: double.infinity,
-                            color: theme.canvasColor,
-                            child: Center(
-                              child: Container(
-                                width: double.infinity,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.r)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            theme.primaryColor.withOpacity(.3),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 4,
-                                        offset: const Offset(0, 3),
-                                      )
-                                    ]),
-                                child: Center(
-                                  child: Text(
-                                    controller.userList[index]["name"] ?? "",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: MyFonts.headline6TextSize,
-                                      fontWeight: FontWeight.w500,
-                                      color: theme.primaryColor,
+                          child: Column(
+                            children: [
+                              controller.mutationResult.isEmpty
+                                  ? SizedBox(
+                                      width: 150.sp,
+                                      height: 48.sp,
+                                      child: PrimaryButton(
+                                          title: "Run mutation",
+                                          onPressed: () async =>
+                                              await controller.updateTodo(),
+                                          inactive: false),
+                                    )
+                                  : const SizedBox(),
+                              SizedBox(height: 10.h),
+                              controller.mutationResult.isEmpty
+                                  ? const SizedBox()
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 20.h),
+                                      child: Column(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Mutation result",
+                                                style: theme
+                                                    .textTheme.headlineSmall,
+                                              ),
+                                              SizedBox(height: 20.sp),
+                                              Text(
+                                                controller.mutationResult.value,
+                                                style:
+                                                    theme.textTheme.bodyLarge,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 20.sp),
+                                          Container(
+                                            height: 35.sp,
+                                            width: 35.sp,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(12.r),
+                                              color: theme.primaryColor
+                                                  .withOpacity(.8),
+                                            ),
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  controller.mutationResult
+                                                      .value = "";
+                                                },
+                                                icon: const Icon(
+                                                  Iconsax.refresh,
+                                                  color: Colors.white,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ),
+                              SizedBox(
+                                  height: controller.mutationResult.isEmpty
+                                      ? 100.h
+                                      : 50.h),
+                              Text(
+                                "Query result",
+                                style: theme.textTheme.headlineSmall,
                               ),
-                            ),
+                              SizedBox(height: 20.sp),
+                              Text(
+                                controller.queryResult.value,
+                                style: theme.textTheme.bodyLarge,
+                              ),
+                              const SizedBox(height: 200)
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             )),

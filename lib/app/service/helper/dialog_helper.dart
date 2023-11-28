@@ -71,6 +71,7 @@ class DialogHelper {
 
   ///show loading
   static void showLoading() {
+    //  var theme = Theme.of(context);
     Get.dialog(
       Center(
         child: Container(
@@ -106,13 +107,19 @@ class DialogHelper {
         ),
       ),
       barrierDismissible: false,
-      barrierColor: Colors.transparent,
+      barrierColor: Colors.black.withOpacity(.1),
     );
   }
 
-  static void hideLoading() {
+  static Future<void> hideLoading() async {
     if (Get.isDialogOpen!) {
-      Get.back();
+      if (Get.isSnackbarOpen) {
+        await 3.delay();
+        Get.closeAllSnackbars();
+        Get.back();
+      } else {
+        Get.back();
+      }
     }
   }
 }
