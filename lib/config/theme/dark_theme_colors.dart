@@ -13,6 +13,7 @@ class DarkThemeColors {
   static const Color backgroundColor = Color(0xff171d2d);
   static const Color dividerColor = Color(0xff686868);
   static const Color cardColor = Color(0xff1e2336);
+  static const Color canvasColor = scaffoldBackgroundColor;
 
   //ICONS
   static const Color appBarIconsColor = Colors.white;
@@ -35,5 +36,5 @@ class DarkThemeColors {
   static const Color chipTextColor = Colors.black87;
 
   // progress bar indicator
-  static const Color progressIndicatorColor = Color(0xFF40A76A);
+  static const Color progressIndicatorColor = primaryColor;
 }

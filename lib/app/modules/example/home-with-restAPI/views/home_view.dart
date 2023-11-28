@@ -10,6 +10,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
 import '../../../../components/global-widgets/network_image_box.dart';
+import '../../../../data/local/my_shared_pref.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -25,7 +26,7 @@ class HomeView extends GetView<HomeController> {
         leading: IconButton(
           onPressed: () => MyTheme.changeTheme(),
           icon: Icon(
-            Get.isDarkMode ? Iconsax.moon5 : Iconsax.sun5,
+            Get.isDarkMode ? Iconsax.sun5 : Iconsax.moon5,
             color: Colors.white,
           ),
         ),
@@ -69,9 +70,11 @@ class HomeView extends GetView<HomeController> {
                                   padding: EdgeInsets.fromLTRB(
                                       10.sp, 46.sp, 10.sp, 12.sp),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.r),
-                                      color: Colors.grey.shade200
-                                          .withOpacity(0.5)),
+                                    borderRadius: BorderRadius.circular(15.r),
+                                    color: MySharedPref.getThemeIsLight()
+                                        ? Colors.white
+                                        : Colors.orange.withOpacity(.1),
+                                  ),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

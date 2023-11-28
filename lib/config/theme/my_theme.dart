@@ -9,7 +9,7 @@ import 'my_styles.dart';
 class MyTheme {
   static getThemeData({required bool isLight}) {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
 
       // main color (app bar,tabs..etc)
       primaryColor: isLight
@@ -47,6 +47,10 @@ class MyTheme {
       dividerColor: isLight
           ? LightThemeColors.dividerColor
           : DarkThemeColors.dividerColor,
+
+      // canvas color
+      canvasColor:
+          isLight ? LightThemeColors.canvasColor : DarkThemeColors.canvasColor,
 
       // app background color
       scaffoldBackgroundColor: isLight

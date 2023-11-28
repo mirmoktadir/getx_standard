@@ -41,11 +41,11 @@ class PrimaryButton extends StatelessWidget {
 
 class PrimaryButtonWithIcon extends StatelessWidget {
   const PrimaryButtonWithIcon({
-    Key? key,
+    super.key,
     required this.title,
     required this.onPressed,
     required this.iconData,
-  }) : super(key: key);
+  });
   final String title;
   final VoidCallback onPressed;
   final IconData iconData;
@@ -88,10 +88,10 @@ class PrimaryButtonWithIcon extends StatelessWidget {
 
 class SocialButton extends StatelessWidget {
   const SocialButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.socialIcon,
-  }) : super(key: key);
+  });
 
   final VoidCallback onPressed;
   final String socialIcon;
