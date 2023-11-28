@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_standard/utils/constants.dart';
 
-class CustomSnackBar {
+class MySnackBar {
   /// SnackBar ///
 
-  static showCustomSnackBar(
+  // 1. success snackbar
+  static showSnackBar(
       {required String title, required String message, Duration? duration}) {
     Get.snackbar(
       title,
       message,
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: const EdgeInsets.all(18),
       borderRadius: 50,
@@ -27,7 +30,8 @@ class CustomSnackBar {
     );
   }
 
-  static showCustomErrorSnackBar(
+  // 2. error snackbar
+  static showErrorSnackBar(
       {required String title,
       required String message,
       Color? color,
@@ -35,7 +39,8 @@ class CustomSnackBar {
     Get.snackbar(
       title,
       message,
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: const EdgeInsets.all(18),
       borderRadius: 50,
@@ -55,10 +60,12 @@ class CustomSnackBar {
 
   /// Toast ///
 
-  static showCustomToast(
+  // 1. success toast
+  static showToast(
       {required String message, Color? color, Duration? duration}) {
     Get.rawSnackbar(
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
       margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
       borderRadius: 50,
@@ -81,10 +88,12 @@ class CustomSnackBar {
     );
   }
 
-  static showCustomInfoToast(
+  // 2. info toast
+  static showInfoToast(
       {required String message, Color? color, Duration? duration}) {
     Get.rawSnackbar(
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
       margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
       borderRadius: 50,
@@ -109,10 +118,12 @@ class CustomSnackBar {
     );
   }
 
-  static showCustomErrorToast(
+  // 3. error toast
+  static showErrorToast(
       {required String message, Color? color, Duration? duration}) {
     Get.rawSnackbar(
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
       margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
       borderRadius: 50,

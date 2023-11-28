@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/app/components/global-widgets/custom_snackbar.dart';
+import 'package:getx_standard/app/components/global-widgets/my_snackbar.dart';
 import 'package:getx_standard/app/modules/example/home-with-restAPI/controllers/home_controller.dart';
 import 'package:getx_standard/app/service/handler/exception_handler.dart';
 
@@ -60,7 +60,7 @@ class GraphQLController extends GetxController with ExceptionHandler {
     if (result == null) return;
     mutationResult.value = result.toString();
     hideLoading();
-    CustomSnackBar.showCustomToast(message: "Mutation success!");
+    MySnackBar.showToast(message: "Mutation success!");
   }
 
   ///
