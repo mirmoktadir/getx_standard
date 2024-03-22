@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 part 'recipes_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -1003,11 +1004,11 @@ class UserRatings {
     countNegative = json['count_negative'];
   }
   @HiveField(0)
-  int? countPositive;
+  dynamic countPositive;
   @HiveField(1)
-  double? score;
+  dynamic score;
   @HiveField(2)
-  int? countNegative;
+  dynamic countNegative;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1040,17 +1041,17 @@ class Instructions {
     displayText = json['display_text'];
   }
   @HiveField(0)
-  int? startTime;
+  dynamic startTime;
   @HiveField(1)
   dynamic appliance;
   @HiveField(2)
-  int? endTime;
+  dynamic endTime;
   @HiveField(3)
   dynamic temperature;
   @HiveField(4)
-  int? id;
+  dynamic id;
   @HiveField(5)
-  int? position;
+  dynamic position;
   @HiveField(6)
   String? displayText;
 

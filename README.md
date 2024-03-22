@@ -53,6 +53,10 @@ Before discovering folders lets first perform some actions to make the project r
     ```
     flutter pub run change_app_package_name:main com.new.package.name
     ```
+  - Change app name
+    ```
+    flutter pub run rename_app:main all="My App Name"
+    ```
   
 - Change app launch icon (replace assets/images/app_icon.png with your app icon) then run this command
     ```
@@ -246,4 +250,8 @@ After setting up all the needed thing now lets talk about folder structure which
 
 ## Support
 
-For support, email mirmoktadir@gmail.com or Facebook [Mir Moktadir](https://www.facebook.com/moktadir91/).
+For support, email mirmoktadir@gmail.com 
+Facebook  [Mir Moktadir](https://www.facebook.com/moktadir91/) 
+LinkedIn [Mir Moktadir](https://www.linkedin.com/in/mir-moktadir-bb144290/)
+Phone no: +8801701308477 (Whatsapp or Telegram)
+

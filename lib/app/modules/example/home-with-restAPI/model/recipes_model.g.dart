@@ -17,7 +17,7 @@ class RecipesAdapter extends TypeAdapter<Recipes> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Recipes(
-      count: fields[0] as int?,
+      count: fields[0] as dynamic,
       results: (fields[1] as List?)?.cast<Results>(),
     );
   }
@@ -59,9 +59,9 @@ class ResultsAdapter extends TypeAdapter<Results> {
       name: fields[2] as String?,
       credits: (fields[3] as List?)?.cast<Credits>(),
       canonicalId: fields[4] as String?,
-      videoId: fields[5] as int?,
+      videoId: fields[5] as dynamic,
       language: fields[6] as String?,
-      prepTimeMinutes: fields[7] as int?,
+      prepTimeMinutes: fields[7] as dynamic,
       description: fields[8] as String?,
       videoAdContent: fields[9] as String?,
       instructions: (fields[10] as List?)?.cast<Instructions>(),
@@ -78,14 +78,14 @@ class ResultsAdapter extends TypeAdapter<Results> {
       keywords: fields[21] as String?,
       tags: (fields[22] as List?)?.cast<Tags>(),
       totalTimeMinutes: fields[23] as dynamic,
-      updatedAt: fields[24] as int?,
-      id: fields[25] as int?,
+      updatedAt: fields[24] as dynamic,
+      id: fields[25] as dynamic,
       slug: fields[26] as String?,
       servingsNounSingular: fields[27] as String?,
-      showId: fields[28] as int?,
+      showId: fields[28] as dynamic,
       compilations: (fields[29] as List?)?.cast<Compilations>(),
       inspiredByUrl: fields[30] as dynamic,
-      approvedAt: fields[31] as int?,
+      approvedAt: fields[31] as dynamic,
       isShoppable: fields[32] as bool?,
       yields: fields[33] as String?,
       originalVideoUrl: fields[34] as String?,
@@ -96,11 +96,11 @@ class ResultsAdapter extends TypeAdapter<Results> {
       brandId: fields[39] as dynamic,
       tipsAndRatingsEnabled: fields[40] as bool?,
       show: fields[41] as Show?,
-      createdAt: fields[42] as int?,
+      createdAt: fields[42] as dynamic,
       totalTimeTier: fields[43] as TotalTimeTier?,
-      cookTimeMinutes: fields[44] as int?,
+      cookTimeMinutes: fields[44] as dynamic,
       promotion: fields[45] as String?,
-      numServings: fields[46] as int?,
+      numServings: fields[46] as dynamic,
       buzzId: fields[47] as dynamic,
       draftStatus: fields[48] as String?,
       thumbnailUrl: fields[49] as String?,
@@ -278,7 +278,7 @@ class ShowAdapter extends TypeAdapter<Show> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Show(
-      id: fields[0] as int?,
+      id: fields[0] as dynamic,
       name: fields[1] as String?,
     );
   }
@@ -317,7 +317,7 @@ class SectionsAdapter extends TypeAdapter<Sections> {
     return Sections(
       components: (fields[0] as List?)?.cast<Components>(),
       name: fields[1] as dynamic,
-      position: fields[2] as int?,
+      position: fields[2] as dynamic,
     );
   }
 
@@ -356,8 +356,8 @@ class ComponentsAdapter extends TypeAdapter<Components> {
     };
     return Components(
       ingredient: fields[0] as Ingredient?,
-      id: fields[1] as int?,
-      position: fields[2] as int?,
+      id: fields[1] as dynamic,
+      position: fields[2] as dynamic,
       measurements: (fields[3] as List?)?.cast<Measurements>(),
       rawText: fields[4] as String?,
       extraComment: fields[5] as String?,
@@ -405,7 +405,7 @@ class MeasurementsAdapter extends TypeAdapter<Measurements> {
     };
     return Measurements(
       quantity: fields[0] as String?,
-      id: fields[1] as int?,
+      id: fields[1] as dynamic,
       unit: fields[2] as Unit?,
     );
   }
@@ -490,11 +490,11 @@ class IngredientAdapter extends TypeAdapter<Ingredient> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Ingredient(
-      updatedAt: fields[0] as int?,
+      updatedAt: fields[0] as dynamic,
       name: fields[1] as String?,
-      createdAt: fields[2] as int?,
+      createdAt: fields[2] as dynamic,
       displayPlural: fields[3] as String?,
-      id: fields[4] as int?,
+      id: fields[4] as dynamic,
       displaySingular: fields[5] as String?,
     );
   }
@@ -539,14 +539,14 @@ class CompilationsAdapter extends TypeAdapter<Compilations> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Compilations(
-      approvedAt: fields[0] as int?,
+      approvedAt: fields[0] as dynamic,
       slug: fields[1] as String?,
       language: fields[2] as String?,
       thumbnailUrl: fields[3] as String?,
       videoUrl: fields[4] as String?,
       name: fields[5] as String?,
       canonicalId: fields[6] as String?,
-      videoId: fields[7] as int?,
+      videoId: fields[7] as dynamic,
       keywords: fields[8] as dynamic,
       thumbnailAltText: fields[9] as String?,
       draftStatus: fields[10] as String?,
@@ -556,8 +556,8 @@ class CompilationsAdapter extends TypeAdapter<Compilations> {
       description: fields[14] as String?,
       facebookPosts: (fields[15] as List?)?.cast<dynamic>(),
       show: (fields[16] as List?)?.cast<Show>(),
-      createdAt: fields[17] as int?,
-      id: fields[18] as int?,
+      createdAt: fields[17] as dynamic,
+      id: fields[18] as dynamic,
       promotion: fields[19] as String?,
       aspectRatio: fields[20] as String?,
       country: fields[21] as String?,
@@ -639,7 +639,7 @@ class TagsAdapter extends TypeAdapter<Tags> {
       type: fields[0] as String?,
       rootTagType: fields[1] as String?,
       name: fields[2] as String?,
-      id: fields[3] as int?,
+      id: fields[3] as dynamic,
       displayName: fields[4] as String?,
     );
   }
@@ -683,17 +683,17 @@ class RenditionsAdapter extends TypeAdapter<Renditions> {
     };
     return Renditions(
       maximumBitRate: fields[0] as dynamic,
-      height: fields[1] as int?,
+      height: fields[1] as dynamic,
       container: fields[2] as String?,
       posterUrl: fields[3] as String?,
       contentType: fields[4] as String?,
       aspect: fields[5] as String?,
-      width: fields[6] as int?,
+      width: fields[6] as dynamic,
       name: fields[7] as String?,
-      fileSize: fields[8] as int?,
+      fileSize: fields[8] as dynamic,
       url: fields[9] as String?,
-      duration: fields[10] as int?,
-      bitRate: fields[11] as int?,
+      duration: fields[10] as dynamic,
+      bitRate: fields[11] as dynamic,
       minimumBitRate: fields[12] as dynamic,
     );
   }
@@ -752,13 +752,13 @@ class NutritionAdapter extends TypeAdapter<Nutrition> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Nutrition(
-      fat: fields[0] as int?,
-      calories: fields[1] as int?,
-      sugar: fields[2] as int?,
-      carbohydrates: fields[3] as int?,
-      fiber: fields[4] as int?,
+      fat: fields[0] as dynamic,
+      calories: fields[1] as dynamic,
+      sugar: fields[2] as dynamic,
+      carbohydrates: fields[3] as dynamic,
+      fiber: fields[4] as dynamic,
       updatedAt: fields[5] as String?,
-      protein: fields[6] as int?,
+      protein: fields[6] as dynamic,
     );
   }
 
@@ -804,11 +804,11 @@ class PriceAdapter extends TypeAdapter<Price> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Price(
-      total: fields[0] as int?,
+      total: fields[0] as dynamic,
       updatedAt: fields[1] as String?,
-      portion: fields[2] as int?,
-      consumptionTotal: fields[3] as int?,
-      consumptionPortion: fields[4] as int?,
+      portion: fields[2] as dynamic,
+      consumptionTotal: fields[3] as dynamic,
+      consumptionPortion: fields[4] as dynamic,
     );
   }
 
@@ -887,9 +887,9 @@ class UserRatingsAdapter extends TypeAdapter<UserRatings> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserRatings(
-      countPositive: fields[0] as int?,
-      score: fields[1] as double?,
-      countNegative: fields[2] as int?,
+      countPositive: fields[0] as dynamic,
+      score: fields[1] as dynamic,
+      countNegative: fields[2] as dynamic,
     );
   }
 
@@ -927,12 +927,12 @@ class InstructionsAdapter extends TypeAdapter<Instructions> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Instructions(
-      startTime: fields[0] as int?,
+      startTime: fields[0] as dynamic,
       appliance: fields[1] as dynamic,
-      endTime: fields[2] as int?,
+      endTime: fields[2] as dynamic,
       temperature: fields[3] as dynamic,
-      id: fields[4] as int?,
-      position: fields[5] as int?,
+      id: fields[4] as dynamic,
+      position: fields[5] as dynamic,
       displayText: fields[6] as String?,
     );
   }
