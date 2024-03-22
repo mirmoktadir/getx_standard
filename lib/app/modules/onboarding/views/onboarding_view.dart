@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 
 import '../../../components/global-widgets/my_buttons.dart';
@@ -8,7 +7,7 @@ import '../../../routes/app_pages.dart';
 import '../controllers/onboarding_controller.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
-  const OnboardingView({Key? key}) : super(key: key);
+  const OnboardingView({super.key});
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -17,7 +16,7 @@ class OnboardingView extends GetView<OnboardingController> {
             children: [
               PageView.builder(
                 controller: controller.pageController,
-                onPageChanged: controller.selectedPage,
+                onPageChanged: controller.selectedPage.call,
                 itemCount: controller.onBoardingPages.length,
                 itemBuilder: (context, index) {
                   return controller.onBoardingPages.isEmpty

@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SoftButton extends StatelessWidget {
   const SoftButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.onPressed,
-  }) : super(key: key);
+  });
   final String title;
   final VoidCallback onPressed;
 

@@ -6,7 +6,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({Key? key, required this.onPressed}) : super(key: key);
+  const EmptyWidget({super.key, required this.onPressed});
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {

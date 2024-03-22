@@ -8,7 +8,7 @@ import 'package:iconly/iconly.dart';
 import 'navbar_controller.dart';
 
 class BottomNavbar extends GetView<NavbarController> {
-  const BottomNavbar({Key? key}) : super(key: key);
+  const BottomNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {

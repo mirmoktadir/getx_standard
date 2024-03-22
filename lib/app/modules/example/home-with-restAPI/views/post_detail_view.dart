@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class PostDetailView extends GetView<HomeController> {
-  const PostDetailView({Key? key}) : super(key: key);
+  const PostDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
