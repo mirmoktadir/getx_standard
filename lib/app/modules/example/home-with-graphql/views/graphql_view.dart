@@ -22,12 +22,12 @@ class GraphQLView extends GetView<GraphQLController> {
         suffixAction: () => controller.navController.selectedIndex.value = 0,
       ),
       body: Obx(() => controller.isError.value == true
-          ? EmptyWidget(onPressed: () async => await controller.getTodos())
+          ? EmptyWidget(onPressed: () async => await controller.getCountries())
           : RefreshIndicator(
               color: theme.primaryColor,
               onRefresh: () async {
                 controller.mutationResult.value = "";
-                await controller.getTodos();
+                await controller.getCountries();
               },
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -36,7 +36,7 @@ class GraphQLView extends GetView<GraphQLController> {
                   radius: const Radius.circular(100),
                   thickness: 5,
                   interactive: true,
-                  child: controller.queryResult.isEmpty
+                  child: controller.countryList.isEmpty
                       ? const SizedBox()
                       : SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
@@ -111,9 +111,53 @@ class GraphQLView extends GetView<GraphQLController> {
                                 style: theme.textTheme.headlineSmall,
                               ),
                               SizedBox(height: 20.sp),
-                              Text(
-                                controller.queryResult.value,
-                                style: theme.textTheme.bodyLarge,
+                              SizedBox(
+                                height: 360.h,
+                                child: ListView.separated(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(15.r),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: theme.primaryColor),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50.sp, vertical: 15.sp),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              controller.countryList[index]
+                                                      .name ??
+                                                  "",
+                                              style: theme.textTheme.bodyLarge,
+                                            ),
+                                            Text(
+                                              controller.countryList[index]
+                                                      .emoji ??
+                                                  "",
+                                              style:
+                                                  theme.textTheme.displayLarge,
+                                            ),
+                                            Text(controller
+                                                    .countryList[index].code ??
+                                                ""),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: controller.countryList.length,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(height: 12.sp);
+                                  },
+                                ),
                               ),
                               const SizedBox(height: 200)
                             ],

@@ -2,9 +2,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/config/theme/light_theme_colors.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../config/theme/light_theme_colors.dart';
 import '../../../config/translations/strings_enum.dart';
 import '../../../utils/constants.dart';
 
@@ -70,45 +70,85 @@ class DialogHelper {
   }
 
   ///show loading
-  static void showLoading() {
-    //  var theme = Theme.of(context);
-    Get.dialog(
-      Center(
-        child: Container(
-          height: 80.h,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            shape: BoxShape.circle,
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // App Icon
-              Container(
-                height: 50.sp,
-                width: 50.sp,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      AppImages.kAppIcon,
+  static Future<void> showLoading() async {
+    if (Get.isSnackbarOpen) {
+      Get.closeAllSnackbars();
+      Get.dialog(
+        Center(
+          child: Container(
+            height: 80.h,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              shape: BoxShape.circle,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // App Icon
+                Container(
+                  height: 50.sp,
+                  width: 50.sp,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.kAppIcon,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              // Loader
-              SizedBox(
-                height: 60.sp,
-                width: 60.sp,
-                child: const CircularProgressIndicator(),
-              ),
-            ],
+                // Loader
+                SizedBox(
+                  height: 60.sp,
+                  width: 60.sp,
+                  child: const CircularProgressIndicator(),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(.1),
-    );
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(.1),
+      );
+    } else {
+      Get.dialog(
+        Center(
+          child: Container(
+            height: 80.h,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              shape: BoxShape.circle,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // App Icon
+                Container(
+                  height: 50.sp,
+                  width: 50.sp,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.kAppIcon,
+                      ),
+                    ),
+                  ),
+                ),
+                // Loader
+                SizedBox(
+                  height: 60.sp,
+                  width: 60.sp,
+                  child: const CircularProgressIndicator(),
+                ),
+              ],
+            ),
+          ),
+        ),
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(.1),
+      );
+    }
   }
 
   ///hide loading

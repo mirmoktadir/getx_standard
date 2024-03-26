@@ -4,6 +4,7 @@ import 'package:getx_standard/app/data/local/hive/hive_adapters.dart';
 import 'package:getx_standard/my_app.dart';
 
 import 'app/data/local/my_shared_pref.dart';
+import 'app/service/helper/network_connectivity.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,11 @@ Future<void> main() async {
 
   // initialize local notifications
   // await NotificationHelper().initNotification();
+
+  // Connectivity
+  Future.delayed(Duration.zero, () {
+    NetworkConnectivity.initConnectivityListener();
+  });
 
   ///****************************************** My App ************************************///
 

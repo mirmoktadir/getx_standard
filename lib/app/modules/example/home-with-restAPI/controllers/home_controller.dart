@@ -76,12 +76,14 @@ class HomeController extends GetxController with ExceptionHandler {
         recipes.assignAll(savedRecipes);
         hideLoading();
         MySnackBar.showErrorToast(message: "No network!");
+        NetworkConnectivity.connectionChangeCount = 1;
         return;
       } else {
         isError.value = true;
-
+        NetworkConnectivity.connectionChangeCount = 1;
         hideLoading();
         showErrorDialog("Oops!", "Connection problem");
+
         return;
       }
     }

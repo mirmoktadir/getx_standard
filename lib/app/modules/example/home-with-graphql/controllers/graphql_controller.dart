@@ -1,31 +1,30 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_standard/app/components/global-widgets/my_snackbar.dart';
+import 'package:getx_standard/app/modules/example/home-with-graphql/models/country_model.dart';
 import 'package:getx_standard/app/modules/example/home-with-restAPI/controllers/home_controller.dart';
 import 'package:getx_standard/app/service/handler/exception_handler.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../components/navbar/navbar_controller.dart';
 
 class GraphQLController extends GetxController with ExceptionHandler {
   final navController = Get.put(NavbarController());
-  final userList = RxList<dynamic>();
+
+  final countryList = RxList<Countries>();
   RxString mutationResult = "".obs;
-  RxString queryResult = "".obs;
 
   /////////////////////   QUERY /////////////////////////
 
-  Future<void> getTodos() async {
+  Future<void> getCountries() async {
     showLoading();
     // Build your query string
     const query = """
     query Query{
-  users{
-    id
+   countries {
+    code
     name
-    email
-    todos{
-      description
-    }
+    emoji
   }
  
 }
@@ -34,8 +33,11 @@ class GraphQLController extends GetxController with ExceptionHandler {
     final result =
         await graphQLService.performQuery(query).catchError(handleGraphqlError);
     if (result == null) return;
-    userList.value = List.from(result["users"]);
-    queryResult.value = result.toString();
+
+    countryList.assignAll((result["countries"] as List)
+        .map((e) => Countries.fromJson(e))
+        .toList());
+    Logger().d(result);
     hideLoading();
   }
 
@@ -67,7 +69,7 @@ class GraphQLController extends GetxController with ExceptionHandler {
 
   @override
   void onReady() async {
-    await getTodos();
+    await getCountries();
     Get.find<HomeController>().bottomPadding.value = 18.sp;
     super.onReady();
   }
