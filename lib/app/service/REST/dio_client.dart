@@ -5,16 +5,27 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api_header.dart';
 
 class DioClient {
   static const int TIME_OUT_DURATION = 10;
-  BaseOptions baseOptions = BaseOptions(
+
+  final _dio = Dio(BaseOptions(
     connectTimeout: const Duration(seconds: TIME_OUT_DURATION),
     receiveTimeout: const Duration(seconds: TIME_OUT_DURATION),
     sendTimeout: const Duration(seconds: TIME_OUT_DURATION),
-  );
+  ))
+    ..interceptors.add(PrettyDioLogger(
+      requestHeader: true,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: false,
+      error: true,
+      compact: true,
+      maxWidth: 90,
+    ));
 
   //GET
 
@@ -23,7 +34,7 @@ class DioClient {
     Map<String, dynamic>? params,
   }) async {
     try {
-      var response = await Dio(baseOptions).get(url,
+      var response = await _dio.get(url,
           options: Options(headers: Header.rapidApiHeader),
           queryParameters: params);
 
@@ -39,7 +50,7 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio(baseOptions).post(url,
+      var response = await _dio.post(url,
           options: Options(headers: Header.defaultHeader),
           queryParameters: params,
           data: payload);
@@ -56,7 +67,7 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio(baseOptions).patch(url,
+      var response = await _dio.patch(url,
           options: Options(headers: Header.defaultHeader),
           queryParameters: params,
           data: payload);
@@ -72,7 +83,7 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-      var response = await Dio(baseOptions).delete(url,
+      var response = await _dio.delete(url,
           options: Options(headers: Header.defaultHeader),
           queryParameters: params,
           data: payload);
@@ -100,7 +111,7 @@ class DioClient {
     }
 
     try {
-      var response = await Dio(baseOptions).post(url,
+      var response = await _dio.post(url,
           options: Options(headers: Header.defaultMultipartHeader),
           queryParameters: params,
           data: formData);
@@ -124,7 +135,7 @@ class DioClient {
     }
 
     try {
-      var response = await Dio(baseOptions).post(url,
+      var response = await _dio.post(url,
           options: Options(headers: Header.defaultMultipartHeader),
           queryParameters: params,
           data: formData);
