@@ -9,11 +9,11 @@ import 'package:dio/dio.dart';
 import 'api_header.dart';
 
 class DioClient {
-  static const int TIME_OUT_DURATION = 2000;
+  static const int TIME_OUT_DURATION = 10;
   BaseOptions baseOptions = BaseOptions(
-    connectTimeout: const Duration(milliseconds: TIME_OUT_DURATION),
-    receiveTimeout: const Duration(milliseconds: TIME_OUT_DURATION),
-    sendTimeout: const Duration(milliseconds: TIME_OUT_DURATION),
+    connectTimeout: const Duration(seconds: TIME_OUT_DURATION),
+    receiveTimeout: const Duration(seconds: TIME_OUT_DURATION),
+    sendTimeout: const Duration(seconds: TIME_OUT_DURATION),
   );
 
   //GET
