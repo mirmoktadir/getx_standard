@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_standard/app/components/global-widgets/main_appbar.dart';
-import 'package:getx_standard/app/components/global-widgets/my_buttons.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/my_theme.dart';
 import '../../../../components/global-widgets/empty_widget.dart';
@@ -37,131 +35,59 @@ class GraphQLView extends GetView<GraphQLController> {
                   thickness: 5,
                   interactive: true,
                   child: controller.countryList.isEmpty
-                      ? const SizedBox()
-                      : SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              controller.mutationResult.isEmpty
-                                  ? Padding(
-                                      padding: EdgeInsets.only(top: 30.sp),
-                                      child: SizedBox(
-                                        width: 150.sp,
-                                        height: 48.sp,
-                                        child: PrimaryButton(
-                                            title: "Run mutation",
-                                            onPressed: () async =>
-                                                await controller.updateTodo(),
-                                            inactive: false),
-                                      ),
-                                    )
-                                  : const SizedBox(),
-                              SizedBox(height: 10.h),
-                              controller.mutationResult.isEmpty
-                                  ? const SizedBox()
-                                  : Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 20.h),
+                      ? const SizedBox.shrink()
+                      : Column(
+                          children: [
+                            Text(
+                              "Query result",
+                              style: theme.textTheme.headlineSmall,
+                            ),
+                            SizedBox(height: 20.sp),
+                            Expanded(
+                              child: ListView.separated(
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.r),
+                                      border: Border.all(
+                                          width: 1, color: theme.primaryColor),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 50.sp, vertical: 15.sp),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Column(
-                                            children: [
-                                              Text(
-                                                "Mutation result",
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                              SizedBox(height: 20.sp),
-                                              Text(
-                                                controller.mutationResult.value,
-                                                style:
-                                                    theme.textTheme.bodyLarge,
-                                              ),
-                                            ],
+                                          Text(
+                                            controller
+                                                    .countryList[index].name ??
+                                                "",
+                                            style: theme.textTheme.bodyLarge,
                                           ),
-                                          SizedBox(height: 20.sp),
-                                          Container(
-                                            height: 35.sp,
-                                            width: 35.sp,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.r),
-                                              color: theme.primaryColor
-                                                  .withOpacity(.8),
-                                            ),
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  controller.mutationResult
-                                                      .value = "";
-                                                },
-                                                icon: const Icon(
-                                                  Iconsax.refresh,
-                                                  color: Colors.white,
-                                                )),
+                                          Text(
+                                            controller
+                                                    .countryList[index].emoji ??
+                                                "",
+                                            style: theme.textTheme.displayLarge,
                                           ),
+                                          Text(controller
+                                                  .countryList[index].code ??
+                                              ""),
                                         ],
                                       ),
                                     ),
-                              SizedBox(
-                                  height: controller.mutationResult.isEmpty
-                                      ? 60.h
-                                      : 50.h),
-                              Text(
-                                "Query result",
-                                style: theme.textTheme.headlineSmall,
+                                  );
+                                },
+                                itemCount: controller.countryList.length,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(height: 12.sp);
+                                },
                               ),
-                              SizedBox(height: 20.sp),
-                              SizedBox(
-                                height: 360.h,
-                                child: ListView.separated(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15.r),
-                                        border: Border.all(
-                                            width: 1,
-                                            color: theme.primaryColor),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 50.sp, vertical: 15.sp),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              controller.countryList[index]
-                                                      .name ??
-                                                  "",
-                                              style: theme.textTheme.bodyLarge,
-                                            ),
-                                            Text(
-                                              controller.countryList[index]
-                                                      .emoji ??
-                                                  "",
-                                              style:
-                                                  theme.textTheme.displayLarge,
-                                            ),
-                                            Text(controller
-                                                    .countryList[index].code ??
-                                                ""),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  itemCount: controller.countryList.length,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return SizedBox(height: 12.sp);
-                                  },
-                                ),
-                              ),
-                              const SizedBox(height: 200)
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                 ),
               ),
