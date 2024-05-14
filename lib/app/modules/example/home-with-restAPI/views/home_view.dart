@@ -32,8 +32,9 @@ class HomeView extends GetView<HomeController> {
                 color: theme.primaryColor,
                 onRefresh: () async => await controller.getRecipes(),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      18.sp, 18.sp, 18.sp, controller.bottomPadding.value),
+                  /// NOTE: IF USE FLOATING_NAV => bottom padding=controller.bottomPadding.value;
+                  /// Otherwise 18.sp;
+                  padding: EdgeInsets.fromLTRB(18.sp, 18.sp, 18.sp, 18.sp),
                   child: GridView.builder(
                     itemCount: controller.recipes.length,
                     physics: const BouncingScrollPhysics(),

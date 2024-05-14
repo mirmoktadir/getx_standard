@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
+import 'package:getx_standard/app/components/navbar/fixed_bottom_navbar.dart';
 
-import '../components/navbar/bottom_navbar.dart';
+import '../components/navbar/floating_bottom_navbar.dart';
 import '../components/navbar/navbar_binding.dart';
 
 import '../modules/example/home-with-graphql/bindings/graphql_binding.dart';
@@ -19,15 +20,20 @@ class AppPages {
   AppPages._();
 
   static const ONBOARDING = Routes.ONBOARDING;
-  static const NAV = Routes.NAV;
+  static const FIXED_NAV = Routes.FIXED_NAV;
+  static const FLOATING_NAV = Routes.FLOATING_NAV;
   static const HOME = Routes.HOME;
   static const POST_DETAIL = Routes.POST_DETAIL;
 
   static final routes = [
-    /// NAV BAR
+    /// NAV BARs
     GetPage(
-      name: _Paths.NAV,
-      page: () => const BottomNavbar(),
+      name: _Paths.FIXED_NAV,
+      page: () => const FixedBottomNavbar(),
+      binding: NavbarBinding(),
+    ), GetPage(
+      name: _Paths.FLOATING_NAV,
+      page: () => const FloatingBottomNavbar(),
       binding: NavbarBinding(),
     ),
 

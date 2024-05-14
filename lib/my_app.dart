@@ -36,7 +36,7 @@ class MyApp extends GetView {
             );
           },
 
-          initialRoute: AppPages.NAV,
+          initialRoute: AppPages.FIXED_NAV,
           // first screen to show when app is running
 
           defaultTransition: Transition.circularReveal,

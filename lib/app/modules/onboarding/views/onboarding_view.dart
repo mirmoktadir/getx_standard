@@ -101,7 +101,7 @@ class OnboardingView extends GetView<OnboardingController> {
                   height: 40.sp,
                   child: TextButton(
                     onPressed: () {
-                      Get.offAllNamed(Routes.NAV);
+                      Get.offAllNamed(Routes.FLOATING_NAV);
                     },
                     child: Text(
                       "Skip",
@@ -147,7 +147,7 @@ class OnboardingView extends GetView<OnboardingController> {
                           onPressed: () {
                             if (controller.selectedPage.value >
                                 controller.onBoardingPages.length - 2) {
-                              Get.offAllNamed(Routes.NAV);
+                              Get.offAllNamed(Routes.FLOATING_NAV);
                             } else {
                               controller.forwardAction();
                             }
