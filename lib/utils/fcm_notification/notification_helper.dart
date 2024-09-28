@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../app/data/local/my_shared_pref.dart';
@@ -26,6 +27,7 @@ class NotificationHelper {
   handleMessage(RemoteMessage? message) {
     if (message == null) return;
     Logger().i(message.notification?.title);
+    _onNotificationTap(jsonEncode(message.toMap()));
   }
 
   void initLocalNotification() async {
@@ -87,7 +89,15 @@ class NotificationHelper {
   }
 
   initPushNotification() {
-    _firebaseMessaging.getInitialMessage().then(handleMessage);
+    _firebaseMessaging.getInitialMessage().then((RemoteMessage? message) async {
+      if (message != null) {
+        Logger().i(
+            "App opened from terminated state via notification: ${message.toMap()}");
+        await 5.delay();
+        _onNotificationTap(
+            jsonEncode(message.toMap())); // Handle tap and navigation
+      }
+    });
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     FirebaseMessaging.onMessage.listen(showFlutterNotification);

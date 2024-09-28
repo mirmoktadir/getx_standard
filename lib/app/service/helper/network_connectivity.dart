@@ -29,17 +29,22 @@ class NetworkConnectivity {
   static void initConnectivityListener() {
     if (!_isListenerInitialized) {
       _isListenerInitialized = true;
-      Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-        bool isConnected = (result != ConnectivityResult.none);
+      Connectivity()
+          .onConnectivityChanged
+          .listen((List<ConnectivityResult> result) {
+        // Assuming only one result is relevant for you, take the first result from the list.
+        bool isConnected =
+            result.isNotEmpty && (result.first != ConnectivityResult.none);
         connectivityController.add(isConnected);
-        if (_wasConnected) {
+
+        if (_wasConnected && !isConnected) {
           // Disconnected after being connected
           connectionChangeCount++;
           if (connectionChangeCount > 1) {
             // First or later disconnection
             _runDisconnectedOperations();
           }
-        } else if (!_wasConnected) {
+        } else if (!_wasConnected && isConnected) {
           // Connected after being disconnected
           connectionChangeCount++;
           if (connectionChangeCount > 1) {
