@@ -4,6 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SplashContainer extends StatelessWidget {
   const SplashContainer(
       {super.key,
+      this.color,
+      this.height,
+      this.width,
       required this.child,
       required this.radius,
       required this.onPressed});
@@ -11,6 +14,9 @@ class SplashContainer extends StatelessWidget {
   final Widget child;
   final Function() onPressed;
   final int radius;
+  final Color? color;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +34,9 @@ class SplashContainer extends StatelessWidget {
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(radius.r),
-            color: theme.canvasColor,
+            color: color ?? theme.canvasColor,
           ),
-          child: child,
+          child: SizedBox(height: height, width: width, child: child),
         ),
       ),
     );

@@ -10,16 +10,20 @@ class NetworkImageBox extends StatelessWidget {
     super.key,
     required this.url,
     required this.radius,
+    required this.height,
+    required this.width,
   });
 
   final String url;
   final num radius;
+  final num height;
+  final num width;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      height: 110.sp,
-      width: 110.sp,
+      height: height.sp,
+      width: width.sp,
       imageUrl: url,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
@@ -34,14 +38,14 @@ class NetworkImageBox extends StatelessWidget {
       ),
       placeholder: (context, url) => Lottie.asset(
         'animations/image_loader.json',
-        height: 120.sp,
+        height: height.sp,
         repeat: true,
         reverse: true,
         fit: BoxFit.cover,
       ),
       errorWidget: (context, url, error) => Container(
-        height: 300.sp,
-        width: 300.sp,
+        height: height.sp,
+        width: width.sp,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: const Color(0xffF3F3F3),

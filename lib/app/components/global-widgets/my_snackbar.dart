@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/utils/constants.dart';
+
+import '../../../utils/constants.dart';
 
 class MySnackBar {
   /// SnackBar ///
@@ -71,7 +72,7 @@ class MySnackBar {
       borderRadius: 50,
       snackPosition: SnackPosition.TOP,
       snackStyle: SnackStyle.FLOATING,
-      backgroundColor: color ?? const Color(0xff61cd80),
+      backgroundColor: color ?? const Color(0xff22DD2F),
       icon: const Padding(
         padding: EdgeInsets.only(left: 15.0),
         child: Icon(
@@ -124,12 +125,12 @@ class MySnackBar {
     Get.rawSnackbar(
       duration:
           duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
-      margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
+      margin: const EdgeInsets.only(bottom: 18, left: 18, right: 18),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
       borderRadius: 50,
       snackPosition: SnackPosition.TOP,
       snackStyle: SnackStyle.FLOATING,
-      backgroundColor: color ?? const Color(0xffd91b82),
+      backgroundColor: color ?? Colors.red.withOpacity(.9),
       icon: const Padding(
         padding: EdgeInsets.only(left: 15.0),
         child: Icon(
@@ -143,6 +144,36 @@ class MySnackBar {
       },
       // overlayBlur: 0.8,
       message: message,
+    );
+  }
+
+  static showBottomToast(
+      {required String message, Color? color, Duration? duration}) {
+    Get.rawSnackbar(
+      duration:
+          duration ?? Duration(seconds: SnackBarDurations.kMySnackBarDuration),
+      margin: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+      borderRadius: 50,
+
+      snackPosition: SnackPosition.BOTTOM,
+      snackStyle: SnackStyle.GROUNDED,
+
+      backgroundColor: color ?? const Color(0xff2E9AFE),
+
+      onTap: (snack) {
+        Get.closeAllSnackbars();
+      },
+      // overlayBlur: 0.8,
+      message: message,
+      icon: const Padding(
+        padding: EdgeInsets.only(left: 15.0),
+        child: Icon(
+          Icons.info_outline_rounded,
+          color: Colors.white,
+          size: 22,
+        ),
+      ),
     );
   }
 }

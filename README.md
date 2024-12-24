@@ -1,9 +1,21 @@
 **# Flutter GetX Template with GetCLI**
 
-**## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive,** 
+**## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive,**
 
 Flutter Getx template to make starting project fast and easy
 .
+
+## **Environment**
+
+- Flutter version 3.27.1
+- Dart version 3.6.0
+- Java version OpenJDK Runtime Environment (build 21.0.3+-12282718-b509.11)
+- Android Studio Ladybug | 2024.2.1 Patch 3
+- Platform android-35
+- Xcode 16.1
+- CocoaPods version 1.16.2
+- macOS 15.1
+- Windows 11
 
 ## **Feature**
 
@@ -12,14 +24,15 @@ Flutter Getx template to make starting project fast and easy
 - GraphQL api requests & error handling with app state
 - Hive for offline Caching
 - Shared preference custom class
-- Snackbar,Toasts & in app notifications 
+- Snackbar,Toasts & in app notifications
 - FCM and Push notifications with Flutter Local Notification custom class
 - Custom Image Picker with Cropper class
 - Web Socket Manager class
+- Pusher Service for Realtime chatting
 - Theme (light/dark) & store current theme in shared pref
 - Localization & store the current locale in shared pref
-- Making app more responsive and stop font scaling 
-  This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use 
+- Making app more responsive and stop font scaling
+  This project will take care of all this repeatable things so you can start your project in few steps and you will have all the mentioned points set up and ready to use
 
 
 ## **Clone and start project**
@@ -41,7 +54,7 @@ Before discovering folders lets first perform some actions to make the project r
   ```
   cd..
   ```
-  
+
 - To make your app responsive and look exactly as your (xd,figma..etc) design you need to set artbord size for flutter_ScreenUtil in main.dart
     ```dart
     ScreenUtilInit(
@@ -53,15 +66,10 @@ Before discovering folders lets first perform some actions to make the project r
     ```
     flutter pub run change_app_package_name:main com.new.package.name
     ```
-  - Change app name
-    ```
-    flutter pub run rename_app:main all="My App Name"
-    ```
-  
-- Change app launch icon (replace assets/images/app_icon.png with your app icon) then run this command
-    ```
-    flutter pub run flutter_launcher_icons:main
-    ```
+    - Change app name
+      ```
+      flutter pub run rename_app:main all="My App Name"
+      ```
 - Change app splash screen (replace assets/images/splash.png with your app splash logo) then run this command
    ```
    flutter pub run flutter_native_splash:create
@@ -250,8 +258,8 @@ After setting up all the needed thing now lets talk about folder structure which
 
 ## Support
 
-For support, email mirmoktadir@gmail.com 
-Facebook  [Mir Moktadir](https://www.facebook.com/moktadir91/) 
+For support, email mirmoktadir@gmail.com
+Facebook  [Mir Moktadir](https://www.facebook.com/moktadir91/)
 LinkedIn [Mir Moktadir](https://www.linkedin.com/in/mir-moktadir-bb144290/)
 Phone no: +8801701308477 (Whatsapp or Telegram)
 

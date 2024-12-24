@@ -124,6 +124,8 @@ class HomeView extends GetView<HomeController> {
                             child: NetworkImageBox(
                               url: controller.recipes[index].thumbnailUrl ?? "",
                               radius: 100,
+                              height: 100.sp,
+                              width: 100.sp,
                             ),
                           ),
                         ),

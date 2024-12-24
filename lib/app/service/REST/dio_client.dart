@@ -10,7 +10,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'api_header.dart';
 
 class DioClient {
-  static const int TIME_OUT_DURATION = 10;
+  static const int TIME_OUT_DURATION = 20;
 
   final _dio = Dio(BaseOptions(
     connectTimeout: const Duration(seconds: TIME_OUT_DURATION),
@@ -143,5 +143,28 @@ class DioClient {
     } catch (e) {
       rethrow;
     }
+  }
+
+  // DOWNLOAD FILE
+  Future<dynamic> download({
+    required String url,
+    Map<String, dynamic>? params,
+    required String savePath, // Full path to save the file
+  }) async {
+    try {
+      var response = await _dio.download(
+        url,
+        savePath,
+        options: Options(headers: Header.defaultHeader),
+        queryParameters: params,
+      );
+
+      if (response.statusCode == 200) {
+        return File(savePath);
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return null;
   }
 }

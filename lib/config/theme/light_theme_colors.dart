@@ -24,9 +24,11 @@ class LightThemeColors {
   static const Color buttonTextColor = Colors.white;
   static const Color buttonDisabledColor = Colors.grey;
   static const Color buttonDisabledTextColor = Colors.black;
+  static const Color buttonBorderColor = Color(0xffE7E7E7);
 
   //TEXT
   static const Color bodyTextColor = primaryColor;
+  static Color bodyTextSecondaryColor = bodyTextColor.withOpacity(.65);
   static const Color headlinesTextColor = primaryColor;
   static const Color captionTextColor = Colors.grey;
   static const Color hintTextColor = Color(0xff686868);
@@ -37,4 +39,5 @@ class LightThemeColors {
 
   // progress bar indicator
   static const Color progressIndicatorColor = primaryColor;
+  static const Color fillColor = Colors.white;
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/config/translations/strings_enum.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../../config/translations/strings_enum.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key, required this.onPressed});
