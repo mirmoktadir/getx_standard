@@ -10,7 +10,7 @@ Flutter Getx template to make starting project fast and easy
 - Flutter version 3.27.1
 - Dart version 3.6.0
 - Java version OpenJDK Runtime Environment (build 21.0.3+-12282718-b509.11)
-- Android Studio Ladybug | 2024.2.1 Patch 3
+- Android Studio Ladybug Feature Drop | 2024.2.2
 - Platform android-35
 - Xcode 16.1
 - CocoaPods version 1.16.2
