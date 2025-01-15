@@ -13,6 +13,7 @@ final Map<String, String> arAR = {
   Strings.badRequest: "اقتراح غير جيد",
   Strings.urlIncorrect: "عنوان Api Url غير صحيح",
   Strings.internalServerError: "خطأ في الخادم الداخلي",
+  Strings.unauthorized: "غير مصرح به",
 
   ///
   Strings.changeTheme: 'تغيير الثيم',

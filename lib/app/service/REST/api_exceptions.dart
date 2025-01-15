@@ -33,17 +33,29 @@ class DioExceptions implements Exception {
   }
 
   String _handleError(int statusCode, dynamic error) {
+    if (error is Map) {
+      return error['error'] ??
+          error["message"] ??
+          _defaultErrorMessage(statusCode);
+    } else if (error is String) {
+      return error.isNotEmpty ? error : _defaultErrorMessage(statusCode);
+    } else {
+      return _defaultErrorMessage(statusCode);
+    }
+  }
+
+  String _defaultErrorMessage(int statusCode) {
     switch (statusCode) {
       case 400:
-        return error['error'] ?? error["message"] ?? Strings.badRequest.tr;
+        return Strings.badRequest.tr;
+      case 401:
+        return Strings.unauthorized.tr;
       case 404:
-        return error['error'] ?? error["message"] ?? Strings.urlIncorrect.tr;
+        return Strings.urlIncorrect.tr;
       case 500:
-        return error['error'] ??
-            error["message"] ??
-            Strings.internalServerError.tr;
+        return Strings.internalServerError.tr;
       default:
-        return error['error'] ?? error["message"] ?? Strings.somethingWrong.tr;
+        return Strings.somethingWrong.tr;
     }
   }
 

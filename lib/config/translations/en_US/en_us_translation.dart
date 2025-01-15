@@ -11,6 +11,7 @@ const Map<String, String> enUs = {
   Strings.connectionProblem: "Connection problem!",
   Strings.somethingWrong: "Something went wrong!",
   Strings.badRequest: "Bad request",
+  Strings.unauthorized: "Unauthorized!",
   Strings.urlIncorrect: "Api Url Incorrect",
   Strings.internalServerError: "Internal Server Error",
 

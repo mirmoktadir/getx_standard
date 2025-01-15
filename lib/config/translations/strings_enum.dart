@@ -8,6 +8,7 @@ class Strings {
   static const String sendTimeout = "Send timeout!";
   static const String connectionProblem = "Connection problem!";
   static const String somethingWrong = "Something went wrong!";
+  static const String unauthorized = "Unauthorized!";
   static const String badRequest = "Bad request";
   static const String urlIncorrect = "Api Url Incorrect";
   static const String internalServerError = "Internal Server Error";

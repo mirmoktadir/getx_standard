@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../../config/translations/strings_enum.dart';
+import '../../components/global-widgets/my_snackbar.dart';
 import '../REST/api_exceptions.dart';
 import '../graphQL/graphql_service.dart';
 import '../helper/dialog_helper.dart';
@@ -49,6 +50,10 @@ mixin class ExceptionHandler {
   }
 
   showErrorDialog(String title, String message) {
-    DialogHelper.showErrorDialog(title, message);
+    /// for toast view
+    MySnackBar.showErrorToast(message: message);
+
+    /// for dialog view
+    // DialogHelper.showErrorDialog(title, message);
   }
 }
