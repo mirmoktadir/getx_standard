@@ -19,7 +19,7 @@ class NetworkConnectivity {
   static Future<bool> isNetworkAvailable() async {
     var connectivityResult = await Connectivity().checkConnectivity();
 
-    bool isConnected = (connectivityResult != ConnectivityResult.none);
+    bool isConnected = (connectivityResult.first != ConnectivityResult.none);
 
     connectivityController.add(isConnected);
 
@@ -58,7 +58,9 @@ class NetworkConnectivity {
   }
 
   static void _runConnectedOperations() async {
-    await homeController.getRecipes();
+    if (Get.isRegistered<HomeController>()) {
+      await homeController.getRecipes();
+    }
     await 2.delay();
     MySnackBar.showSnackBar(
         title: "Connection restored!", message: 'Data loaded from network');

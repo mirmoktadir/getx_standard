@@ -2,7 +2,7 @@ name: getx_standard
 description: "A GetX Architecture by Mir Moktadir"
 
 publish_to: 'none'
-version: 7.0.3+3
+version: 7.0.4+4
 
 environment:
   sdk: ^3.6.0
@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.4.1
   graphql_flutter: ^5.2.0-beta.8
   intl: ^0.20.1
+  url_launcher: ^6.3.1
   animated_text_kit: ^4.2.2
   device_info_plus: ^11.2.0
   flutter_local_notifications: ^18.0.1
@@ -84,6 +85,7 @@ flutter:
     - assets/vectors/
     - assets/fonts/
     - animations/
+    - shorebird.yaml
 
   fonts:
     - family: Poppins
