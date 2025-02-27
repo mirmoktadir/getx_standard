@@ -138,6 +138,7 @@ Container(
 
 ## Discovering Project
 After setting up all the needed thing now lets talk about folder structure which is mainly based on Getx Pattern and there are some personal opinions, if you open your lib folder you will find those folders
+![Project Banner](assets/images/structure.png)
 
 ```
 .
