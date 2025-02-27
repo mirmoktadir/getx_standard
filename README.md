@@ -4,6 +4,8 @@
 
 Flutter Getx template to make starting project fast and easy
 .
+![Project Banner](assets/images/banner.webp)
+
 
 ## **Environment**
 
