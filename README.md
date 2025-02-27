@@ -1,4 +1,4 @@
-**# Flutter GetX Template with GetCLI**
+**# Flutter GetX MVC Moduler Architecture with GetCLI**
 
 **## GetX, Rest Api, GraphQL Api, FirebaseCLI, Hive,**
 
