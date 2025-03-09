@@ -1,0 +1,2 @@
+/Users/moktadir/StudioProjects/getx_standard/android/app/.cxx/Debug/4264695h/x86/CMakeFiles/edit_cache.dir
+/Users/moktadir/StudioProjects/getx_standard/android/app/.cxx/Debug/4264695h/x86/CMakeFiles/rebuild_cache.dir

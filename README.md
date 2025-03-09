@@ -9,14 +9,14 @@ Flutter Getx template to make starting project fast and easy
 
 ## **Environment**
 
-- Flutter version 3.29.0
+- Flutter version 3.29.1
 - Dart version 3.7.0
-- Java version OpenJDK Runtime Environment (build 21.0.5+-13047016-b750.29)
-- Android Studio Ladybug Feature Drop | 2024.2.2
-- Android SDK version 35.0.1
+- Java version OpenJDK Runtime Environment (build 21.0.3+-12282718-b509.11)
+- Android Studio Meerkat | 2024.3.1
+- Platform android-35
 - Xcode 16.2
 - CocoaPods version 1.16.2
-- macOS Sequoia 15.3
+- macOS 15.3.1
 - Windows 11
 
 ## **Feature**
