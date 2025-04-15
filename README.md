@@ -9,8 +9,8 @@ Flutter Getx template to make starting project fast and easy
 
 ## **Environment**
 
-- Flutter version 3.29.1
-- Dart version 3.7.0
+- Flutter version 3.29.3
+- Dart version 3.7.2
 - Java version OpenJDK Runtime Environment (build 21.0.3+-12282718-b509.11)
 - Android Studio Meerkat | 2024.3.1
 - Platform android-35
