@@ -7,7 +7,11 @@ import 'app/data/local/my_shared_pref.dart';
 import 'app/service/helper/network_connectivity.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // Preserve the splash screen while initializing
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  
   // Device orientation
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
@@ -40,4 +44,8 @@ Future<void> main() async {
   runApp(
     const MyApp(),
   );
+
+   // remove splash screen after 2 seconds
+  await 2.delay();
+  FlutterNativeSplash.remove();
 }
