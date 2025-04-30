@@ -38,7 +38,11 @@ class DioExceptions implements Exception {
           error["message"] ??
           _defaultErrorMessage(statusCode);
     } else if (error is String) {
-      return error.isNotEmpty ? error : _defaultErrorMessage(statusCode);
+    final isHtml =
+          error.contains('<!DOCTYPE html>') || error.contains('<html');
+      return isHtml
+          ? _defaultErrorMessage(statusCode)
+          : (error.isNotEmpty ? error : _defaultErrorMessage(statusCode));
     } else {
       return _defaultErrorMessage(statusCode);
     }
