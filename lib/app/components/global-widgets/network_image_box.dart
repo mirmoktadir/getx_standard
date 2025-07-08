@@ -21,7 +21,19 @@ class NetworkImageBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
+    return url.isEmpty
+        ? Container(
+            height: height.sp,
+            width: width.sp,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xffF3F3F3),
+              border: Border.all(color: Colors.white, width: 1),
+              shape: BoxShape.circle,
+            ),
+            child: Image.asset(AppImages.kUser, fit: BoxFit.contain),
+          )
+        : CachedNetworkImage(
       height: height.sp,
       width: width.sp,
       imageUrl: url,
