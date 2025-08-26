@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:getx_standard/config/translations/strings_enum.dart';
+
+import '../../../config/translations/strings_enum.dart';
 
 class DioExceptions implements Exception {
   String message = "";
@@ -23,9 +24,7 @@ class DioExceptions implements Exception {
         message = _handleError(dioException.response!.statusCode!.toInt(),
             dioException.response!.data);
         break;
-      case DioExceptionType.unknown:
-        message = Strings.connectionProblem.tr;
-        break;
+
       default:
         message = Strings.somethingWrong.tr;
         break;
@@ -38,7 +37,7 @@ class DioExceptions implements Exception {
           error["message"] ??
           _defaultErrorMessage(statusCode);
     } else if (error is String) {
-    final isHtml =
+      final isHtml =
           error.contains('<!DOCTYPE html>') || error.contains('<html');
       return isHtml
           ? _defaultErrorMessage(statusCode)

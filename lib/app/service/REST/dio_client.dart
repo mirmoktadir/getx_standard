@@ -34,9 +34,10 @@ class DioClient {
     Map<String, dynamic>? params,
   }) async {
     try {
-    //  final headers = await Header.getSecureHeader();
+      //  final headers = await Header.getSecureHeader();
       var response = await _dio.get(url,
-          options: Options(headers:  Header.rapidApiHeader), queryParameters: params);
+          options: Options(headers: Header.rapidApiHeader),
+          queryParameters: params);
 
       return response.data;
     } catch (e) {
@@ -50,9 +51,9 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-     // final headers = await Header.getSecureHeader();
+      // final headers = await Header.getSecureHeader();
       var response = await _dio.post(url,
-          options: Options(headers:  Header.rapidApiHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: payload);
 
@@ -68,9 +69,9 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-    //  final headers = await Header.getSecureHeader();
+      //  final headers = await Header.getSecureHeader();
       var response = await _dio.put(url,
-          options: Options(headers:  Header.rapidApiHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: payload);
 
@@ -86,9 +87,9 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-     // final headers = await Header.getSecureHeader();
+      // final headers = await Header.getSecureHeader();
       var response = await _dio.patch(url,
-          options: Options(headers:  Header.rapidApiHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: payload);
       return response.data;
@@ -103,9 +104,9 @@ class DioClient {
       {required String url, Map<String, dynamic>? params, dynamic body}) async {
     var payload = json.encode(body);
     try {
-    //  final headers = await Header.getSecureHeader();
+      //  final headers = await Header.getSecureHeader();
       var response = await _dio.delete(url,
-          options: Options(headers:  Header.rapidApiHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: payload);
       return response.data;
@@ -132,9 +133,9 @@ class DioClient {
     }
 
     try {
-     // final headers = await Header.getSecureMultipartHeader();
+      // final headers = await Header.getSecureMultipartHeader();
       var response = await _dio.post(url,
-          options: Options(headers: Header.defaultMultipartHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: formData);
       return response.data;
@@ -157,9 +158,9 @@ class DioClient {
     }
 
     try {
-    //  final headers = await Header.getSecureMultipartHeader();
+      //  final headers = await Header.getSecureMultipartHeader();
       var response = await _dio.post(url,
-          options: Options(headers: Header.defaultMultipartHeader),
+          options: Options(headers: Header.rapidApiHeader),
           queryParameters: params,
           data: formData);
       return response.data;
@@ -175,11 +176,11 @@ class DioClient {
     required String savePath, // Full path to save the file
   }) async {
     try {
-    //  final headers = await Header.getSecureHeader();
+      //  final headers = await Header.getSecureHeader();
       var response = await _dio.download(
         url,
         savePath,
-        options: Options(headers: Header.defaultHeader),
+        options: Options(headers: Header.rapidApiHeader),
         queryParameters: params,
       );
 

@@ -31,44 +31,44 @@ class NetworkImageBox extends StatelessWidget {
               border: Border.all(color: Colors.white, width: 1),
               shape: BoxShape.circle,
             ),
-            child: Image.asset(AppImages.kUser, fit: BoxFit.contain),
+            child: Image.asset(AppImages.kNoImage, fit: BoxFit.contain),
           )
         : CachedNetworkImage(
-      height: height.sp,
-      width: width.sp,
-      imageUrl: url,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.white, width: 1),
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(radius.r),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => Lottie.asset(
-        'animations/image_loader.json',
-        height: height.sp,
-        repeat: true,
-        reverse: true,
-        fit: BoxFit.cover,
-      ),
-      errorWidget: (context, url, error) => Container(
-        height: height.sp,
-        width: width.sp,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: const Color(0xffF3F3F3),
-          border: Border.all(color: Colors.white, width: 1),
-          shape: BoxShape.circle,
-        ),
-        child: Image.asset(
-          AppImages.kNoImage,
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
+            height: height.sp,
+            width: width.sp,
+            imageUrl: url,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 1),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(radius.r),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            placeholder: (context, url) => Lottie.asset(
+              'animations/image_loader.json',
+              height: height.sp,
+              repeat: true,
+              reverse: true,
+              fit: BoxFit.cover,
+            ),
+            errorWidget: (context, url, error) => Container(
+              height: height.sp,
+              width: width.sp,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xffF3F3F3),
+                border: Border.all(color: Colors.white, width: 1),
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset(
+                AppImages.kNoImage,
+                fit: BoxFit.contain,
+              ),
+            ),
+          );
   }
 }

@@ -17,7 +17,7 @@ class DialogHelper {
       Dialog(
         backgroundColor: Colors.black,
         elevation: 6,
-        shadowColor: Colors.black12.withOpacity(.2),
+        shadowColor: Colors.black12.withValues(alpha: .2),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Padding(
@@ -83,7 +83,7 @@ class DialogHelper {
       Dialog(
         backgroundColor: Colors.white,
         elevation: 6,
-        shadowColor: Colors.black12.withOpacity(.2),
+        shadowColor: Colors.black12.withValues(alpha: .2),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Padding(
@@ -177,7 +177,7 @@ class DialogHelper {
       Get.closeAllSnackbars();
       Get.dialog(
         barrierDismissible: false,
-        barrierColor: Colors.black.withOpacity(.1),
+        barrierColor: Colors.black.withValues(alpha: .1),
         // barrierColor: LightThemeColors.bodyTextColor,
         Center(
           child: Container(
@@ -216,7 +216,7 @@ class DialogHelper {
     } else {
       Get.dialog(
         barrierDismissible: false,
-        barrierColor: LightThemeColors.bodyTextColor.withOpacity(.1),
+        barrierColor: LightThemeColors.bodyTextColor.withValues(alpha: .1),
         //  barrierColor: LightThemeColors.bodyTextColor,
         Center(
           child: Container(

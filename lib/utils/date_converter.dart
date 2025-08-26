@@ -1,15 +1,23 @@
 import 'package:intl/intl.dart';
-import 'package:timezone/data/latest.dart' as tz_data;
+import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
 String dateTimeConverter({
   required String inputTime,
   required String outputFormat,
-  String? timezone, // Optional parameter for timezone
+  String? inputFormat,
+  String? timezone,
 }) {
   tz_data.initializeTimeZones();
 
-  final dateTime = DateTime.parse(inputTime);
+  DateTime dateTime;
+
+  if (inputFormat != null) {
+    final customInputFormat = DateFormat(inputFormat);
+    dateTime = customInputFormat.parse(inputTime);
+  } else {
+    dateTime = DateTime.parse(inputTime);
+  }
 
   DateTime finalDateTime;
   if (timezone != null) {
@@ -20,6 +28,7 @@ String dateTimeConverter({
     finalDateTime = dateTime.toLocal();
   }
 
+  // Format the DateTime object to the desired output format
   final format = DateFormat(outputFormat);
   return format.format(finalDateTime);
 }
