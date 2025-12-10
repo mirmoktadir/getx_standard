@@ -24,7 +24,7 @@ class HomeController extends GetxController with ExceptionHandler {
 
   final recipes = RxList<Results>();
 
-  scrollPositionTracker() {
+  void scrollPositionTracker() {
     Timer? debounce;
 
     scrollController.addListener(() {
@@ -49,7 +49,7 @@ class HomeController extends GetxController with ExceptionHandler {
 
   /// GET ALL RECIPES LIST 'HIVE IMPLEMENTED'
 
-  getRecipes() async {
+  Future<void> getRecipes() async {
     showLoading();
     if (await NetworkConnectivity.isNetworkAvailable()) {
       /// Fetch recipes from the API
