@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
-class FormValidator extends GetxController {
-  // Observables
-  var email = ''.obs;
-  var password = ''.obs;
-  var phoneNumber = ''.obs;
+class FormValidator {
+  static final _emailRegex = RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  );
+  static final _phoneRegex = RegExp(r'^\+?[\d\s\-\(\)]{10,}$');
 
-  // Validators
   String? validateRequired(String value, String fieldName) {
     if (value.isEmpty) {
       return 'Please enter $fieldName';
@@ -18,7 +16,8 @@ class FormValidator extends GetxController {
   String? validateEmail(String value) {
     if (value.isEmpty) {
       return 'Please enter your email';
-    } else if (!GetUtils.isEmail(value)) {
+    }
+    if (!_emailRegex.hasMatch(value)) {
       return 'Please enter a valid email';
     }
     return null;
@@ -27,7 +26,8 @@ class FormValidator extends GetxController {
   String? validatePassword(String value) {
     if (value.isEmpty) {
       return 'Please enter your password';
-    } else if (value.length < 6) {
+    }
+    if (value.length < 6) {
       return 'Password should be at least 6 characters long';
     }
     return null;
@@ -36,40 +36,30 @@ class FormValidator extends GetxController {
   String? validatePhoneNumber(String value) {
     if (value.isEmpty) {
       return 'Please enter your phone number';
-    } else if (!GetUtils.isPhoneNumber(value)) {
+    }
+    if (!_phoneRegex.hasMatch(value)) {
       return 'Please enter a valid phone number';
     }
     return null;
   }
 
-  // Form submission
-  bool submitForm() {
-    final emailError = validateEmail(email.value);
-    final passwordError = validatePassword(password.value);
-    final phoneNumberError = validatePhoneNumber(phoneNumber.value);
+  bool submitForm({
+    required String email,
+    required String password,
+    required String phoneNumber,
+  }) {
+    final emailError = validateEmail(email);
+    final passwordError = validatePassword(password);
+    final phoneNumberError = validatePhoneNumber(phoneNumber);
 
     if (emailError != null ||
         passwordError != null ||
         phoneNumberError != null) {
-      // Handle form validation errors
       if (kDebugMode) {
         print('Form validation failed!');
       }
       return false;
     }
-
-    // Form is valid
     return true;
   }
 }
-
-// TODO : HOW TO CALL THE VALIDATOR IN UI "onPressed" Function
-//      ElevatedButton(
-//               onPressed: () {
-//                 if (formKey.currentState!.validate()) {
-//                     formKey.currentState!.save();
-//                     authController.login();
-//                     }
-//                   },
-//               child: Text('Submit'),
-//      ),

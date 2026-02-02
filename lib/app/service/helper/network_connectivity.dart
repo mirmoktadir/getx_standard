@@ -1,12 +1,9 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:get/get.dart';
-import 'package:getx_standard/app/modules/example/home-with-restAPI/controllers/home_controller.dart';
 
 import '../../components/global-widgets/my_snackbar.dart';
-
-final homeController = Get.put(HomeController());
 
 class NetworkConnectivity {
   static StreamController<bool> connectivityController =
@@ -15,6 +12,9 @@ class NetworkConnectivity {
   static bool _isListenerInitialized = false;
   static int connectionChangeCount = 0;
   static bool _wasConnected = false;
+
+  /// Set from app (e.g. MyApp) to refresh data when connection is restored.
+  static VoidCallback? onReconnect;
 
   static Future<bool> isNetworkAvailable() async {
     var connectivityResult = await Connectivity().checkConnectivity();
@@ -29,26 +29,21 @@ class NetworkConnectivity {
   static void initConnectivityListener() {
     if (!_isListenerInitialized) {
       _isListenerInitialized = true;
-      Connectivity()
-          .onConnectivityChanged
-          .listen((List<ConnectivityResult> result) {
-        // Assuming only one result is relevant for you, take the first result from the list.
+      Connectivity().onConnectivityChanged.listen((
+        List<ConnectivityResult> result,
+      ) {
         bool isConnected =
             result.isNotEmpty && (result.first != ConnectivityResult.none);
         connectivityController.add(isConnected);
 
         if (_wasConnected && !isConnected) {
-          // Disconnected after being connected
           connectionChangeCount++;
           if (connectionChangeCount > 1) {
-            // First or later disconnection
             _runDisconnectedOperations();
           }
         } else if (!_wasConnected && isConnected) {
-          // Connected after being disconnected
           connectionChangeCount++;
           if (connectionChangeCount > 1) {
-            // First or later reconnection
             _runConnectedOperations();
           }
         }
@@ -58,17 +53,19 @@ class NetworkConnectivity {
   }
 
   static void _runConnectedOperations() async {
-    if (Get.isRegistered<HomeController>()) {
-      await homeController.getRecipes();
-    }
-    await 2.delay();
+    onReconnect?.call();
+    await Future.delayed(const Duration(seconds: 2));
     MySnackBar.showSnackBar(
-        title: "Connection restored!", message: 'Data loaded from network');
+      title: "Connection restored!",
+      message: 'Data loaded from network',
+    );
   }
 
   static void _runDisconnectedOperations() async {
-    await 2.delay();
+    await Future.delayed(const Duration(seconds: 2));
     MySnackBar.showErrorSnackBar(
-        title: "Connection lost!", message: 'Data loaded from memory');
+      title: "Connection lost!",
+      message: 'Data loaded from memory',
+    );
   }
 }

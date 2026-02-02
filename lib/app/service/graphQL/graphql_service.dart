@@ -1,17 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import 'graphql_config.dart';
 
-class GraphQLService extends GetxService {
-  GraphQLConfig graphQLConfig = GraphQLConfig();
+class GraphQLService {
+  final GraphQLConfig graphQLConfig = GraphQLConfig();
   String errorMessage = "";
 
-  /// QUERY
   Future<dynamic> performQuery(String query) async {
     final queryOptions = QueryOptions(
       document: gql(query),
@@ -25,7 +23,6 @@ class GraphQLService extends GetxService {
     return result.data;
   }
 
-  /// MUTATION
   Future<dynamic> performMutation(String mutation) async {
     final mutationOptions = MutationOptions(
       document: gql(mutation),
@@ -37,10 +34,11 @@ class GraphQLService extends GetxService {
     return result.data;
   }
 
-  /// MUTATION WITH SINGLE FILE
-
-  Future<dynamic> performFileUpload(
-      {required String mutation, required String key, File? file}) async {
+  Future<dynamic> performFileUpload({
+    required String mutation,
+    required String key,
+    File? file,
+  }) async {
     if (file == null) {
       throw Exception('No file provided');
     }
@@ -54,9 +52,7 @@ class GraphQLService extends GetxService {
 
     final options = MutationOptions(
       document: gql(mutation),
-      variables: {
-        key: multipartFile,
-      },
+      variables: {key: multipartFile},
     );
 
     final result = await graphQLConfig.graphqlClient().mutate(options);
@@ -64,28 +60,26 @@ class GraphQLService extends GetxService {
     return result.data;
   }
 
-  ///MUTATION WITH MULTIPLE FILE
-
   Future<dynamic> performMultipleFileUpload({
     required String mutation,
     required Map<String, File> files,
   }) async {
     final Map<String, http.MultipartFile> multipartFiles = {};
 
-    files.forEach((key, file) async {
-      final fileBytes = await file.readAsBytes();
+    for (final entry in files.entries) {
+      final fileBytes = await entry.value.readAsBytes();
       final multipartFile = http.MultipartFile.fromBytes(
-        key,
+        entry.key,
         fileBytes,
-        filename: file.path.split('/').last,
+        filename: entry.value.path.split('/').last,
       );
-      multipartFiles[key] = multipartFile;
-    });
+      multipartFiles[entry.key] = multipartFile;
+    }
 
     final variables = <String, dynamic>{};
-    multipartFiles.forEach((key, multipartFile) {
-      variables[key] = multipartFile;
-    });
+    for (final entry in multipartFiles.entries) {
+      variables[entry.key] = entry.value;
+    }
 
     final options = MutationOptions(
       document: gql(mutation),
@@ -97,15 +91,13 @@ class GraphQLService extends GetxService {
     return result.data;
   }
 
-  /// ERROR CHECKER
-  _checkException(result) {
+  void _checkException(QueryResult result) {
     if (result.hasException) {
       final List<GraphQLError> errors = result.exception!.graphqlErrors;
       final LinkException? linkException = result.exception!.linkException;
       if (errors.isNotEmpty) {
         for (final GraphQLError error in errors) {
           errorMessage = error.message.toString();
-
           throw error.message;
         }
       } else if (linkException != null) {

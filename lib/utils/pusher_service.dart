@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
-class PusherService extends GetxService {
+class PusherService {
   late PusherChannelsFlutter pusher;
   final String apiKey = '';
   final String cluster = 'ap2';
@@ -37,14 +36,17 @@ class PusherService extends GetxService {
   }
 
   Future<void> subscribeToChannel(
-      String channelName, void Function(PusherEvent) onEvent) async {
+    String channelName,
+    void Function(PusherEvent) onEvent,
+  ) async {
     await pusher.subscribe(
       channelName: channelName,
       onEvent: (dynamic event) async {
         try {
           if (event is PusherEvent) {
             Logger().i(
-                'Event received: ${event.eventName} with data: ${event.data}');
+              'Event received: ${event.eventName} with data: ${event.data}',
+            );
             Map<String, dynamic> jsonData = jsonDecode(event.data);
             String body = jsonData['data']['body'];
             Logger().d(body);

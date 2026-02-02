@@ -1,31 +1,23 @@
-import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-class VersionController extends GetxController {
-  final RxString appVersion = ''.obs;
-  final RxString buildNumber = ''.obs;
-  final RxString appName = ''.obs;
-  final RxString packageName = ''.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    getAppInfo();
-  }
+class VersionController {
+  String appVersion = '';
+  String buildNumber = '';
+  String appName = '';
+  String packageName = '';
 
   Future<void> getAppInfo() async {
     try {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-      appName.value = packageInfo.appName;
-      packageName.value = packageInfo.packageName;
-      appVersion.value = packageInfo.version;
-      buildNumber.value = packageInfo.buildNumber;
+      appName = packageInfo.appName;
+      packageName = packageInfo.packageName;
+      appVersion = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
 
-      // Print the version
-      print('App Name: ${appName.value}');
-      print('App Version: ${appVersion.value}');
-      print('Build Number: ${buildNumber.value}');
+      print('App Name: $appName');
+      print('App Version: $appVersion');
+      print('Build Number: $buildNumber');
     } catch (e) {
       print('Error getting app info: $e');
     }

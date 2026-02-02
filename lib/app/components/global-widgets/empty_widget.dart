@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,7 +25,7 @@ class EmptyWidget extends StatelessWidget {
         ),
         Center(
           child: Text(
-            Strings.empty.tr,
+            Strings.empty,
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.w500,
@@ -38,25 +37,24 @@ class EmptyWidget extends StatelessWidget {
         SizedBox(
           height: 44.h,
           child: ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey.shade50,
-                elevation: .5,
-                shadowColor: theme.hintColor,
-                padding: EdgeInsets.zero,
-              ),
-              child: Icon(
-                Ionicons.refresh,
-                size: 24,
-                color: theme.primaryColor.withOpacity(.7),
-              )),
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey.shade50,
+              elevation: .5,
+              shadowColor: theme.hintColor,
+              padding: EdgeInsets.zero,
+            ),
+            child: Icon(
+              Ionicons.refresh,
+              size: 24,
+              color: theme.primaryColor.withOpacity(.7),
+            ),
+          ),
         ),
         const SizedBox(height: 5),
         Text(
-          Strings.refresh.tr,
-          style: TextStyle(
-            color: theme.hintColor.withOpacity(.5),
-          ),
+          Strings.refresh,
+          style: TextStyle(color: theme.hintColor.withOpacity(.5)),
         ),
       ],
     );

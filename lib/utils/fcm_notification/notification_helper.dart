@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../app/data/local/my_shared_pref.dart';
@@ -95,7 +94,7 @@ class NotificationHelper {
         Logger().i(
           "App opened from terminated state via notification: ${message.toMap()}",
         );
-        await 5.delay();
+        await Future.delayed(const Duration(seconds: 5));
         _onNotificationTap(
           jsonEncode(message.toMap()),
         ); // Handle tap and navigation

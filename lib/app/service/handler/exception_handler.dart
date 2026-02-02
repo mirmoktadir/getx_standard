@@ -1,59 +1,53 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 import '../../../config/translations/strings_enum.dart';
+import '../../core/navigator_key.dart';
 import '../../components/global-widgets/my_snackbar.dart';
 import '../REST/api_exceptions.dart';
 import '../graphQL/graphql_service.dart';
 import '../helper/dialog_helper.dart';
 
-mixin class ExceptionHandler {
+mixin ExceptionHandler {
   final GraphQLService graphQLService = GraphQLService();
-  RxBool isError = false.obs;
 
-  /// FOR REST API
-  void handleError(error) {
-    isError.value = true;
-    hideLoading();
-
-    var errorText = DioExceptions.fromDioError(error).toString();
-
-    showErrorDialog(Strings.ohNo.tr, errorText);
+  void handleError(Ref ref, dynamic error) {
+    hideLoading(ref);
+    final errorText = DioExceptions.fromDioError(error).toString();
+    showErrorDialog(ref, Strings.ohNo, errorText);
     Logger().e(errorText);
   }
 
-  /// FOR GRAPHQL API
-  void handleGraphqlError(error) {
-    isError.value = true;
-    hideLoading();
-    var errorText = graphQLService.errorMessage.toString();
-
+  void handleGraphqlError(Ref ref, dynamic error) {
+    hideLoading(ref);
+    final errorText = graphQLService.errorMessage.toString();
     try {
-      Map onlyMessage = jsonDecode(errorText);
-      showErrorDialog(Strings.ohNo.tr, onlyMessage["message"]);
+      final onlyMessage = jsonDecode(errorText) as Map;
+      showErrorDialog(
+        ref,
+        Strings.ohNo,
+        onlyMessage["message"]?.toString() ?? errorText,
+      );
       Logger().e(onlyMessage);
     } catch (e) {
-      showErrorDialog(Strings.ohNo.tr, errorText);
+      showErrorDialog(ref, Strings.ohNo, errorText);
       Logger().e(errorText);
     }
   }
 
-  showLoading() {
-    isError.value = false;
-    DialogHelper.showLoading();
+  void showLoading(Ref ref) {
+    final context = rootNavigatorKey.currentContext;
+    if (context != null) DialogHelper.showLoading(context);
   }
 
-  hideLoading() {
-    DialogHelper.hideLoading();
+  void hideLoading(Ref ref) {
+    final context = rootNavigatorKey.currentContext;
+    if (context != null) DialogHelper.hideLoading(context);
   }
 
-  showErrorDialog(String title, String message) {
-    /// for toast view
+  void showErrorDialog(Ref ref, String title, String message) {
     MySnackBar.showErrorToast(message: message);
-
-    /// for dialog view
-    // DialogHelper.showErrorDialog(title, message);
   }
 }

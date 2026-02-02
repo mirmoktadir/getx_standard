@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -9,15 +8,11 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class WebSocketManager {
   late WebSocketChannel _channel;
   late WebSocket _webSocket;
-  RxString receivedMessage = "".obs; // This full response comes from websocket
-  RxInt yourJsonKeyValue =
-      0.obs; // collecting any particular value from socket response
+  String receivedMessage = "";
+  int yourJsonKeyValue = 0;
 
   Future<void> connectWebSocket() async {
-    List<String> urls = [
-      'your-websocket-url', //  socket url 1
-      'your-websocket-url', //  socket url 2
-    ];
+    List<String> urls = ['your-websocket-url', 'your-websocket-url'];
     for (var url in urls) {
       try {
         _webSocket = await WebSocket.connect(url);
@@ -25,8 +20,8 @@ class WebSocketManager {
 
         _channel.stream.listen(
           (message) {
-            _parseReceivedMessage(message); // your particular value
-            receivedMessage.value = message; // main response
+            _parseReceivedMessage(message);
+            receivedMessage = message;
           },
           onError: (err) {
             connectWebSocket();
@@ -44,13 +39,12 @@ class WebSocketManager {
     }
   }
 
-  // Decoding main socket response to get particular value
   void _parseReceivedMessage(String message) {
     Logger().d('Received message: $message');
     final Map<String, dynamic> data = jsonDecode(message);
     if (data.containsKey('json_key')) {
-      yourJsonKeyValue.value = data['json_key'];
-      Logger().d(yourJsonKeyValue.value);
+      yourJsonKeyValue = data['json_key'];
+      Logger().d(yourJsonKeyValue);
     }
   }
 
@@ -67,6 +61,3 @@ class WebSocketManager {
     Logger().i("WebSocket connection closed!");
   }
 }
-
-// TODO: how to use ?
-// call WebsocketManager.connectWebSocket()  into any getx controller onReady methode to initiate websocket

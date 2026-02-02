@@ -1,7 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:remixicon/remixicon.dart';
 
 import '../../../config/theme/light_theme_colors.dart';
@@ -9,17 +8,21 @@ import '../../../utils/constants.dart';
 import '../../components/global-widgets/my_buttons.dart';
 
 class DialogHelper {
-  static get context => null;
-
-  ///show error dialog
-  static void showErrorDialog(String title, String description) {
-    Get.dialog(
-      Dialog(
+  static void showErrorDialog(
+    BuildContext context,
+    String title,
+    String description,
+  ) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
         backgroundColor: Colors.black,
         elevation: 6,
         shadowColor: Colors.black12.withValues(alpha: .2),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
         child: Padding(
           padding: EdgeInsets.all(16.sp),
           child: SizedBox(
@@ -31,22 +34,14 @@ class DialogHelper {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                        constraints: const BoxConstraints(),
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          if (Get.isDialogOpen!) Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        )),
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.close, color: Colors.white),
+                    ),
                   ],
                 ),
-                Icon(
-                  Remix.error_warning_fill,
-                  color: Colors.red,
-                  size: 60.sp,
-                ),
+                Icon(Remix.error_warning_fill, color: Colors.red, size: 60.sp),
                 SizedBox(height: 15.sp),
                 Text(
                   title,
@@ -57,17 +52,23 @@ class DialogHelper {
                   ),
                 ),
                 SizedBox(height: 15.sp),
-                AnimatedTextKit(repeatForever: true, animatedTexts: [
-                  ColorizeAnimatedText(description,
-                      textStyle: Get.textTheme.bodyMedium as TextStyle,
+                AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    ColorizeAnimatedText(
+                      description,
+                      textStyle:
+                          Theme.of(context).textTheme.bodyMedium as TextStyle,
                       textAlign: TextAlign.center,
                       colors: [
                         Colors.white,
                         Colors.red.shade50,
                         Colors.redAccent.shade100,
                         Colors.white,
-                      ]),
-                ]),
+                      ],
+                    ),
+                  ],
+                ),
                 SizedBox(height: 15.sp),
               ],
             ),
@@ -77,15 +78,20 @@ class DialogHelper {
     );
   }
 
-  ///show Download dialog
-  static void showDownloadDialog(String fileName, dynamic onPressed) {
-    Get.dialog(
-      Dialog(
+  static void showDownloadDialog(
+    BuildContext context,
+    String fileName,
+    dynamic onPressed,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
         backgroundColor: Colors.white,
         elevation: 6,
         shadowColor: Colors.black12.withValues(alpha: .2),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
         child: Padding(
           padding: EdgeInsets.all(16.sp),
           child: SizedBox(
@@ -105,15 +111,11 @@ class DialogHelper {
                       ),
                     ),
                     IconButton(
-                        constraints: const BoxConstraints(),
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          if (Get.isDialogOpen!) Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          // color: Colors.white,
-                        )),
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.close),
+                    ),
                   ],
                 ),
                 SizedBox(height: 20.sp),
@@ -138,27 +140,24 @@ class DialogHelper {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                            height: 40.sp,
-                            width: 100.sp,
-                            child: SecondaryButton(
-                                title: "Cancel",
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                inactive: false)),
-                        SizedBox(width: 10.sp),
-                        SizedBox(
-                          height: 40.sp,
-                          width: 100.sp,
-                          child: PrimaryButton(
-                              title: "Download",
-                              onPressed: onPressed,
-                              inactive: false),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 40.sp,
+                      width: 100.sp,
+                      child: SecondaryButton(
+                        title: "Cancel",
+                        onPressed: () => Navigator.of(context).pop(),
+                        inactive: false,
+                      ),
+                    ),
+                    SizedBox(width: 10.sp),
+                    SizedBox(
+                      height: 40.sp,
+                      width: 100.sp,
+                      child: PrimaryButton(
+                        title: "Download",
+                        onPressed: onPressed,
+                        inactive: false,
+                      ),
                     ),
                   ],
                 ),
@@ -171,99 +170,47 @@ class DialogHelper {
     );
   }
 
-  ///show loading
-  static Future<void> showLoading() async {
-    if (Get.isSnackbarOpen) {
-      Get.closeAllSnackbars();
-      Get.dialog(
-        barrierDismissible: false,
-        barrierColor: Colors.black.withValues(alpha: .1),
-        // barrierColor: LightThemeColors.bodyTextColor,
-        Center(
-          child: Container(
-            height: 80.h,
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // App Icon
-                Container(
-                  height: 50.sp,
-                  width: 50.sp,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.kLoaderIcon,
-                      ),
-                    ),
+  static Future<void> showLoading(BuildContext context) async {
+    final theme = Theme.of(context);
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+      builder: (context) => Center(
+        child: Container(
+          height: 80.h,
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 50.sp,
+                width: 50.sp,
+                decoration:  BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(AppImages.kLoaderIcon),
                   ),
                 ),
-                // Loader
-                SizedBox(
-                  height: 60.sp,
-                  width: 60.sp,
-                  child: const CircularProgressIndicator(),
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 60.sp,
+                width: 60.sp,
+                child: const CircularProgressIndicator(),
+              ),
+            ],
           ),
         ),
-      );
-    } else {
-      Get.dialog(
-        barrierDismissible: false,
-        barrierColor: LightThemeColors.bodyTextColor.withValues(alpha: .1),
-        //  barrierColor: LightThemeColors.bodyTextColor,
-        Center(
-          child: Container(
-            height: 80.h,
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // App Icon
-                Container(
-                  height: 50.sp,
-                  width: 50.sp,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage(
-                      AppImages.kLoaderIcon,
-                    )),
-                  ),
-                ),
-                // Loader
-                SizedBox(
-                  height: 60.sp,
-                  width: 60.sp,
-                  child: const CircularProgressIndicator(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 
-  ///hide loading
-  static Future<void> hideLoading() async {
-    if (Get.isDialogOpen!) {
-      if (Get.isSnackbarOpen) {
-        await SnackBarDurations.kMySnackBarDuration.delay();
-        Get.closeAllSnackbars();
-        Get.back();
-      } else {
-        Get.back();
-      }
+  static Future<void> hideLoading(BuildContext context) async {
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
     }
   }
 }

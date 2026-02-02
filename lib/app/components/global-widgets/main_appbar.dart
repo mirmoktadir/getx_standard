@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -13,22 +12,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback suffixAction;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return AppBar(
       title: const Text('GetX Standard'),
       leading: IconButton(
         onPressed: prefixAction,
-        icon: Icon(
-          Get.isDarkMode ? Iconsax.moon5 : Iconsax.moon5,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-        ),
+        icon: Icon(Iconsax.moon5, color: isDark ? Colors.white : Colors.black),
       ),
       actions: [
         IconButton(
           onPressed: suffixAction,
-          icon: const Icon(
-            IconlyBold.graph,
-            color: Colors.white,
-          ),
+          icon: const Icon(IconlyBold.graph, color: Colors.white),
         ),
       ],
       centerTitle: true,

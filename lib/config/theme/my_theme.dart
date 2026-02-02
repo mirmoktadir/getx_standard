@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../app/data/local/my_shared_pref.dart';
 import 'dark_theme_colors.dart';
 import 'light_theme_colors.dart';
 import 'my_styles.dart';
@@ -17,26 +15,28 @@ class MyTheme {
           : DarkThemeColors.primaryColor,
 
       // secondary & background color
-      colorScheme: ColorScheme.fromSwatch(
-        accentColor: isLight
-            ? LightThemeColors.accentColor
-            : DarkThemeColors.accentColor,
-        backgroundColor: isLight
-            ? LightThemeColors.backgroundColor
-            : DarkThemeColors.backgroundColor,
-        brightness: isLight ? Brightness.light : Brightness.dark,
-      ).copyWith(
-        secondary: isLight
-            ? LightThemeColors.accentColor
-            : DarkThemeColors.accentColor,
-      ),
+      colorScheme:
+          ColorScheme.fromSwatch(
+            accentColor: isLight
+                ? LightThemeColors.accentColor
+                : DarkThemeColors.accentColor,
+            backgroundColor: isLight
+                ? LightThemeColors.backgroundColor
+                : DarkThemeColors.backgroundColor,
+            brightness: isLight ? Brightness.light : Brightness.dark,
+          ).copyWith(
+            secondary: isLight
+                ? LightThemeColors.accentColor
+                : DarkThemeColors.accentColor,
+          ),
 
       // color contrast (if the theme is dark text should be white for example)
       brightness: isLight ? Brightness.light : Brightness.dark,
 
       // card widget background color
-      cardColor:
-          isLight ? LightThemeColors.cardColor : DarkThemeColors.cardColor,
+      cardColor: isLight
+          ? LightThemeColors.cardColor
+          : DarkThemeColors.cardColor,
 
       // hint text color
       hintColor: isLight
@@ -49,8 +49,9 @@ class MyTheme {
           : DarkThemeColors.dividerColor,
 
       // canvas color
-      canvasColor:
-          isLight ? LightThemeColors.canvasColor : DarkThemeColors.canvasColor,
+      canvasColor: isLight
+          ? LightThemeColors.canvasColor
+          : DarkThemeColors.canvasColor,
 
       // app background color
       scaffoldBackgroundColor: isLight
@@ -68,8 +69,9 @@ class MyTheme {
       appBarTheme: MyStyles.getAppBarTheme(isLightTheme: isLight),
 
       // elevated button theme
-      elevatedButtonTheme:
-          MyStyles.getElevatedButtonTheme(isLightTheme: isLight),
+      elevatedButtonTheme: MyStyles.getElevatedButtonTheme(
+        isLightTheme: isLight,
+      ),
 
       // text theme
       textTheme: MyStyles.getTextTheme(isLightTheme: isLight),
@@ -81,20 +83,4 @@ class MyTheme {
       iconTheme: MyStyles.getIconTheme(isLightTheme: isLight),
     );
   }
-
-  /// update app theme and save theme type to shared pref
-  /// (so when the app is killed and up again theme will remain the same)
-  static changeTheme() {
-    // *) check if the current theme is light (default is light)
-    bool isLightTheme = MySharedPref.getThemeIsLight();
-
-    // *) store the new theme mode on get storage
-    MySharedPref.setThemeIsLight(!isLightTheme);
-
-    // *) let GetX change theme
-    Get.changeThemeMode(!isLightTheme ? ThemeMode.light : ThemeMode.dark);
-  }
-
-  /// check if the theme is light or dark
-  bool get getThemeIsLight => MySharedPref.getThemeIsLight();
 }

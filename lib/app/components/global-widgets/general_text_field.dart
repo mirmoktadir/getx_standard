@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../config/theme/light_theme_colors.dart';
 import '../../../utils/validators.dart';
 
-final formValidator = Get.put(FormValidator());
+final _formValidator = FormValidator();
 
 class GeneralTextField extends StatelessWidget {
   const GeneralTextField({
@@ -44,13 +43,16 @@ class GeneralTextField extends StatelessWidget {
   final int? maxLine;
   final int? minLine;
   final TextAlign? textAlignment;
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return TextFormField(
       controller: textEditingController,
       style: readOnly == true
-          ? theme.textTheme.bodyMedium
-              ?.copyWith(color: LightThemeColors.bodyTextSecondaryColor)
+          ? theme.textTheme.bodyMedium?.copyWith(
+              color: LightThemeColors.bodyTextSecondaryColor,
+            )
           : theme.textTheme.bodyMedium,
       textInputAction: textInputAction ?? TextInputAction.done,
       keyboardType: textInputType ?? TextInputType.text,
@@ -76,12 +78,11 @@ class GeneralTextField extends StatelessWidget {
       validator: (value) {
         if (fieldName?.toLowerCase() != "website url" &&
             textEditingController.text.isEmpty) {
-          return formValidator.validateRequired(value!, fieldName!);
+          return _formValidator.validateRequired(value!, fieldName!);
         }
 
         if (fieldName?.toLowerCase() == "website url" &&
             textEditingController.text.isNotEmpty) {
-          // Check if the value is a valid URL
           const urlPattern = r'(http|https):\/\/([^\s$.?#].[^\s]*)';
           final regExp = RegExp(urlPattern);
 
@@ -93,16 +94,13 @@ class GeneralTextField extends StatelessWidget {
       },
       decoration: InputDecoration(
         filled: true,
-        contentPadding: Get.size.width <= 440
+        contentPadding: width <= 440
             ? EdgeInsets.symmetric(horizontal: 15.sp)
             : null,
         fillColor: readOnly == true
             ? LightThemeColors.bodyTextSecondaryColor.withValues(alpha: .1)
             : LightThemeColors.fillColor,
-        errorStyle: TextStyle(
-          height: .1,
-          fontSize: 12.sp,
-        ),
+        errorStyle: TextStyle(height: .1, fontSize: 12.sp),
         errorMaxLines: 1,
         hintText: hint,
         hintStyle: TextStyle(
@@ -114,17 +112,11 @@ class GeneralTextField extends StatelessWidget {
         suffix: suffix,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Colors.red,
-          ),
+          borderSide: const BorderSide(width: 1, color: Colors.red),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Colors.red,
-          ),
+          borderSide: const BorderSide(width: 1, color: Colors.red),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
