@@ -14,7 +14,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return AppBar(
-      title: const Text('GetX Standard'),
+      title: const Text('Riverpod Modular'),
       leading: IconButton(
         onPressed: prefixAction,
         icon: Icon(Iconsax.moon5, color: isDark ? Colors.white : Colors.black),
