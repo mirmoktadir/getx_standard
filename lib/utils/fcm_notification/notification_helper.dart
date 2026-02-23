@@ -42,7 +42,7 @@ class NotificationHelper {
         );
 
     await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) {
             _onNotificationTap(notificationResponse.payload);
@@ -116,11 +116,11 @@ class NotificationHelper {
 
       Logger().i("New notification has arrived in foreground");
       flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
+        id: notification.hashCode,
+        title: notification.title,
+        body: notification.body,
         payload: jsonEncode(message.toMap()),
-        NotificationDetails(
+        notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
             channel.id,
             channel.name,

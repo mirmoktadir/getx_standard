@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/getx_standard.iml" filepath="$PROJECT_DIR$/.idea/getx_standard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/getx_standard.iml" filepath="$PROJECT_DIR$/getx_standard.iml" />
     </modules>
   </component>
 </project>
