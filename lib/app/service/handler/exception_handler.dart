@@ -14,7 +14,7 @@ mixin class ExceptionHandler {
   RxBool isError = false.obs;
 
   /// FOR REST API
-  void handleError(error) {
+  void handleError(dynamic error) {
     isError.value = true;
     hideLoading();
 
@@ -25,7 +25,7 @@ mixin class ExceptionHandler {
   }
 
   /// FOR GRAPHQL API
-  void handleGraphqlError(error) {
+  void handleGraphqlError(dynamic error) {
     isError.value = true;
     hideLoading();
     var errorText = graphQLService.errorMessage.toString();
@@ -40,16 +40,16 @@ mixin class ExceptionHandler {
     }
   }
 
-  showLoading() {
+  void showLoading() {
     isError.value = false;
     DialogHelper.showLoading();
   }
 
-  hideLoading() {
+  void hideLoading() {
     DialogHelper.hideLoading();
   }
 
-  showErrorDialog(String title, String message) {
+  void showErrorDialog(String title, String message) {
     /// for toast view
     MySnackBar.showErrorToast(message: message);
 

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionController extends GetxController {
@@ -23,11 +24,11 @@ class VersionController extends GetxController {
       buildNumber.value = packageInfo.buildNumber;
 
       // Print the version
-      print('App Name: ${appName.value}');
-      print('App Version: ${appVersion.value}');
-      print('Build Number: ${buildNumber.value}');
+      Logger().i('App Name: ${appName.value}');
+      Logger().i('App Version: ${appVersion.value}');
+      Logger().i('Build Number: ${buildNumber.value}');
     } catch (e) {
-      print('Error getting app info: $e');
+      Logger().e('Error getting app info: $e');
     }
   }
 }

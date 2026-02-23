@@ -47,73 +47,84 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             SplashContainer(
-                                radius: 15,
-                                onPressed: () {},
-                                child: Container(
-                                  width: 150.sp,
-                                  height: 170.sp,
-                                  padding: EdgeInsets.fromLTRB(
-                                      10.sp, 46.sp, 10.sp, 12.sp),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.r),
-                                    color: MySharedPref.getThemeIsLight()
-                                        ? Colors.white
-                                        : Colors.orange.withOpacity(.1),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      TweenAnimationBuilder(
-                                        tween: Tween<double>(begin: 0, end: 1),
-                                        duration:
-                                            const Duration(milliseconds: 1500),
-                                        builder: (BuildContext context,
-                                            double value, Widget? child) {
-                                          return Opacity(
-                                            opacity: value,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: value * 18.r),
-                                              child: child,
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          controller.recipes[index].name ?? "",
-                                          style: theme.textTheme.titleLarge,
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                              radius: 15,
+                              onPressed: () {},
+                              child: Container(
+                                width: 150.sp,
+                                height: 170.sp,
+                                padding: EdgeInsets.fromLTRB(
+                                  10.sp,
+                                  46.sp,
+                                  10.sp,
+                                  12.sp,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  color: MySharedPref.getThemeIsLight()
+                                      ? Colors.white
+                                      : Colors.orange.withValues(alpha: .1),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TweenAnimationBuilder(
+                                      tween: Tween<double>(begin: 0, end: 1),
+                                      duration: const Duration(
+                                        milliseconds: 1500,
+                                      ),
+                                      builder:
+                                          (
+                                            BuildContext context,
+                                            double value,
+                                            Widget? child,
+                                          ) {
+                                            return Opacity(
+                                              opacity: value,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: value * 18.r,
+                                                ),
+                                                child: child,
+                                              ),
+                                            );
+                                          },
+                                      child: Text(
+                                        controller.recipes[index].name ?? "",
+                                        style: theme.textTheme.titleLarge,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "${controller.recipes[index].prepTimeMinutes ?? ""} Mins",
+                                          style: theme.textTheme.bodySmall,
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "${controller.recipes[index].prepTimeMinutes ?? ""} Mins",
-                                            style: theme.textTheme.bodySmall,
+                                        SizedBox(
+                                          height: 30.sp,
+                                          width: 30.sp,
+                                          child: SplashContainer(
+                                            radius: 100,
+                                            onPressed: () {},
+                                            child: Icon(
+                                              Iconsax.save_add,
+                                              size: 16.sp,
+                                              color: theme.primaryColor,
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 30.sp,
-                                            width: 30.sp,
-                                            child: SplashContainer(
-                                                radius: 100,
-                                                onPressed: () {},
-                                                child: Icon(
-                                                  Iconsax.save_add,
-                                                  size: 16.sp,
-                                                  color: theme.primaryColor,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Positioned(
@@ -154,7 +165,7 @@ class HomeView extends GetView<HomeController> {
                                   style: TextStyle(
                                     color: Get.isDarkMode
                                         ? DarkThemeColors
-                                            .scaffoldBackgroundColor
+                                              .scaffoldBackgroundColor
                                         : LightThemeColors.primaryColor,
                                   ),
                                 ),
@@ -166,9 +177,9 @@ class HomeView extends GetView<HomeController> {
                     ),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 2 / 3,
-                    ),
+                          crossAxisCount: 2,
+                          childAspectRatio: 2 / 3,
+                        ),
                   ),
                 ),
               ),

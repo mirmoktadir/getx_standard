@@ -9,7 +9,7 @@ import '../../../utils/constants.dart';
 import '../../components/global-widgets/my_buttons.dart';
 
 class DialogHelper {
-  static get context => null;
+  static Null get context => null;
 
   ///show error dialog
   static void showErrorDialog(String title, String description) {
@@ -18,8 +18,9 @@ class DialogHelper {
         backgroundColor: Colors.black,
         elevation: 6,
         shadowColor: Colors.black12.withValues(alpha: .2),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
         child: Padding(
           padding: EdgeInsets.all(16.sp),
           child: SizedBox(
@@ -31,22 +32,16 @@ class DialogHelper {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                        constraints: const BoxConstraints(),
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          if (Get.isDialogOpen!) Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        )),
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        if (Get.isDialogOpen!) Get.back();
+                      },
+                      icon: const Icon(Icons.close, color: Colors.white),
+                    ),
                   ],
                 ),
-                Icon(
-                  Remix.error_warning_fill,
-                  color: Colors.red,
-                  size: 60.sp,
-                ),
+                Icon(Remix.error_warning_fill, color: Colors.red, size: 60.sp),
                 SizedBox(height: 15.sp),
                 Text(
                   title,
@@ -57,8 +52,11 @@ class DialogHelper {
                   ),
                 ),
                 SizedBox(height: 15.sp),
-                AnimatedTextKit(repeatForever: true, animatedTexts: [
-                  ColorizeAnimatedText(description,
+                AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    ColorizeAnimatedText(
+                      description,
                       textStyle: Get.textTheme.bodyMedium as TextStyle,
                       textAlign: TextAlign.center,
                       colors: [
@@ -66,8 +64,10 @@ class DialogHelper {
                         Colors.red.shade50,
                         Colors.redAccent.shade100,
                         Colors.white,
-                      ]),
-                ]),
+                      ],
+                    ),
+                  ],
+                ),
                 SizedBox(height: 15.sp),
               ],
             ),
@@ -84,8 +84,9 @@ class DialogHelper {
         backgroundColor: Colors.white,
         elevation: 6,
         shadowColor: Colors.black12.withValues(alpha: .2),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
         child: Padding(
           padding: EdgeInsets.all(16.sp),
           child: SizedBox(
@@ -105,15 +106,16 @@ class DialogHelper {
                       ),
                     ),
                     IconButton(
-                        constraints: const BoxConstraints(),
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          if (Get.isDialogOpen!) Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          // color: Colors.white,
-                        )),
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        if (Get.isDialogOpen!) Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        // color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 20.sp),
@@ -141,22 +143,25 @@ class DialogHelper {
                     Row(
                       children: [
                         SizedBox(
-                            height: 40.sp,
-                            width: 100.sp,
-                            child: SecondaryButton(
-                                title: "Cancel",
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                inactive: false)),
+                          height: 40.sp,
+                          width: 100.sp,
+                          child: SecondaryButton(
+                            title: "Cancel",
+                            onPressed: () {
+                              Get.back();
+                            },
+                            inactive: false,
+                          ),
+                        ),
                         SizedBox(width: 10.sp),
                         SizedBox(
                           height: 40.sp,
                           width: 100.sp,
                           child: PrimaryButton(
-                              title: "Download",
-                              onPressed: onPressed,
-                              inactive: false),
+                            title: "Download",
+                            onPressed: onPressed,
+                            inactive: false,
+                          ),
                         ),
                       ],
                     ),
@@ -196,9 +201,7 @@ class DialogHelper {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.kLoaderIcon,
-                      ),
+                      image: AssetImage(AppImages.kLoaderIcon),
                     ),
                   ),
                 ),
@@ -235,9 +238,8 @@ class DialogHelper {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: AssetImage(
-                      AppImages.kLoaderIcon,
-                    )),
+                      image: AssetImage(AppImages.kLoaderIcon),
+                    ),
                   ),
                 ),
                 // Loader

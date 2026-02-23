@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,6 +8,84 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api_header.dart';
 
+enum HttpMethod { get, post, put, patch, delete }
+
+/// Single HTTP client for all REST calls. Use [request] for GET/POST/PUT/PATCH/DELETE
+/// and [download] for file downloads.
+///
+/// ## JSON requests (GET, POST, PUT, PATCH, DELETE)
+///
+/// ```dart
+/// final client = DioClient();
+///
+/// // GET
+/// var data = await client.request(
+///   method: HttpMethod.get,
+///   url: 'https://api.example.com/items',
+///   queryParams: {'page': 1},
+/// );
+///
+/// // POST with JSON body
+/// var created = await client.request(
+///   method: HttpMethod.post,
+///   url: 'https://api.example.com/items',
+///   body: {'name': 'Item', 'type': 'food'},
+/// );
+///
+/// // PUT / PATCH / DELETE same way with [method] and optional [body].
+/// ```
+///
+/// ## Multipart (file upload)
+///
+/// Build [FormData] and pass it as [body]. Dio sends it as multipart/form-data.
+///
+/// **Single file:**
+/// ```dart
+/// final formData = FormData.fromMap({
+///   'title': 'My document',
+/// });
+/// formData.files.add(MapEntry(
+///   'file',
+///   await MultipartFile.fromFile(file.path, filename: 'doc.pdf'),
+/// ));
+/// var result = await client.request(
+///   method: HttpMethod.post,
+///   url: 'https://api.example.com/upload',
+///   body: formData,
+/// );
+/// ```
+///
+/// **Multiple files (e.g. document[]):**
+/// ```dart
+/// final formData = FormData.fromMap({'userId': '123'});
+/// for (final file in fileList) {
+///   formData.files.add(MapEntry(
+///     'document[]',
+///     await MultipartFile.fromFile(file.path),
+///   ));
+/// }
+/// var result = await client.request(
+///   method: HttpMethod.post,
+///   url: 'https://api.example.com/upload',
+///   body: formData,
+/// );
+/// ```
+///
+/// ## Download file
+///
+/// Use [download] (different from [request]): it writes the response to disk
+/// and returns the saved [File].
+///
+/// ```dart
+/// final file = await client.download(
+///   url: 'https://api.example.com/file.pdf',
+///   savePath: '/path/to/save/file.pdf',
+///   params: {'token': 'xyz'},
+/// );
+/// if (file != null) {
+///   // open or use file
+/// }
+/// ```
 class DioClient {
   static const int TIME_OUT_DURATION = 20;
 
@@ -27,169 +104,91 @@ class DioClient {
       maxWidth: 90,
     ));
 
-  //GET
-
-  Future<dynamic> get({
+  /// Single method for GET, POST, PUT, PATCH, DELETE.
+  /// [body] can be a Map/list (sent as JSON) or [FormData] for multipart uploads.
+  Future<dynamic> request({
+    required HttpMethod method,
     required String url,
-    Map<String, dynamic>? params,
+    Map<String, dynamic>? queryParams,
+    dynamic body,
+    Map<String, String>? headers,
   }) async {
     try {
-      //  final headers = await Header.getSecureHeader();
-      var response = await _dio.get(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params);
+      final options = Options(headers: headers ?? Header.rapidApiHeader);
+      final data = _buildData(body);
 
+      Response response;
+      switch (method) {
+        case HttpMethod.get:
+          response = await _dio.get(
+            url,
+            options: options,
+            queryParameters: queryParams,
+          );
+          break;
+        case HttpMethod.post:
+          response = await _dio.post(
+            url,
+            options: options,
+            queryParameters: queryParams,
+            data: data,
+          );
+          break;
+        case HttpMethod.put:
+          response = await _dio.put(
+            url,
+            options: options,
+            queryParameters: queryParams,
+            data: data,
+          );
+          break;
+        case HttpMethod.patch:
+          response = await _dio.patch(
+            url,
+            options: options,
+            queryParameters: queryParams,
+            data: data,
+          );
+          break;
+        case HttpMethod.delete:
+          response = await _dio.delete(
+            url,
+            options: options,
+            queryParameters: queryParams,
+            data: data,
+          );
+          break;
+      }
       return response.data;
     } catch (e) {
       rethrow;
     }
   }
 
-  //POST
-
-  Future<dynamic> post(
-      {required String url, Map<String, dynamic>? params, dynamic body}) async {
-    var payload = json.encode(body);
-    try {
-      // final headers = await Header.getSecureHeader();
-      var response = await _dio.post(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: payload);
-
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
+  dynamic _buildData(dynamic body) {
+    if (body == null) return null;
+    if (body is FormData) return body;
+    return json.encode(body);
   }
 
-  //PUT
-
-  Future<dynamic> put(
-      {required String url, Map<String, dynamic>? params, dynamic body}) async {
-    var payload = json.encode(body);
-    try {
-      //  final headers = await Header.getSecureHeader();
-      var response = await _dio.put(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: payload);
-
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  //PATCH
-
-  Future<dynamic> patch(
-      {required String url, Map<String, dynamic>? params, dynamic body}) async {
-    var payload = json.encode(body);
-    try {
-      // final headers = await Header.getSecureHeader();
-      var response = await _dio.patch(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: payload);
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  //DELETE
-
-  Future<dynamic> delete(
-      {required String url, Map<String, dynamic>? params, dynamic body}) async {
-    var payload = json.encode(body);
-    try {
-      //  final headers = await Header.getSecureHeader();
-      var response = await _dio.delete(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: payload);
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  //MULTIPART FOR MULTIPLE FILE UPLOAD
-
-  List<File>? docFileList = [];
-
-  Future<dynamic> multipartRequest({
+  /// Downloads the [url] to [savePath]. Returns the saved [File] on success.
+  /// For normal API responses use [request] instead.
+  Future<File?> download({
     required String url,
     Map<String, dynamic>? params,
-    required Map<String, dynamic> body,
-    String? filepath,
-  }) async {
-    var formData = FormData.fromMap(body);
-    for (var files in docFileList!) {
-      filepath = files.path;
-      formData.files.addAll(
-          [MapEntry("document[]", await MultipartFile.fromFile(filepath))]);
-    }
-
-    try {
-      // final headers = await Header.getSecureMultipartHeader();
-      var response = await _dio.post(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: formData);
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  //MULTIPART FOR SINGLE FILE UPLOAD
-
-  Future<dynamic> multipartSingleFile(
-      {required String url,
-      Map<String, dynamic>? params,
-      required Map<String, dynamic> body,
-      String? filepath,
-      required String key}) async {
-    var formData = FormData.fromMap(body);
-    if (filepath != null) {
-      formData.files.add(MapEntry(key, await MultipartFile.fromFile(filepath)));
-    }
-
-    try {
-      //  final headers = await Header.getSecureMultipartHeader();
-      var response = await _dio.post(url,
-          options: Options(headers: Header.rapidApiHeader),
-          queryParameters: params,
-          data: formData);
-      return response.data;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  // DOWNLOAD FILE
-  Future<dynamic> download({
-    required String url,
-    Map<String, dynamic>? params,
-    required String savePath, // Full path to save the file
+    required String savePath,
+    Map<String, String>? headers,
   }) async {
     try {
-      //  final headers = await Header.getSecureHeader();
-      var response = await _dio.download(
+      await _dio.download(
         url,
         savePath,
-        options: Options(headers: Header.rapidApiHeader),
+        options: Options(headers: headers ?? Header.rapidApiHeader),
         queryParameters: params,
       );
-
-      if (response.statusCode == 200) {
-        return File(savePath);
-      }
+      return File(savePath);
     } catch (e) {
       rethrow;
     }
-    return null;
   }
 }

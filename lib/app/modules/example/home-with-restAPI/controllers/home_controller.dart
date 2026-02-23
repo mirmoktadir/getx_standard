@@ -24,7 +24,7 @@ class HomeController extends GetxController with ExceptionHandler {
 
   final recipes = RxList<Results>();
 
-  scrollPositionTracker() {
+  void scrollPositionTracker() {
     Timer? debounce;
 
     scrollController.addListener(() {
@@ -49,21 +49,19 @@ class HomeController extends GetxController with ExceptionHandler {
 
   /// GET ALL RECIPES LIST 'HIVE IMPLEMENTED'
 
-  getRecipes() async {
+  Future<void> getRecipes() async {
     showLoading();
     if (await NetworkConnectivity.isNetworkAvailable()) {
       /// Fetch recipes from the API
       var response = await DioClient()
-          .get(
-            url: ApiUrl.allRecipes,
-          )
+          .request(method: HttpMethod.get, url: ApiUrl.allRecipes)
           .catchError(handleError);
 
       if (response == null) return;
 
-      recipes.assignAll((response["results"] as List)
-          .map((e) => Results.fromJson(e))
-          .toList());
+      recipes.assignAll(
+        (response["results"] as List).map((e) => Results.fromJson(e)).toList(),
+      );
 
       /// Save fetched posts to Hive for future use
       await MyHive.saveAllRecipes(recipes);

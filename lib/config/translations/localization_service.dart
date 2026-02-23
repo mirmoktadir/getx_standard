@@ -32,17 +32,14 @@ class LocalizationService extends Translations {
   };
 
   @override
-  Map<String, Map<String, String>> get keys => {
-        'en_US': enUs,
-        'ar_AR': arAR,
-      };
+  Map<String, Map<String, String>> get keys => {'en_US': enUs, 'ar_AR': arAR};
 
   /// check if the language is supported
-  static isLanguageSupported(String languageCode) =>
+  static bool isLanguageSupported(String languageCode) =>
       supportedLanguages.keys.contains(languageCode);
 
   /// update app language by code language for example (en,ar..etc)
-  static updateLanguage(String languageCode) async {
+  static Future<void> updateLanguage(String languageCode) async {
     // check if the language is supported
     if (!isLanguageSupported(languageCode)) return;
     // update current language in shared pref
